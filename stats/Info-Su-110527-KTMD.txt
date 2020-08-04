@@ -1,0 +1,22 @@
+Monkey: Su
+Exp date: 20110527
+Anesthetic agent: Ketamine+Medetomidine
+Number of Session: 3
+
+Session : 1
+time: 17.05 [s] : AwakeEyesOpened-Start 
+time: 1279.88 [s] : AwakeEyesOpened-End 
+time: 1601.33 [s] : AwakeEyesClosed-Start 
+time: 2922.45 [s] : AwakeEyesClosed-End 
+
+Session : 2
+time: 44.31 [s] : AnestheticInjection 
+time: 925.06 [s] : Anesthetized-Start 
+time: 2862.40 [s] : Anesthetized-End 
+
+Session : 3
+time: 23.36 [s] : AntagonistInjection 
+time: 259.39 [s] : RecoveryEyesClosed-Start 
+time: 2061.06 [s] : RecoveryEyesClosed-End 
+time: 2148.18 [s] : RecoveryEyesOpened-Start 
+time: 3054.09 [s] : RecoveryEyesOpened-End 
