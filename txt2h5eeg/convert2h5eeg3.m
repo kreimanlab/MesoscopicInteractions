@@ -245,7 +245,10 @@ H5F.close(fid);
 % * **`aux`** -- **Dataset** (Samples by Channels) containing non-electrophysiologial data used to mark/give meaning to the **`eeg`** dataset.
 %h5create(h5fname,'/h5eeg/aux',[1 Inf],'ChunkSize',[1 Fs]);
 %h5create(h5fname,'/h5eeg/aux',[(1+AUX_CHAN) Inf],'ChunkSize',[1 Fs]);
-h5create(h5fname,'/h5eeg/aux',[(1+AUX_CHAN) Inf],'ChunkSize',[(1+AUX_CHAN),Fs*60],'Datatype','single');
+%h5create(h5fname,'/h5eeg/aux',[(1+AUX_CHAN) Inf],'ChunkSize',[(1+AUX_CHAN),Fs*60],'Datatype','single');
+
+% Changed to double precision, July 24, 2020
+h5create(h5fname,'/h5eeg/aux',[(1+AUX_CHAN) Inf],'ChunkSize',[(1+AUX_CHAN),Fs*60],'Datatype','double');
 
 place = 1;
 TOTAL_SAMPLES = 0;
