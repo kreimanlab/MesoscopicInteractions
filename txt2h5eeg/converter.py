@@ -169,7 +169,7 @@ class converter:
             self.shell('rm '+tmpDir+'/*.m')
 
             # --- Delete .csv files to save space ---
-            #self.shell('rm '+tmpDir+'/*.csv')
+            self.shell('rm '+tmpDir+'/*.csv')
 
             # --- Export meta ---
             self.shell('cp '+currDir+'/'+'export_meta.py'+' '+efDir+'/')

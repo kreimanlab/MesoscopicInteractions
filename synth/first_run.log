@@ -1,0 +1,960 @@
+[?1h=
+                                       < M A T L A B (R) >
+                             Copyright 1984-2017 The MathWorks, Inc.
+                              R2017b (9.3.0.713579) 64-bit (glnxa64)
+                                        September 14, 2017
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00006/
+[*     ] m00006: 6.4265 Days
+[  OK  ] 22-May-2007 17:59:07 - 23-May-2007 09:08:02 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00006/m00006_90ecb6fb.hdf5 
+[  OK  ] 23-May-2007 09:08:50 - 24-May-2007 08:49:45 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00006/m00006_574b16e3.hdf5 
+[  OK  ] 25-May-2007 09:04:23 - 26-May-2007 10:08:43 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00006/m00006_d5c5c13d.hdf5 
+[  OK  ] 26-May-2007 10:10:12 - 27-May-2007 10:29:55 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00006/m00006_e1561855.hdf5 
+[  OK  ] 27-May-2007 10:33:29 - 29-May-2007 08:27:28 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00006/m00006_8d428898.hdf5 
+[  OK  ] 29-May-2007 11:55:08 - 30-May-2007 08:01:31 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00006/m00006_3971c7a4.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00019/
+[*     ] m00019: 3.5007 Days
+[  OK  ] 08-Dec-2007 17:15:20 - 09-Dec-2007 10:08:25 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00019/m00019_bd1634f5.hdf5 
+[  OK  ] 10-Dec-2007 08:14:42 - 11-Dec-2007 08:42:15 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00019/m00019_dad188ce.hdf5 
+[  OK  ] 11-Dec-2007 08:43:11 - 12-Dec-2007 08:29:29 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00019/m00019_f7005105.hdf5 
+[  OK  ] 13-Dec-2007 12:22:05 - 14-Dec-2007 07:16:09 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00019/m00019_b21c3066.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00023/
+[*     ] m00023: 7.0067 Days
+[  OK  ] 15-Feb-2008 08:07:55 - 17-Feb-2008 13:07:48 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00023/m00023_8999a3ea.hdf5 
+[  OK  ] 17-Feb-2008 13:16:23 - 19-Feb-2008 07:37:59 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00023/m00023_a78cfb01.hdf5 
+[  OK  ] 19-Feb-2008 07:40:55 - 20-Feb-2008 08:36:28 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00023/m00023_eb01ea39.hdf5 
+[  OK  ] 20-Feb-2008 08:37:28 - 21-Feb-2008 10:28:29 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00023/m00023_58612e7f.hdf5 
+[  OK  ] 21-Feb-2008 10:29:46 - 22-Feb-2008 08:31:21 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00023/m00023_0c36dc94.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00024/
+[*     ] m00024: 5.5654 Days
+[  OK  ] 06-Mar-2008 17:30:36 - 07-Mar-2008 10:08:28 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00024/m00024_0c0e8ec5.hdf5 
+[  OK  ] 07-Mar-2008 10:09:16 - 08-Mar-2008 10:12:02 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00024/m00024_81ddc8b6.hdf5 
+[  OK  ] 08-Mar-2008 10:13:13 - 10-Mar-2008 09:38:47 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00024/m00024_31d5a031.hdf5 
+[  OK  ] 10-Mar-2008 10:41:13 - 11-Mar-2008 08:52:27 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00024/m00024_302ede27.hdf5 
+[  OK  ] 11-Mar-2008 08:53:26 - 12-Mar-2008 08:10:11 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00024/m00024_dc694dea.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00026/
+[*     ] m00026: 2.1452 Days
+[  OK  ] 02-Jun-2008 07:22:08 - 03-Jun-2008 07:06:47 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00026/m00026_b80f678f.hdf5 
+[  OK  ] 03-Jun-2008 07:13:35 - 04-Jun-2008 08:19:52 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00026/m00026_d6bf280e.hdf5 
+[  !!  ] 03-Jun-2008 15:55:37 - 03-Jun-2008 18:33:43 /share2/CACHEDEV1_DATA/RawData/h5eeg/m00026/m00026_025587a1.hdf5 
+[ !FIX ] Dropping: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00026/m00026_025587a1.hdf5
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00030/
+[*     ] m00030: 3.7659 Days
+[  OK  ] 24-Oct-2008 13:06:17 - 24-Oct-2008 15:40:32 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00030/m00030_5c70a604.hdf5 
+[  OK  ] 24-Oct-2008 15:41:47 - 25-Oct-2008 07:54:21 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00030/m00030_152ce507.hdf5 
+[  OK  ] 25-Oct-2008 08:01:54 - 26-Oct-2008 07:23:18 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00030/m00030_6c676131.hdf5 
+[  OK  ] 26-Oct-2008 07:30:22 - 27-Oct-2008 07:07:48 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00030/m00030_5b39ef05.hdf5 
+[  OK  ] 28-Oct-2008 07:14:10 - 29-Oct-2008 07:51:28 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00030/m00030_0a9d761f.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00037/
+[*     ] m00037: 3.8076 Days
+[  OK  ] 12-Jun-2009 17:02:30 - 13-Jun-2009 13:27:19 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00037/m00037_02f25390.hdf5 
+[  OK  ] 13-Jun-2009 14:57:03 - 14-Jun-2009 05:26:27 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00037/m00037_361ad4ec.hdf5 
+[  OK  ] 14-Jun-2009 05:46:34 - 14-Jun-2009 12:07:39 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00037/m00037_ef7585f5.hdf5 
+[  OK  ] 14-Jun-2009 12:18:25 - 16-Jun-2009 14:26:04 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00037/m00037_f1b5f8d4.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00038/
+[*     ] m00038: 6.4982 Days
+[  OK  ] 10-Jul-2009 17:07:14 - 12-Jul-2009 11:38:15 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00038/m00038_dafc9b36.hdf5 
+[  OK  ] 12-Jul-2009 12:23:42 - 14-Jul-2009 10:45:54 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00038/m00038_7db0c189.hdf5 
+[  OK  ] 14-Jul-2009 11:01:20 - 17-Jul-2009 06:05:27 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00038/m00038_ae3a27f3.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00043/
+[*     ] m00043: 6.2423 Days
+[  OK  ] 09-Oct-2009 16:07:30 - 10-Oct-2009 15:43:32 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00043/m00043_22ca4eb9.hdf5 
+[  OK  ] 10-Oct-2009 15:52:33 - 11-Oct-2009 10:36:46 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00043/m00043_5d898fa9.hdf5 
+[  OK  ] 11-Oct-2009 18:17:02 - 15-Oct-2009 13:39:30 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00043/m00043_4ce6814b.hdf5 
+[  OK  ] 15-Oct-2009 14:05:27 - 16-Oct-2009 06:11:43 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00043/m00043_13c4770d.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00060/
+[*     ] m00060: 8.8472 Days
+[  OK  ] 21-Oct-2010 14:15:14 - 29-Oct-2010 06:27:00 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00060/m00060_aec57c8b.hdf5 
+[  !!  ] ecog.fs: 2000, subject fs: 500
+[  OK  ] 20-Oct-2010 09:10:51 - 21-Oct-2010 13:19:07 (2000.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00060/m00060_826bcde2.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00068/
+[*     ] m00068: 2.3743 Days
+[  OK  ] 20-Jun-2011 21:37:59 - 23-Jun-2011 06:37:02 (2000.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00068/m00068_7ae73508.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00083/
+[*     ] m00083: 12.6403 Days
+[  OK  ] 14-Dec-2011 18:16:39 - 16-Dec-2011 09:35:47 (1024.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00083/m00083_9c787773.hdf5 
+[  OK  ] 16-Dec-2011 10:05:39 - 21-Dec-2011 14:55:26 (1024.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00083/m00083_189b2ab7.hdf5 
+[  OK  ] 21-Dec-2011 14:57:49 - 26-Dec-2011 19:35:56 (1024.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00083/m00083_d3ab4e12.hdf5 
+[  OK  ] 26-Dec-2011 19:37:15 - 27-Dec-2011 10:12:16 (1024.0000 Hz) /share2/CACHEDEV1_DATA/RawData/h5eeg/m00083/m00083_b91b58fe.hdf5 
+Looking for companion artifact removed .hdf5 files
+[ !FIX ] Dropping companion to: /mnt/cuenap/data/h5eeg/artifact_removed/m00083/m00083_9c787773.hdf5
+[ !FIX ] Dropping companion to: /mnt/cuenap/data/h5eeg/artifact_removed/m00083/m00083_d3ab4e12.hdf5
+[ !FIX ] Dropping companion to: /mnt/cuenap/data/h5eeg/artifact_removed/m00083/m00083_b91b58fe.hdf5
+[  OK  ] Filenames checked and ready.
+	Plan downsample 499.9070 Hz --> 249.9535 Hz: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00006/m00006_90ecb6fb.hdf5
+	Plan downsample 499.9070 Hz --> 249.9535 Hz: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00006/m00006_574b16e3.hdf5
+	Plan downsample 499.9070 Hz --> 249.9535 Hz: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00006/m00006_d5c5c13d.hdf5
+	Plan downsample 499.9070 Hz --> 249.9535 Hz: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00006/m00006_e1561855.hdf5
+	Plan downsample 499.9070 Hz --> 249.9535 Hz: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00006/m00006_8d428898.hdf5
+	Plan downsample 499.9070 Hz --> 249.9535 Hz: /share2/CACHEDEV1_DATA/RawData/h5eeg/m00006/m00006_3971c7a4.hdf5
+[m00006] BIP montage 0 of 63 channels exceed 20.00 mm.
+[!] Clearing existing outfile: out/m00006.h5
+[?1h=[#] Creating combined h5 file
+[*]	outfilename: out/m00006.h5
+[*]	chunk height: 72
+[*]	chunk width: 900000
+[*]	chunk width (sec): 3600
+[*]	total time: 6.43 days
+[*]	sum(h5_n_samples): 138787638
+[*]	h5_n_chan: 72
+[*]	n_chan_aux: 1
+[*]	h5_fs: 249.9535
+[+] Finished writing events.
+[+] Artifacts copied (0.05 sec).
+[+] Wrote zeros to unplugged.
+[#] Start EEG copy
+[*]	Approx. read bytes: 164.325 GB
+[*]	Approx. write bytes: 41.081 GB
+[*]	Tested read speed: 90.039 MB/s
+[*]	Theoretical read time: 0.5 hrs
+[*]	Theoretical write time: 0.1 hrs
+[*]	Theoretical total I/O time: 0.6 hrs
+	(m00006_90ecb6fb.hdf5) start: 1	end: 1736110 (6.25 %)
+		Aux read: 136.60 MB/s
+		EEG read: 346.99 MB/s
+		EEG write: 346.67 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_90ecb6fb.hdf5) start: 1736111	end: 3472220 (12.50 %)
+		Aux read: 84.25 MB/s
+		EEG read: 405.11 MB/s
+		EEG write: 349.57 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_90ecb6fb.hdf5) start: 3472221	end: 5208330 (18.75 %)
+		Aux read: 84.42 MB/s
+		EEG read: 391.51 MB/s
+		EEG write: 345.83 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_90ecb6fb.hdf5) start: 5208331	end: 6944440 (25.00 %)
+		Aux read: 83.82 MB/s
+		EEG read: 348.95 MB/s
+		EEG write: 343.78 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_90ecb6fb.hdf5) start: 6944441	end: 8680550 (31.25 %)
+		Aux read: 82.60 MB/s
+		EEG read: 405.88 MB/s
+		EEG write: 321.67 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_90ecb6fb.hdf5) start: 8680551	end: 10416660 (37.50 %)
+		Aux read: 84.26 MB/s
+		EEG read: 357.73 MB/s
+		EEG write: 326.19 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_90ecb6fb.hdf5) start: 10416661	end: 12152770 (43.75 %)
+		Aux read: 72.65 MB/s
+		EEG read: 250.27 MB/s
+		EEG write: 338.76 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_90ecb6fb.hdf5) start: 12152771	end: 13888880 (50.00 %)
+		Aux read: 8.54 MB/s
+		EEG read: 220.69 MB/s
+		EEG write: 337.03 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_90ecb6fb.hdf5) start: 13888881	end: 15624990 (56.25 %)
+		Aux read: 1.34 MB/s
+		EEG read: 246.96 MB/s
+		EEG write: 347.19 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_90ecb6fb.hdf5) start: 15624991	end: 17361100 (62.50 %)
+		Aux read: 1.37 MB/s
+		EEG read: 247.65 MB/s
+		EEG write: 320.34 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_90ecb6fb.hdf5) start: 17361101	end: 19097210 (68.75 %)
+		Aux read: 1.22 MB/s
+		EEG read: 268.94 MB/s
+		EEG write: 346.10 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_90ecb6fb.hdf5) start: 19097211	end: 20833320 (75.00 %)
+		Aux read: 1.31 MB/s
+		EEG read: 243.68 MB/s
+		EEG write: 345.78 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_90ecb6fb.hdf5) start: 20833321	end: 22569430 (81.25 %)
+		Aux read: 1.40 MB/s
+		EEG read: 245.14 MB/s
+		EEG write: 351.26 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_90ecb6fb.hdf5) start: 22569431	end: 24305540 (87.50 %)
+		Aux read: 1.43 MB/s
+		EEG read: 242.30 MB/s
+		EEG write: 340.80 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_90ecb6fb.hdf5) start: 24305541	end: 26041650 (93.75 %)
+		Aux read: 1.34 MB/s
+		EEG read: 242.46 MB/s
+		EEG write: 332.79 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_90ecb6fb.hdf5) start: 26041651	end: 27262468 (100.00 %)
+		Aux read: 1.22 MB/s
+		EEG read: 228.20 MB/s
+		EEG write: 352.79 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_574b16e3.hdf5) start: 1	end: 1736110 (4.00 %)
+		Aux read: 1.31 MB/s
+		EEG read: 242.06 MB/s
+		EEG write: 346.94 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_574b16e3.hdf5) start: 1736111	end: 3472220 (8.00 %)
+		Aux read: 1.37 MB/s
+		EEG read: 238.45 MB/s
+		EEG write: 351.75 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_574b16e3.hdf5) start: 3472221	end: 5208330 (12.00 %)
+		Aux read: 1.46 MB/s
+		EEG read: 250.92 MB/s
+		EEG write: 334.50 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_574b16e3.hdf5) start: 5208331	end: 6944440 (16.00 %)
+		Aux read: 1.38 MB/s
+		EEG read: 255.00 MB/s
+		EEG write: 355.39 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_574b16e3.hdf5) start: 6944441	end: 8680550 (20.00 %)
+		Aux read: 1.61 MB/s
+		EEG read: 258.02 MB/s
+		EEG write: 340.67 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_574b16e3.hdf5) start: 8680551	end: 10416660 (24.00 %)
+		Aux read: 1.38 MB/s
+		EEG read: 243.80 MB/s
+		EEG write: 342.22 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_574b16e3.hdf5) start: 10416661	end: 12152770 (28.00 %)
+		Aux read: 1.57 MB/s
+		EEG read: 258.93 MB/s
+		EEG write: 336.42 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_574b16e3.hdf5) start: 12152771	end: 13888880 (32.00 %)
+		Aux read: 1.39 MB/s
+		EEG read: 240.54 MB/s
+		EEG write: 342.72 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_574b16e3.hdf5) start: 13888881	end: 15624990 (36.00 %)
+		Aux read: 1.39 MB/s
+		EEG read: 246.54 MB/s
+		EEG write: 340.22 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_574b16e3.hdf5) start: 15624991	end: 17361100 (40.00 %)
+		Aux read: 1.45 MB/s
+		EEG read: 240.68 MB/s
+		EEG write: 343.41 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_574b16e3.hdf5) start: 17361101	end: 19097210 (44.00 %)
+		Aux read: 1.46 MB/s
+		EEG read: 245.20 MB/s
+		EEG write: 339.16 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_574b16e3.hdf5) start: 19097211	end: 20833320 (48.00 %)
+		Aux read: 1.40 MB/s
+		EEG read: 244.76 MB/s
+		EEG write: 332.91 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_574b16e3.hdf5) start: 20833321	end: 22569430 (52.00 %)
+		Aux read: 1.59 MB/s
+		EEG read: 248.96 MB/s
+		EEG write: 334.73 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_574b16e3.hdf5) start: 22569431	end: 24305540 (56.00 %)
+		Aux read: 1.43 MB/s
+		EEG read: 242.11 MB/s
+		EEG write: 334.73 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_574b16e3.hdf5) start: 24305541	end: 26041650 (60.00 %)
+		Aux read: 1.40 MB/s
+		EEG read: 236.82 MB/s
+		EEG write: 341.76 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_574b16e3.hdf5) start: 26041651	end: 27777760 (64.00 %)
+		Aux read: 1.49 MB/s
+		EEG read: 247.59 MB/s
+		EEG write: 339.01 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_574b16e3.hdf5) start: 27777761	end: 29513870 (68.00 %)
+		Aux read: 1.45 MB/s
+		EEG read: 252.82 MB/s
+		EEG write: 340.25 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_574b16e3.hdf5) start: 29513871	end: 31249980 (72.00 %)
+		Aux read: 1.50 MB/s
+		EEG read: 242.84 MB/s
+		EEG write: 337.25 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_574b16e3.hdf5) start: 31249981	end: 32986090 (76.00 %)
+		Aux read: 1.50 MB/s
+		EEG read: 234.51 MB/s
+		EEG write: 339.88 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_574b16e3.hdf5) start: 32986091	end: 34722200 (80.00 %)
+		Aux read: 1.40 MB/s
+		EEG read: 246.60 MB/s
+		EEG write: 345.37 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_574b16e3.hdf5) start: 34722201	end: 36458310 (84.00 %)
+		Aux read: 1.54 MB/s
+		EEG read: 249.43 MB/s
+		EEG write: 347.70 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_574b16e3.hdf5) start: 36458311	end: 38194420 (88.00 %)
+		Aux read: 1.50 MB/s
+		EEG read: 237.63 MB/s
+		EEG write: 342.64 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_574b16e3.hdf5) start: 38194421	end: 39930530 (92.00 %)
+		Aux read: 1.37 MB/s
+		EEG read: 244.99 MB/s
+		EEG write: 349.41 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_574b16e3.hdf5) start: 39930531	end: 41666640 (96.00 %)
+		Aux read: 1.28 MB/s
+		EEG read: 257.04 MB/s
+		EEG write: 349.15 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_574b16e3.hdf5) start: 41666641	end: 42619528 (100.00 %)
+		Aux read: 1.13 MB/s
+		EEG read: 242.16 MB/s
+		EEG write: 353.23 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_d5c5c13d.hdf5) start: 1	end: 1736110 (3.85 %)
+		Aux read: 1.19 MB/s
+		EEG read: 245.47 MB/s
+		EEG write: 328.69 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_d5c5c13d.hdf5) start: 1736111	end: 3472220 (7.69 %)
+		Aux read: 1.43 MB/s
+		EEG read: 249.42 MB/s
+		EEG write: 334.70 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_d5c5c13d.hdf5) start: 3472221	end: 5208330 (11.54 %)
+		Aux read: 1.37 MB/s
+		EEG read: 246.76 MB/s
+		EEG write: 320.99 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_d5c5c13d.hdf5) start: 5208331	end: 6944440 (15.38 %)
+		Aux read: 1.52 MB/s
+		EEG read: 244.50 MB/s
+		EEG write: 337.67 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_d5c5c13d.hdf5) start: 6944441	end: 8680550 (19.23 %)
+		Aux read: 1.36 MB/s
+		EEG read: 233.41 MB/s
+		EEG write: 325.89 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_d5c5c13d.hdf5) start: 8680551	end: 10416660 (23.08 %)
+		Aux read: 1.54 MB/s
+		EEG read: 268.41 MB/s
+		EEG write: 338.73 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_d5c5c13d.hdf5) start: 10416661	end: 12152770 (26.92 %)
+		Aux read: 1.54 MB/s
+		EEG read: 244.13 MB/s
+		EEG write: 339.43 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_d5c5c13d.hdf5) start: 12152771	end: 13888880 (30.77 %)
+		Aux read: 1.47 MB/s
+		EEG read: 243.02 MB/s
+		EEG write: 343.89 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_d5c5c13d.hdf5) start: 13888881	end: 15624990 (34.62 %)
+		Aux read: 1.27 MB/s
+		EEG read: 244.57 MB/s
+		EEG write: 337.72 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_d5c5c13d.hdf5) start: 15624991	end: 17361100 (38.46 %)
+		Aux read: 1.54 MB/s
+		EEG read: 254.31 MB/s
+		EEG write: 341.79 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_d5c5c13d.hdf5) start: 17361101	end: 19097210 (42.31 %)
+		Aux read: 1.52 MB/s
+		EEG read: 247.74 MB/s
+		EEG write: 339.22 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_d5c5c13d.hdf5) start: 19097211	end: 20833320 (46.15 %)
+		Aux read: 1.43 MB/s
+		EEG read: 239.47 MB/s
+		EEG write: 342.91 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_d5c5c13d.hdf5) start: 20833321	end: 22569430 (50.00 %)
+		Aux read: 1.46 MB/s
+		EEG read: 248.58 MB/s
+		EEG write: 341.40 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_d5c5c13d.hdf5) start: 22569431	end: 24305540 (53.85 %)
+		Aux read: 1.41 MB/s
+		EEG read: 247.47 MB/s
+		EEG write: 342.96 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_d5c5c13d.hdf5) start: 24305541	end: 26041650 (57.69 %)
+		Aux read: 1.52 MB/s
+		EEG read: 255.05 MB/s
+		EEG write: 340.05 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_d5c5c13d.hdf5) start: 26041651	end: 27777760 (61.54 %)
+		Aux read: 1.56 MB/s
+		EEG read: 238.74 MB/s
+		EEG write: 342.75 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_d5c5c13d.hdf5) start: 27777761	end: 29513870 (65.38 %)
+		Aux read: 1.30 MB/s
+		EEG read: 251.94 MB/s
+		EEG write: 343.21 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_d5c5c13d.hdf5) start: 29513871	end: 31249980 (69.23 %)
+		Aux read: 1.62 MB/s
+		EEG read: 260.58 MB/s
+		EEG write: 348.37 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_d5c5c13d.hdf5) start: 31249981	end: 32986090 (73.08 %)
+		Aux read: 1.43 MB/s
+		EEG read: 244.18 MB/s
+		EEG write: 347.31 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_d5c5c13d.hdf5) start: 32986091	end: 34722200 (76.92 %)
+		Aux read: 1.45 MB/s
+		EEG read: 249.22 MB/s
+		EEG write: 352.80 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_d5c5c13d.hdf5) start: 34722201	end: 36458310 (80.77 %)
+		Aux read: 1.42 MB/s
+		EEG read: 247.23 MB/s
+		EEG write: 356.77 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_d5c5c13d.hdf5) start: 36458311	end: 38194420 (84.62 %)
+		Aux read: 1.52 MB/s
+		EEG read: 267.78 MB/s
+		EEG write: 359.03 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_d5c5c13d.hdf5) start: 38194421	end: 39930530 (88.46 %)
+		Aux read: 1.37 MB/s
+		EEG read: 243.31 MB/s
+		EEG write: 355.43 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_d5c5c13d.hdf5) start: 39930531	end: 41666640 (92.31 %)
+		Aux read: 1.54 MB/s
+		EEG read: 243.67 MB/s
+		EEG write: 367.25 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_d5c5c13d.hdf5) start: 41666641	end: 43402750 (96.15 %)
+		Aux read: 1.32 MB/s
+		EEG read: 248.30 MB/s
+		EEG write: 332.57 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_d5c5c13d.hdf5) start: 43402751	end: 45121392 (100.00 %)
+		Aux read: 1.30 MB/s
+		EEG read: 213.13 MB/s
+		EEG write: 334.18 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_e1561855.hdf5) start: 1	end: 1736110 (3.85 %)
+		Aux read: 1.59 MB/s
+		EEG read: 256.43 MB/s
+		EEG write: 342.43 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_e1561855.hdf5) start: 1736111	end: 3472220 (7.69 %)
+		Aux read: 1.58 MB/s
+		EEG read: 253.40 MB/s
+		EEG write: 335.36 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_e1561855.hdf5) start: 3472221	end: 5208330 (11.54 %)
+		Aux read: 1.47 MB/s
+		EEG read: 244.44 MB/s
+		EEG write: 327.99 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_e1561855.hdf5) start: 5208331	end: 6944440 (15.38 %)
+		Aux read: 1.44 MB/s
+		EEG read: 248.85 MB/s
+		EEG write: 327.00 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_e1561855.hdf5) start: 6944441	end: 8680550 (19.23 %)
+		Aux read: 1.48 MB/s
+		EEG read: 250.96 MB/s
+		EEG write: 329.98 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_e1561855.hdf5) start: 8680551	end: 10416660 (23.08 %)
+		Aux read: 1.45 MB/s
+		EEG read: 263.10 MB/s
+		EEG write: 339.04 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_e1561855.hdf5) start: 10416661	end: 12152770 (26.92 %)
+		Aux read: 1.55 MB/s
+		EEG read: 265.09 MB/s
+		EEG write: 338.16 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_e1561855.hdf5) start: 12152771	end: 13888880 (30.77 %)
+		Aux read: 1.39 MB/s
+		EEG read: 251.70 MB/s
+		EEG write: 341.15 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_e1561855.hdf5) start: 13888881	end: 15624990 (34.62 %)
+		Aux read: 1.35 MB/s
+		EEG read: 283.17 MB/s
+		EEG write: 340.31 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_e1561855.hdf5) start: 15624991	end: 17361100 (38.46 %)
+		Aux read: 1.48 MB/s
+		EEG read: 255.35 MB/s
+		EEG write: 341.40 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_e1561855.hdf5) start: 17361101	end: 19097210 (42.31 %)
+		Aux read: 1.38 MB/s
+		EEG read: 247.22 MB/s
+		EEG write: 343.72 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_e1561855.hdf5) start: 19097211	end: 20833320 (46.15 %)
+		Aux read: 1.38 MB/s
+		EEG read: 237.35 MB/s
+		EEG write: 341.40 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_e1561855.hdf5) start: 20833321	end: 22569430 (50.00 %)
+		Aux read: 1.65 MB/s
+		EEG read: 248.80 MB/s
+		EEG write: 341.08 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_e1561855.hdf5) start: 22569431	end: 24305540 (53.85 %)
+		Aux read: 1.35 MB/s
+		EEG read: 243.25 MB/s
+		EEG write: 348.01 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_e1561855.hdf5) start: 24305541	end: 26041650 (57.69 %)
+		Aux read: 1.45 MB/s
+		EEG read: 243.13 MB/s
+		EEG write: 344.89 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_e1561855.hdf5) start: 26041651	end: 27777760 (61.54 %)
+		Aux read: 1.48 MB/s
+		EEG read: 251.23 MB/s
+		EEG write: 345.29 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_e1561855.hdf5) start: 27777761	end: 29513870 (65.38 %)
+		Aux read: 1.46 MB/s
+		EEG read: 260.27 MB/s
+		EEG write: 348.13 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_e1561855.hdf5) start: 29513871	end: 31249980 (69.23 %)
+		Aux read: 1.45 MB/s
+		EEG read: 249.39 MB/s
+		EEG write: 344.25 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_e1561855.hdf5) start: 31249981	end: 32986090 (73.08 %)
+		Aux read: 1.44 MB/s
+		EEG read: 263.21 MB/s
+		EEG write: 346.43 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_e1561855.hdf5) start: 32986091	end: 34722200 (76.92 %)
+		Aux read: 1.34 MB/s
+		EEG read: 264.34 MB/s
+		EEG write: 348.47 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_e1561855.hdf5) start: 34722201	end: 36458310 (80.77 %)
+		Aux read: 1.42 MB/s
+		EEG read: 260.37 MB/s
+		EEG write: 349.31 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_e1561855.hdf5) start: 36458311	end: 38194420 (84.62 %)
+		Aux read: 1.39 MB/s
+		EEG read: 248.53 MB/s
+		EEG write: 357.46 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_e1561855.hdf5) start: 38194421	end: 39930530 (88.46 %)
+		Aux read: 1.45 MB/s
+		EEG read: 242.14 MB/s
+		EEG write: 359.40 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_e1561855.hdf5) start: 39930531	end: 41666640 (92.31 %)
+		Aux read: 1.41 MB/s
+		EEG read: 248.45 MB/s
+		EEG write: 356.34 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_e1561855.hdf5) start: 41666641	end: 43402750 (96.15 %)
+		Aux read: 1.21 MB/s
+		EEG read: 265.13 MB/s
+		EEG write: 340.58 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_e1561855.hdf5) start: 43402751	end: 43783092 (100.00 %)
+		Aux read: 1.11 MB/s
+		EEG read: 229.93 MB/s
+		EEG write: 362.46 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_8d428898.hdf5) start: 1	end: 1736110 (2.08 %)
+		Aux read: 2.10 MB/s
+		EEG read: 291.46 MB/s
+		EEG write: 346.30 MB/s
+	(*) ETA: 0.06 hrs.
+	(m00006_8d428898.hdf5) start: 1736111	end: 3472220 (4.17 %)
+		Aux read: 1.22 MB/s
+		EEG read: 275.61 MB/s
+		EEG write: 341.18 MB/s
+	(*) ETA: 0.06 hrs.
+	(m00006_8d428898.hdf5) start: 3472221	end: 5208330 (6.25 %)
+		Aux read: 1.41 MB/s
+		EEG read: 252.16 MB/s
+		EEG write: 351.27 MB/s
+	(*) ETA: 0.06 hrs.
+	(m00006_8d428898.hdf5) start: 5208331	end: 6944440 (8.33 %)
+		Aux read: 1.46 MB/s
+		EEG read: 240.10 MB/s
+		EEG write: 359.76 MB/s
+	(*) ETA: 0.06 hrs.
+	(m00006_8d428898.hdf5) start: 6944441	end: 8680550 (10.42 %)
+		Aux read: 1.30 MB/s
+		EEG read: 247.47 MB/s
+		EEG write: 350.13 MB/s
+	(*) ETA: 0.06 hrs.
+	(m00006_8d428898.hdf5) start: 8680551	end: 10416660 (12.50 %)
+		Aux read: 1.46 MB/s
+		EEG read: 252.89 MB/s
+		EEG write: 355.94 MB/s
+	(*) ETA: 0.06 hrs.
+	(m00006_8d428898.hdf5) start: 10416661	end: 12152770 (14.58 %)
+		Aux read: 1.51 MB/s
+		EEG read: 235.98 MB/s
+		EEG write: 364.70 MB/s
+	(*) ETA: 0.06 hrs.
+	(m00006_8d428898.hdf5) start: 12152771	end: 13888880 (16.67 %)
+		Aux read: 1.55 MB/s
+		EEG read: 255.61 MB/s
+		EEG write: 323.50 MB/s
+	(*) ETA: 0.05 hrs.
+	(m00006_8d428898.hdf5) start: 13888881	end: 15624990 (18.75 %)
+		Aux read: 1.47 MB/s
+		EEG read: 245.54 MB/s
+		EEG write: 325.28 MB/s
+	(*) ETA: 0.05 hrs.
+	(m00006_8d428898.hdf5) start: 15624991	end: 17361100 (20.83 %)
+		Aux read: 1.39 MB/s
+		EEG read: 281.97 MB/s
+		EEG write: 329.72 MB/s
+	(*) ETA: 0.05 hrs.
+	(m00006_8d428898.hdf5) start: 17361101	end: 19097210 (22.92 %)
+		Aux read: 1.37 MB/s
+		EEG read: 296.15 MB/s
+		EEG write: 330.57 MB/s
+	(*) ETA: 0.04 hrs.
+	(m00006_8d428898.hdf5) start: 19097211	end: 20833320 (25.00 %)
+		Aux read: 1.35 MB/s
+		EEG read: 236.99 MB/s
+		EEG write: 330.77 MB/s
+	(*) ETA: 0.05 hrs.
+	(m00006_8d428898.hdf5) start: 20833321	end: 22569430 (27.08 %)
+		Aux read: 1.28 MB/s
+		EEG read: 250.95 MB/s
+		EEG write: 332.90 MB/s
+	(*) ETA: 0.05 hrs.
+	(m00006_8d428898.hdf5) start: 22569431	end: 24305540 (29.17 %)
+		Aux read: 1.59 MB/s
+		EEG read: 232.01 MB/s
+		EEG write: 333.87 MB/s
+	(*) ETA: 0.05 hrs.
+	(m00006_8d428898.hdf5) start: 24305541	end: 26041650 (31.25 %)
+		Aux read: 1.42 MB/s
+		EEG read: 244.32 MB/s
+		EEG write: 329.38 MB/s
+	(*) ETA: 0.05 hrs.
+	(m00006_8d428898.hdf5) start: 26041651	end: 27777760 (33.33 %)
+		Aux read: 1.42 MB/s
+		EEG read: 248.82 MB/s
+		EEG write: 335.19 MB/s
+	(*) ETA: 0.04 hrs.
+	(m00006_8d428898.hdf5) start: 27777761	end: 29513870 (35.42 %)
+		Aux read: 1.41 MB/s
+		EEG read: 245.59 MB/s
+		EEG write: 339.99 MB/s
+	(*) ETA: 0.04 hrs.
+	(m00006_8d428898.hdf5) start: 29513871	end: 31249980 (37.50 %)
+		Aux read: 1.65 MB/s
+		EEG read: 241.53 MB/s
+		EEG write: 339.30 MB/s
+	(*) ETA: 0.04 hrs.
+	(m00006_8d428898.hdf5) start: 31249981	end: 32986090 (39.58 %)
+		Aux read: 1.54 MB/s
+		EEG read: 245.77 MB/s
+		EEG write: 340.89 MB/s
+	(*) ETA: 0.04 hrs.
+	(m00006_8d428898.hdf5) start: 32986091	end: 34722200 (41.67 %)
+		Aux read: 1.39 MB/s
+		EEG read: 239.35 MB/s
+		EEG write: 340.32 MB/s
+	(*) ETA: 0.04 hrs.
+	(m00006_8d428898.hdf5) start: 34722201	end: 36458310 (43.75 %)
+		Aux read: 1.52 MB/s
+		EEG read: 245.51 MB/s
+		EEG write: 341.95 MB/s
+	(*) ETA: 0.04 hrs.
+	(m00006_8d428898.hdf5) start: 36458311	end: 38194420 (45.83 %)
+		Aux read: 1.41 MB/s
+		EEG read: 246.19 MB/s
+		EEG write: 342.80 MB/s
+	(*) ETA: 0.04 hrs.
+	(m00006_8d428898.hdf5) start: 38194421	end: 39930530 (47.92 %)
+		Aux read: 1.45 MB/s
+		EEG read: 241.58 MB/s
+		EEG write: 343.91 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_8d428898.hdf5) start: 39930531	end: 41666640 (50.00 %)
+		Aux read: 1.51 MB/s
+		EEG read: 243.59 MB/s
+		EEG write: 347.89 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_8d428898.hdf5) start: 41666641	end: 43402750 (52.08 %)
+		Aux read: 1.42 MB/s
+		EEG read: 246.25 MB/s
+		EEG write: 346.04 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_8d428898.hdf5) start: 43402751	end: 45138860 (54.17 %)
+		Aux read: 1.46 MB/s
+		EEG read: 247.28 MB/s
+		EEG write: 331.13 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_8d428898.hdf5) start: 45138861	end: 46874970 (56.25 %)
+		Aux read: 1.45 MB/s
+		EEG read: 249.83 MB/s
+		EEG write: 345.49 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_8d428898.hdf5) start: 46874971	end: 48611080 (58.33 %)
+		Aux read: 1.46 MB/s
+		EEG read: 236.20 MB/s
+		EEG write: 346.82 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_8d428898.hdf5) start: 48611081	end: 50347190 (60.42 %)
+		Aux read: 1.43 MB/s
+		EEG read: 227.13 MB/s
+		EEG write: 348.44 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_8d428898.hdf5) start: 50347191	end: 52083300 (62.50 %)
+		Aux read: 1.58 MB/s
+		EEG read: 241.61 MB/s
+		EEG write: 349.22 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_8d428898.hdf5) start: 52083301	end: 53819410 (64.58 %)
+		Aux read: 1.46 MB/s
+		EEG read: 240.43 MB/s
+		EEG write: 345.44 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_8d428898.hdf5) start: 53819411	end: 55555520 (66.67 %)
+		Aux read: 1.46 MB/s
+		EEG read: 233.91 MB/s
+		EEG write: 351.27 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_8d428898.hdf5) start: 55555521	end: 57291630 (68.75 %)
+		Aux read: 1.47 MB/s
+		EEG read: 229.30 MB/s
+		EEG write: 356.48 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_8d428898.hdf5) start: 57291631	end: 59027740 (70.83 %)
+		Aux read: 1.52 MB/s
+		EEG read: 241.10 MB/s
+		EEG write: 363.88 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_8d428898.hdf5) start: 59027741	end: 60763850 (72.92 %)
+		Aux read: 1.59 MB/s
+		EEG read: 238.81 MB/s
+		EEG write: 360.06 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_8d428898.hdf5) start: 60763851	end: 62499960 (75.00 %)
+		Aux read: 1.30 MB/s
+		EEG read: 238.86 MB/s
+		EEG write: 334.37 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_8d428898.hdf5) start: 62499961	end: 64236070 (77.08 %)
+		Aux read: 1.64 MB/s
+		EEG read: 230.94 MB/s
+		EEG write: 333.58 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_8d428898.hdf5) start: 64236071	end: 65972180 (79.17 %)
+		Aux read: 1.41 MB/s
+		EEG read: 246.61 MB/s
+		EEG write: 333.62 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_8d428898.hdf5) start: 65972181	end: 67708290 (81.25 %)
+		Aux read: 1.55 MB/s
+		EEG read: 267.30 MB/s
+		EEG write: 336.78 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_8d428898.hdf5) start: 67708291	end: 69444400 (83.33 %)
+		Aux read: 1.35 MB/s
+		EEG read: 239.95 MB/s
+		EEG write: 334.29 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_8d428898.hdf5) start: 69444401	end: 71180510 (85.42 %)
+		Aux read: 1.49 MB/s
+		EEG read: 252.50 MB/s
+		EEG write: 328.05 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_8d428898.hdf5) start: 71180511	end: 72916620 (87.50 %)
+		Aux read: 1.35 MB/s
+		EEG read: 248.05 MB/s
+		EEG write: 335.56 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_8d428898.hdf5) start: 72916621	end: 74652730 (89.58 %)
+		Aux read: 1.53 MB/s
+		EEG read: 252.18 MB/s
+		EEG write: 333.81 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_8d428898.hdf5) start: 74652731	end: 76388840 (91.67 %)
+		Aux read: 1.38 MB/s
+		EEG read: 259.42 MB/s
+		EEG write: 336.89 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_8d428898.hdf5) start: 76388841	end: 78124950 (93.75 %)
+		Aux read: 1.42 MB/s
+		EEG read: 246.15 MB/s
+		EEG write: 333.26 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_8d428898.hdf5) start: 78124951	end: 79861060 (95.83 %)
+		Aux read: 1.48 MB/s
+		EEG read: 249.40 MB/s
+		EEG write: 335.16 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_8d428898.hdf5) start: 79861061	end: 81597170 (97.92 %)
+		Aux read: 1.38 MB/s
+		EEG read: 248.67 MB/s
+		EEG write: 337.50 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_8d428898.hdf5) start: 81597171	end: 82604068 (100.00 %)
+		Aux read: 1.05 MB/s
+		EEG read: 234.63 MB/s
+		EEG write: 348.23 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_3971c7a4.hdf5) start: 1	end: 1736110 (4.76 %)
+		Aux read: 1.24 MB/s
+		EEG read: 245.59 MB/s
+		EEG write: 354.84 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_3971c7a4.hdf5) start: 1736111	end: 3472220 (9.52 %)
+		Aux read: 1.36 MB/s
+		EEG read: 245.82 MB/s
+		EEG write: 348.12 MB/s
+	(*) ETA: 0.03 hrs.
+	(m00006_3971c7a4.hdf5) start: 3472221	end: 5208330 (14.29 %)
+		Aux read: 1.41 MB/s
+		EEG read: 246.46 MB/s
+		EEG write: 364.67 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_3971c7a4.hdf5) start: 5208331	end: 6944440 (19.05 %)
+		Aux read: 1.40 MB/s
+		EEG read: 254.70 MB/s
+		EEG write: 314.26 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_3971c7a4.hdf5) start: 6944441	end: 8680550 (23.81 %)
+		Aux read: 1.52 MB/s
+		EEG read: 254.86 MB/s
+		EEG write: 328.90 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_3971c7a4.hdf5) start: 8680551	end: 10416660 (28.57 %)
+		Aux read: 1.49 MB/s
+		EEG read: 244.98 MB/s
+		EEG write: 313.60 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_3971c7a4.hdf5) start: 10416661	end: 12152770 (33.33 %)
+		Aux read: 1.49 MB/s
+		EEG read: 252.90 MB/s
+		EEG write: 326.75 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_3971c7a4.hdf5) start: 12152771	end: 13888880 (38.10 %)
+		Aux read: 1.43 MB/s
+		EEG read: 252.29 MB/s
+		EEG write: 327.48 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_3971c7a4.hdf5) start: 13888881	end: 15624990 (42.86 %)
+		Aux read: 1.45 MB/s
+		EEG read: 265.47 MB/s
+		EEG write: 334.79 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_3971c7a4.hdf5) start: 15624991	end: 17361100 (47.62 %)
+		Aux read: 1.45 MB/s
+		EEG read: 246.10 MB/s
+		EEG write: 334.42 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_3971c7a4.hdf5) start: 17361101	end: 19097210 (52.38 %)
+		Aux read: 1.46 MB/s
+		EEG read: 261.41 MB/s
+		EEG write: 323.53 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_3971c7a4.hdf5) start: 19097211	end: 20833320 (57.14 %)
+		Aux read: 0.64 MB/s
+		EEG read: 121.86 MB/s
+		EEG write: 339.71 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_3971c7a4.hdf5) start: 20833321	end: 22569430 (61.90 %)
+		Aux read: 0.55 MB/s
+		EEG read: 154.03 MB/s
+		EEG write: 334.19 MB/s
+	(*) ETA: 0.02 hrs.
+	(m00006_3971c7a4.hdf5) start: 22569431	end: 24305540 (66.67 %)
+		Aux read: 0.63 MB/s
+		EEG read: 164.29 MB/s
+		EEG write: 338.58 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_3971c7a4.hdf5) start: 24305541	end: 26041650 (71.43 %)
+		Aux read: 0.61 MB/s
+		EEG read: 156.98 MB/s
+		EEG write: 347.24 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_3971c7a4.hdf5) start: 26041651	end: 27777760 (76.19 %)
+		Aux read: 0.59 MB/s
+		EEG read: 130.92 MB/s
+		EEG write: 340.36 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_3971c7a4.hdf5) start: 27777761	end: 29513870 (80.95 %)
+		Aux read: 0.68 MB/s
+		EEG read: 128.41 MB/s
+		EEG write: 346.28 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_3971c7a4.hdf5) start: 29513871	end: 31249980 (85.71 %)
+		Aux read: 0.62 MB/s
+		EEG read: 126.30 MB/s
+		EEG write: 336.04 MB/s
+	(*) ETA: 0.01 hrs.
+	(m00006_3971c7a4.hdf5) start: 31249981	end: 32986090 (90.48 %)
+		Aux read: 0.74 MB/s
+		EEG read: 180.83 MB/s
+		EEG write: 334.59 MB/s
+	(*) ETA: 0.00 hrs.
+	(m00006_3971c7a4.hdf5) start: 32986091	end: 34722200 (95.24 %)
+{Error using h5write>get_filespace (line 228)
+Cannot write to '/h5eeg/cavg' because the edge of the dataset would be exceeded, and '/h5eeg/cavg'
+is not extendable along all affected extents.
+
+Error in h5write (line 123)
+    filespace_id          = get_filespace(dataset_id,offset,count,stride);
+
+Error in synth (line 471)
+                h5write(outfilename,'/h5eeg/cavg',single(cavg),[1 start_idx_ds],size(cavg))
+} 
+>> start_idx_ds
+
+start_idx_ds =
+
+   137188320
+
+>> h5_n_samples
+
+h5_n_samples =
+
+    13631234    21309764    22560696    21891546    41302034    18092364
+
+>> 
+>> 
+>> 
+>> 
+>> 
+>> 
+>> 
+>> 
+>> 
+>> exit
+[?1l>
