@@ -1,0 +1,175 @@
+[?1h=
+                                            < M A T L A B (R) >
+                                  Copyright 1984-2016 The MathWorks, Inc.
+                                  R2016b (9.1.0.441655) 64-bit (glnxa64)
+                                             September 7, 2016
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+------------------- freesurfer -------------------
+fshome	/home/admin/Documents/freesurfer
+fsmatlab	/home/admin/Documents/freesurfer/matlab
+fsfasthome	/home/admin/Documents/freesurfer/fsfast
+fsfasttoolbox	/home/admin/Documents/freesurfer/fsfast/toolbox
+------------------- iELVis -----------------------
+globalFsDir	/nas_share/cuenap_ssd/coregistration
+m00001:
+	Fraction marked as seizure: 0.002
+	Fraction marked as seizure (pairwise): 0.002
+m00003:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00004:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00005:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00006:
+	Fraction marked as seizure: 0.028
+	Fraction marked as seizure (pairwise): 0.029
+m00017:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00018:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00019:
+	Fraction marked as seizure: 0.003
+	Fraction marked as seizure (pairwise): 0.003
+m00021:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00022:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00023:
+	Fraction marked as seizure: 0.002
+	Fraction marked as seizure (pairwise): 0.002
+m00024:
+	Fraction marked as seizure: 0.105
+	Fraction marked as seizure (pairwise): 0.106
+m00025:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00026:
+	Fraction marked as seizure: 0.005
+	Fraction marked as seizure (pairwise): 0.005
+m00027:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00028:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00030:
+	Fraction marked as seizure: 0.003
+	Fraction marked as seizure (pairwise): 0.003
+m00032:
+	Fraction marked as seizure: 0.002
+	Fraction marked as seizure (pairwise): 0.002
+m00033:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00035:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00037:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00038:
+	Fraction marked as seizure: 0.003
+	Fraction marked as seizure (pairwise): 0.003
+m00039:
+	Fraction marked as seizure: 0.007
+	Fraction marked as seizure (pairwise): 0.007
+m00043:
+	Fraction marked as seizure: 0.003
+	Fraction marked as seizure (pairwise): 0.003
+m00044:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00045:
+	Fraction marked as seizure: 0.005
+	Fraction marked as seizure (pairwise): 0.005
+m00047:
+	Fraction marked as seizure: 0.007
+	Fraction marked as seizure (pairwise): 0.007
+m00048:
+	Fraction marked as seizure: 0.004
+	Fraction marked as seizure (pairwise): 0.004
+m00049:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00052:
+	Fraction marked as seizure: 0.005
+	Fraction marked as seizure (pairwise): 0.005
+m00053:
+	Fraction marked as seizure: 0.005
+	Fraction marked as seizure (pairwise): 0.005
+m00055:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00056:
+	Fraction marked as seizure: 0.033
+	Fraction marked as seizure (pairwise): 0.033
+m00058:
+	Fraction marked as seizure: 0.009
+	Fraction marked as seizure (pairwise): 0.009
+m00059:
+	Fraction marked as seizure: 0.008
+	Fraction marked as seizure (pairwise): 0.008
+m00060:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00061:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00068:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00071:
+	Fraction marked as seizure: 0.002
+	Fraction marked as seizure (pairwise): 0.002
+m00073:
+	Fraction marked as seizure: 0.004
+	Fraction marked as seizure (pairwise): 0.005
+m00075:
+	Fraction marked as seizure: 0.005
+	Fraction marked as seizure (pairwise): 0.005
+m00079:
+	Fraction marked as seizure: 0.011
+	Fraction marked as seizure (pairwise): 0.011
+m00083:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00084:
+	Fraction marked as seizure: 0.064
+	Fraction marked as seizure (pairwise): 0.064
+m00095:
+	Fraction marked as seizure: 0.002
+	Fraction marked as seizure (pairwise): 0.002
+m00096:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00097:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00100:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00107:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00122:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+m00124:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+mSu:
+	Fraction marked as seizure: 0.000
+	Fraction marked as seizure (pairwise): 0.000
+>> exit
+[?1l>
