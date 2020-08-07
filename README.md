@@ -1,7 +1,7 @@
 # MesoscopicInteractions
 Code and data release for "Mesoscopic functional interactions in the human brain reveal small-world properties", manuscript
 
-Contents
+<h1>Contents</h1>
 
 /txt2h5eeg  Preprocessing, starting from NeuroWorks .txt export  
 /synth      Preprocessing, data consolidation  
