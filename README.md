@@ -3,13 +3,16 @@ Code and data release for "Mesoscopic functional interactions in the human brain
 
 <h2>Contents</h2>
 
-/txt2h5eeg  Preprocessing, starting from NeuroWorks .txt export  
-/synth      Preprocessing, data consolidation  
-/v2         Artifact annotation  
-/opencl     Coherence calculations  
-/stats      Analysis, figure generation  
-
-
+1. /txt2h5eeg
+    - Preprocessing, starting from NeuroWorks .txt export  
+2. /synth
+    - Preprocessing, data consolidation  
+3. /v2
+    - Artifact annotation  
+4. /opencl
+    - Coherence calculations  
+5. /stats
+    - Analysis, figure generation  
 
 <h3>txt2h5eeg</h3>
 
