@@ -136,7 +136,7 @@ def corr_envelope_gpu(Xbip, thr):
 
 
 def main():
-    h5fname = './h5/m00026.h5'
+    h5fname = './h5/sub11.h5'
     h5f = h5py.File(h5fname,'r')
     fs = int(h5f['/h5eeg/eeg'].attrs['rate'][0])
     n_chan = int(h5f['/h5eeg/eeg'].attrs['n_chan'][0])
