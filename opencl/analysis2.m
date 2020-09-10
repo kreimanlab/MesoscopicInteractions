@@ -17,7 +17,7 @@ color_diag = 0*[1 1 1];
 % Dname = {D.name};
 % Dname = Dname(Disdir);
 % SubjectsAll = Dname(startsWith(Dname,'m'));
-% %SubjectsAll = {'m00043','m00060','m00083'};
+% %SubjectsAll = {'sub21','sub33','sub40'};
 
 % Use all folders for SubjectsAll
 if ismac
