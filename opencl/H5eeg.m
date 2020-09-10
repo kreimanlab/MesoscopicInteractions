@@ -8,7 +8,7 @@ classdef H5eeg
     %
     %[Example Usage]
     %
-    %   patient1 = H5eeg('m00001.hdf5')
+    %   patient1 = H5eeg('sub1.hdf5')
     %   
     %   patient1.readAttributes() returns a struct of descriptive
     %   information about the data.
