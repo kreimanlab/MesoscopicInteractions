@@ -156,7 +156,7 @@ def coherence2(v, w, fs):
     return r
 
 def main():
-    h5fname = '/mnt/cuenap2/scripts/synth/out/m00023.h5'
+    h5fname = '/mnt/cuenap2/scripts/synth/out/sub8.h5'
     h5f = h5py.File(h5fname,'r')
     fs = int(h5f['/h5eeg/eeg'].attrs['rate'][0])
     n_chan = int(h5f['/h5eeg/eeg'].attrs['n_chan'][0])
