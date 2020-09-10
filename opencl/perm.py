@@ -2,6 +2,15 @@
 # Kreiman Lab :: klab.tch.harvard.edu
 # Last edited: March 30, 2018 [14:12:53]
 
+DIR_OUTPUT = './results'
+DIR_H5 = '../data/h5_notch20'
+
+# This parameter is the window size for coherence calculations
+#   - Please check that this number is the same as in graph.py
+WINDOW = 10 # seconds
+# This parameter is the minimum time delay for coherence permutations
+DELAY = 1 # seconds, default: 250 seconds, debug: 1 second
+
 from envelope import envelope
 from envelope import envelope_gpu
 from coherence import coherence2
@@ -84,53 +93,11 @@ if __name__ == "__main__":
     METRIC = sys.argv[2]
     N_PERM = int(sys.argv[3])
 
-    host = socket.gethostname()
     plat_n = 0
-    if ('Leibniz' in host):
-        OUT_DIR = '/Volumes/KLAB102/results/coh_w10'
-        h5fname = './h5/' + sys.argv[1] + '.h5'
-        if (not Path(h5fname).is_file()):
-            h5fname = '/Volumes/cuenap/data/h5_notch20/' + sys.argv[1] + '.h5'
-        artfname = '/Volumes/cuenap/data/h5_notch20/art/' + sys.argv[1] + '_art.h5'
-    elif ('seldon' in host):
-        #OUT_DIR = '/Volumes/KLAB101/results/coh_w10'
-        OUT_DIR = './results/coh_w20'
-        h5fname = './h5/' + sys.argv[1] + '.h5'
-        if (not Path(h5fname).is_file()):
-            h5fname = '/Volumes/cuenap/data/h5_notch20/' + sys.argv[1] + '.h5'
-        artfname = '/Volumes/cuenap/data/h5_notch20/art_nosz/' + sys.argv[1] + '_art.h5'
-    elif ('o2.rc.hms.harvard.edu' in host):
-        OUT_DIR = '/n/scratch2/jw324/opencl/results'
-        h5fname = '/n/scratch2/jw324/data/h5_notch20/' + sys.argv[1] + '.h5'
-        artfname = '/n/scratch2/jw324/data/h5_notch20/art/' + sys.argv[1] + '_art.h5'
-    elif ((os.path.isfile('iscuenap2')) and ('ubuntu_1604' in host)):
-        OUT_DIR = './results_res5hz'
-        h5fname = '/nas_share/RawData/data/h5_notch20/' + sys.argv[1] + '.h5'
-        artfname = '/nas_share/RawData/data/h5_notch20/art_nosz/' + sys.argv[1] + '_art.h5'
-    elif ((os.path.isfile('iscuenap')) and ('ubuntu_1604' in host)):
-        plat_n = 1
-        OUT_DIR = './results_res5hz'
-        h5fname = '/nas_share/cuenap/data/h5_notch20/' + sys.argv[1] + '.h5'
-        artfname = '/nas_share/cuenap/data/h5_notch20/art_nosz/' + sys.argv[1] + '_art.h5'
-    elif ('hopper' in host):
-        OUT_DIR = './results_res5hz'
-        h5fname = '/media/klab/KLAB101/h5_notch20/' + sys.argv[1] + '.h5'
-        artfname = '/media/klab/KLAB101/h5_notch20/art_nosz/' + sys.argv[1] + '_art.h5'
-    elif ('archimedes' in host):
-        OUT_DIR = './results_res5hz'
-        h5fname = '/mnt/cuenap2/data/h5_notch20/' + sys.argv[1] + '.h5'
-        artfname = '/mnt/cuenap2/data/h5_notch20/art_nosz/' + sys.argv[1] + '_art.h5'
-    elif ('kraken' in host):
-        OUT_DIR = './results_res5hz'
-        h5fname = '/media/jerry/internal/data/h5_notch20/' + sys.argv[1] + '.h5'
-        artfname = '/media/jerry/internal/data/h5_notch20/art_nosz/' + sys.argv[1] + '_art.h5'
-    else:
-        OUT_DIR = './results'
-        h5fname = './h5/' + sys.argv[1] + '.h5'
-        if (not Path(h5fname).is_file()):
-            #h5fname = '/mnt/cuenap2/scripts/synth/out/' + sys.argv[1] + '.h5'
-            h5fname = '/mnt/cuenap/data/h5_notch20/' + sys.argv[1] + '.h5'
-        artfname = '/home/klab/Documents/ArtifactAnnotation/v2/art/' + sys.argv[1] + '_art.h5'
+
+    OUT_DIR = DIR_OUTPUT
+    h5fname = DIR_H5 + '/' + sys.argv[1] + '.h5'
+    artfname = DIR_H5 + '/art_nosz/' + sys.argv[1] + '_art.h5'
 
     # Check for file
     if (not Path(h5fname).is_file()):
@@ -172,8 +139,9 @@ if __name__ == "__main__":
     arts = artf['/artifacts_v1']
     width = int(arts.attrs['width'][0])
 
-    w = 10 # seconds (6/250 makes r_row = 5)
-    alpha = 120 # seconds
+    w = WINDOW # seconds (6/250 makes r_row = 5)
+    #alpha = 120 # seconds
+    alpha = DELAY # seconds
     #r_rows = int(w*fs)
     r_rows = int(w * round(fs))
     print('[*] r_rows: ' + str(r_rows))
