@@ -1,8 +1,8 @@
 close all;
 
 DIST_THRESH_MM = 15;
-%Subjects = {'m00006','m00019','m00023','m00024','m00026','m00030','m00037','m00068'};
-SubjectsAll = {'m00006','m00019','m00023','m00024','m00026','m00030','m00037','m00038','m00043','m00060','m00068','m00083'};
+%Subjects = {'sub4','sub5','sub8','sub9','sub11','sub14','sub18','sub35'};
+SubjectsAll = {'sub4','sub5','sub8','sub9','sub11','sub14','sub18','sub19','sub21','sub33','sub35','sub40'};
 hcc = jet(length(SubjectsAll));
 h = figure;
 PctCovs = zeros(1,length(SubjectsAll));
