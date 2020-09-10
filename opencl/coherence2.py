@@ -822,9 +822,9 @@ def coherence2(v, w, fs):
     return r
 
 def main():
-    h5fname = '/mnt/cuenap2/scripts/synth/out/m00083.h5'
-    #h5fname = '/mnt/cuenap2/scripts/synth/out/m00003.h5'
-    #h5fname = '/mnt/cuenap2/scripts/synth/out/m00001.h5'
+    h5fname = '/mnt/cuenap2/scripts/synth/out/sub40.h5'
+    #h5fname = '/mnt/cuenap2/scripts/synth/out/sub2.h5'
+    #h5fname = '/mnt/cuenap2/scripts/synth/out/sub1.h5'
     h5f = h5py.File(h5fname,'r')
     fs = int(round(h5f['/h5eeg/eeg'].attrs['rate'][0]))
     print('fs:',fs)
