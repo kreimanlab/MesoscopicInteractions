@@ -1,8 +1,8 @@
 close all; clear;
 
-%Subs = {'m00006','m00019','m00023','m00024','m00026','m00030','m00037','m00038','m00043','m00060','m00068','m00083'};
-%Subs = {'m00006','m00019','m00023','m00024','m00026','m00030','m00037'};
-Subs = {'m00006','m00019','m00023'};
+%Subs = {'sub4','sub5','sub8','sub9','sub11','sub14','sub18','sub19','sub21','sub33','sub35','sub40'};
+%Subs = {'sub4','sub5','sub8','sub9','sub11','sub14','sub18'};
+Subs = {'sub4','sub5','sub8'};
 P_VALUE_FINAL = 0.05;
 DIST_THRESH_MM = 15;
 h5eegDir = '.';
