@@ -4,7 +4,7 @@ import h5py
 from scipy.ndimage import gaussian_filter
 from scipy.ndimage import gaussian_filter1d
 
-sid = 'm00005'
+sid = 'sub3'
 h5fname = '/media/jerry/internal/data/h5_notch20/' + sid + '.h5'
 
 h5f = h5py.File(h5fname,'r')
