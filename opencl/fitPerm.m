@@ -1,27 +1,16 @@
 close all; clear;
 
-%Subs = {'m00006','m00019','m00023','m00024','m00026','m00030','m00037','m00038','m00043','m00060','m00068','m00083'};
-%Subs = {'m00006'};
-
-% Use all folders for SubjectsAll
-[~,host] = system('hostname');
-if ismac
-    resultsDir = '/Volumes/RawData/data/results';
-    h5Dir = '/Volumes/RawData/scripts/synth/out';
-elseif isunix    
-    resultsDir = '/mnt/cuenap2/data/results';
-    h5Dir = '/mnt/cuenap2/scripts/synth/out';
-end
-
-if contains(host,'ubuntu_1604')
-    resultsDir = '/nas_share/RawData/scripts/opencl/results_res5hz';
-    h5Dir = '/nas_share/RawData/data/h5_notch20';
-end
+Subs = {'example'};
+resultsDir = './results';
+h5Dir = '../data/h5_notch20';
 
 extra_check = false;
 
 o = getOutputFilenames(resultsDir,false);
 n_f = o.n_f;
+if (n_f == 0)
+    fprintf(2,'[!] no actionable files found.\n')
+end
 SubjectsAllPerm = o.SubjectsAllPerm;
 SubjectsAllGraph = o.SubjectsAllGraph;
 SubjectsAllDists = o.SubjectsAllDists;
