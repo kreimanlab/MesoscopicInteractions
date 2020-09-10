@@ -9,7 +9,7 @@ t = ((1:(seconds*fs)) - 1)/fs;
 t = t';
 %x = random('Normal',mu,sig,seconds*fs,1) + sig*sin((2*pi*f1)*t);
 
-x = h5read('/mnt/cuenap2/scripts/synth/out/m00023.h5','/h5eeg/eeg',[17 500000],[1 fs*seconds]);
+x = h5read('/mnt/cuenap2/scripts/synth/out/sub8.h5','/h5eeg/eeg',[17 500000],[1 fs*seconds]);
 
 figure;
 subplot(2,2,1)
