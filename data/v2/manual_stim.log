@@ -1,0 +1,166 @@
+[?1h=
+                                                < M A T L A B (R) >
+                                      Copyright 1984-2016 The MathWorks, Inc.
+                                      R2016b (9.1.0.441655) 64-bit (glnxa64)
+                                                 September 7, 2016
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+------------------- freesurfer -------------------
+fshome	/home/admin/Documents/freesurfer
+fsmatlab	/home/admin/Documents/freesurfer/matlab
+fsfasthome	/home/admin/Documents/freesurfer/fsfast
+fsfasttoolbox	/home/admin/Documents/freesurfer/fsfast/toolbox
+------------------- iELVis -----------------------
+globalFsDir	/nas_share/cuenap_ssd/coregistration
+sub1:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub2:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub3:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub4:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub5:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub6:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub7:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub8:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub9:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub10:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub11:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub12:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub13:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub14:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub15:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub16:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub17:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub18:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub19:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub20:
+	Fraction marked as seizure: 0.003386747924
+	Fraction marked as seizure (pairwise): 0.003418725499
+sub21:
+	Fraction marked as seizure: 0.002755234668
+	Fraction marked as seizure (pairwise): 0.002781228561
+sub22:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub23:
+	Fraction marked as seizure: 0.002618543730
+	Fraction marked as seizure (pairwise): 0.002643264961
+sub24:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub25:
+	Fraction marked as seizure: 0.006303367593
+	Fraction marked as seizure (pairwise): 0.006362942224
+sub26:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub27:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub28:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub29:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub30:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub31:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub32:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub33:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub34:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub35:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub36:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub37:
+	Fraction marked as seizure: 0.005528109282
+	Fraction marked as seizure (pairwise): 0.005580357143
+sub38:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub39:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub40:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub41:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub42:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub43:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub44:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub45:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub46:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub47:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+sub48:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+mSu:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (pairwise): 0.000000000000
+>> exot  it
+[?1l>
