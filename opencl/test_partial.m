@@ -1,7 +1,6 @@
 close all;
 
-%ifn = '/mnt/cuenap2/scripts/synth/out/m00043.h5';
-ifn = '~/data/h5eeg/artifact_removed/test/opencl/h5/m00026.h5';
+ifn = '../data/h5_notch20/sub3.h5'
 n_chan = h5readatt(ifn,'/h5eeg/eeg','n_chan');
 fs = h5readatt(ifn,'/h5eeg/eeg','rate');
 n_samples = h5readatt(ifn,'/h5eeg/eeg','n_samples');
