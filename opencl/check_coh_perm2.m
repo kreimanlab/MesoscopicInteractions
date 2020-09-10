@@ -2,7 +2,7 @@ close all;
 
 system('mkdir figures/check_coh_perm2');
 
-h5fname = 'h5/m00030.h5';
+h5fname = 'h5/sub14.h5';
 ecog = H5eeg(h5fname);
 bip = h5readatt(ecog.filename,'/h5eeg/eeg','bip');
 w = round(ecog.fs * 60);
