@@ -15,8 +15,8 @@
 %       h - figure handle
 %
 %   Example:
-%       brainplot('m00001') - plot blank pial surface with electrodes
-%       brainplot('m00001','mmp') - plot surface and electrodes colored with MMP atlas
+%       brainplot('sub1') - plot blank pial surface with electrodes
+%       brainplot('sub1','mmp') - plot surface and electrodes colored with MMP atlas
 %
 
 function [ h ] = brainplot( sid, atlas )
