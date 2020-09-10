@@ -149,7 +149,7 @@ if __name__ == "__main__":
         thr = api.Thread(dev)
 
     # Read h5eeg
-    #h5fname = '/home/klab/data/h5eeg/artifact_removed/test/opencl/m00006.h5'
+    #h5fname = '/home/klab/data/h5eeg/artifact_removed/test/opencl/sub4.h5'
     sid = h5fname.split('/')[-1].split('.h5')[0]
     h5f = h5py.File(h5fname,'r')
     arts = h5f['/h5eeg/artifacts']
