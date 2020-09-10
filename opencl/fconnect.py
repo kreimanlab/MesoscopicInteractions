@@ -35,9 +35,9 @@ def get_paths(argv):
         print('\tn_perm\t[optional] compute this number of permutations')
         print('\tdev\t OpenCL device number to use\n')
         print('Examples:\n\nCompute the full correlation matrix:\n')
-        print('\tfconnect.py m00001.h5 p 0\n')
+        print('\tfconnect.py sub1.h5 p 0\n')
         print('Compute time-shifted correlations with 10000 permutations:\n')
-        print('\tfconnect.py m00001.h5 p 10000 0\n')
+        print('\tfconnect.py sub1.h5 p 10000 0\n')
         exit()
 
     host = socket.gethostname()
