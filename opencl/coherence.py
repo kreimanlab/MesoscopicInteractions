@@ -911,13 +911,12 @@ def coherence2(v, w, npseg, fs, pli):
     return r
 
 def main():
-    h5fname = '/media/jerry/internal/data/h5_notch20/m00005.h5'
-    #h5fname = '/media/jerry/KLAB101/h5_notch20/m00083.h5'
-    #h5fname = '/mnt/cuenap/data/h5_notch20/m00001.h5'
-    #h5fname = '/mnt/cuenap/data/h5_notch20/m00018.h5'
-    #h5fname = '/mnt/cuenap2/scripts/synth/out/m00083.h5'
-    #h5fname = '/mnt/cuenap2/scripts/synth/out/m00003.h5'
-    #h5fname = '/mnt/cuenap2/scripts/synth/out/m00001.h5'
+    h5fname = '/media/jerry/internal/data/h5_notch20/sub3.h5'
+    #h5fname = '/media/jerry/KLAB101/h5_notch20/sub40.h5'
+    #h5fname = '/mnt/cuenap/data/h5_notch20/sub1.h5'
+    #h5fname = '/mnt/cuenap2/scripts/synth/out/sub40.h5'
+    #h5fname = '/mnt/cuenap2/scripts/synth/out/sub2.h5'
+    #h5fname = '/mnt/cuenap2/scripts/synth/out/sub1.h5'
     h5f = h5py.File(h5fname,'r')
     fs = int(round(h5f['/h5eeg/eeg'].attrs['rate'][0]))
     print('fs:',fs)
