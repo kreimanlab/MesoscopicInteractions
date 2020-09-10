@@ -2,6 +2,13 @@
 # Kreiman Lab :: klab.tch.harvard.edu
 # Last edited: March 30, 2018 [14:13:06]
 
+DIR_OUTPUT = './results'
+DIR_H5 = '../data/h5_notch20'
+
+# This parameter is the window size for coherence calculations
+#   - Please check that this number is the same as in perm.py
+WINDOW = 10 # seconds
+
 from envelope import envelope
 from envelope import envelope_gpu
 from coherence import coherence
@@ -77,43 +84,10 @@ if __name__ == "__main__":
         exit()
     METRIC = sys.argv[2]
 
-    host = socket.gethostname()
+    OUT_DIR = DIR_OUTPUT
+    h5fname = DIR_H5 + '/' + sys.argv[1] + '.h5'
     plat_n = 0
-    if ('Leibniz' in host):
-        OUT_DIR = './results_res5hz'
-        h5fname = './h5/' + sys.argv[1] + '.h5'
-        if (not Path(h5fname).is_file()):
-            #h5fname = '/Volumes/cuenap_ssd/h5/' + sys.argv[1] + '.h5'
-            h5fname = '/Volumes/cuenap/data/h5_notch20/' + sys.argv[1] + '.h5'
-    elif ('seldon' in host):
-        #OUT_DIR = '/Volumes/KLAB101/results/coh_w30'
-        OUT_DIR = './results/coh_w5'
-        h5fname = './h5/' + sys.argv[1] + '.h5'
-        if (not Path(h5fname).is_file()):
-            #h5fname = '/Volumes/cuenap_ssd/h5/' + sys.argv[1] + '.h5'
-            h5fname = '/Volumes/cuenap/data/h5_notch20/' + sys.argv[1] + '.h5'
-    elif ('o2.rc.hms.harvard.edu' in host):
-        OUT_DIR = '/n/scratch2/jw324/opencl/results'
-        h5fname = '/n/scratch2/jw324/data/h5/' + sys.argv[1] + '.h5'
-    elif ((os.path.isfile('iscuenap2')) and ('ubuntu_1604' in host)):
-        OUT_DIR = './results_res5hz'
-        h5fname = '/nas_share/RawData/data/h5_notch20/' + sys.argv[1] + '.h5'
-    elif ((os.path.isfile('iscuenap')) and ('ubuntu_1604' in host)):
-        plat_n = 1 # 0 - cpu, 1 - integrated graphics (faster)
-        OUT_DIR = './results_res5hz'
-        h5fname = '/nas_share/cuenap/data/h5_notch20/' + sys.argv[1] + '.h5'
-    elif ('hopper' in host):
-        OUT_DIR = './results_res5hz'
-        h5fname = '/media/klab/KLAB101/h5_notch20'
-    elif ('archimedes' in host):
-        OUT_DIR = './results_res5hz'
-        h5fname = '/mnt/cuenap2/data/h5_notch20'
-    else:
-        OUT_DIR = './results_res5hz_w5'
-        h5fname = '/media/jerry/KLAB101/h5_notch20/' + sys.argv[1] + '.h5'
-        if (not Path(h5fname).is_file()):
-            h5fname = '/mnt/cuenap2/scripts/synth/out/' + sys.argv[1] + '.h5'
-
+    
     # Check for file
     if (not Path(h5fname).is_file()):
         print("[!] Error: graph.py "+' '.join(sys.argv[1:])+": h5eeg file not found.")
@@ -172,14 +146,14 @@ if __name__ == "__main__":
         thr = api.Thread(dev)
 
     # Read h5eeg
-    #h5fname = '/home/klab/data/h5eeg/artifact_removed/test/opencl/m00006.h5'
+    #h5fname = '/home/klab/data/h5eeg/artifact_removed/test/opencl/sub4.h5'
     sid = h5fname.split('/')[-1].split('.h5')[0]
     h5f = h5py.File(h5fname,'r')
     arts = h5f['/h5eeg/artifacts']
     n_chan = int(h5f['/h5eeg/eeg'].attrs['n_chan'][0])
     n_samples = int(h5f['/h5eeg/eeg'].attrs['n_samples'][0])
     fs = h5f['/h5eeg/eeg'].attrs['rate'][0]
-    w = 10 # seconds
+    w = WINDOW # seconds
     #r_rows = int(w*fs)
     r_rows = int(w * round(fs))
     print('[*] Using file: {0}\n[*] n_chan: {1}\n[*] n_samples: {2}'.format(h5fname,n_chan,n_samples))
