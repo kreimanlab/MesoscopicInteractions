@@ -8,9 +8,12 @@ D = dir(resultsDir);
 Disdir = [D.isdir];
 Dname = {D.name};
 Dname = Dname(~Disdir);
-SubjectsAllPerm = Dname(startsWith(Dname,'m') & endsWith(Dname,'.h5') & contains(Dname,'perm'));
-SubjectsAllGraph = Dname(startsWith(Dname,'m') & endsWith(Dname,'.h5') & contains(Dname,'graph'));
-SubjectsAllDists = Dname(startsWith(Dname,'m') & endsWith(Dname,'.mat') & contains(Dname,'dists'));
+%SubjectsAllPerm = Dname(startsWith(Dname,'m') & endsWith(Dname,'.h5') & contains(Dname,'perm'));
+%SubjectsAllGraph = Dname(startsWith(Dname,'m') & endsWith(Dname,'.h5') & contains(Dname,'graph'));
+%SubjectsAllDists = Dname(startsWith(Dname,'m') & endsWith(Dname,'.mat') & contains(Dname,'dists'));
+SubjectsAllPerm = Dname(endsWith(Dname,'.h5') & contains(Dname,'perm'));
+SubjectsAllGraph = Dname(endsWith(Dname,'.h5') & contains(Dname,'graph'));
+SubjectsAllDists = Dname(endsWith(Dname,'.mat') & contains(Dname,'dists'));
 n_f = length(SubjectsAllPerm);
 
 % Trim graph files with no perm partner
