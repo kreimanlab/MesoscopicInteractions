@@ -23,7 +23,7 @@ if (~exist('A','var'))
     A = Analysis(resultsDir,h5Dir);
 end
 
-sid = 'm00003';%'m00027';%'m00006';%'m00004';%'m00003';% 'm00001';
+sid = 'sub2';%'sub12';%'sub4';%'sub2';% 'sub1';
 metric = 'pcBroadband';
 bchan1_str = 'IF33-IF34';%'AT1-AT2';%'RMT4-RMT5';%'LA10-LA11';%'IF33-IF34';%'LF53-LF54';
 bchan2_str = 'IF36-IF37';%'AT6-AT7';%'RMT7-RMT8';%'LP26-LP27';%'IF36-IF37';%'PT39-PT40';
