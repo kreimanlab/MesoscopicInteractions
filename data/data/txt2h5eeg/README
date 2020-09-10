@@ -1,0 +1,32 @@
+Text to H5eeg conversion
+
+
+Jiarui Wang :: jwang04@g.harvard.edu
+Last edited: December 23, 2016
+
+
+1   Introduction
+
+    This package converts Neuroworks exported text to H5eeg .hdf5 format.
+
+
+2   Requirements
+
+    Matlab (never tested any verions earlier than 2016b)
+    Python 3
+
+
+4   Usage
+
+    1   Configure where your exported data directories are located by editing
+        the file "config"
+
+    2   Any files within EXPORTED_DIR and its subdirectories containing
+        "Export" somewhere in the name will be treated as an exported file
+
+    3   Execute: python3 main.py <name of folder to convert>
+
+
+5   Credits
+
+    The H5eeg format specification was designed by the Nathan Crone Lab

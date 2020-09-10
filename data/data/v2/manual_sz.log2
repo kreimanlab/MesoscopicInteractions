@@ -1,0 +1,278 @@
+[?1h=
+                                    < M A T L A B (R) >
+                          Copyright 1984-2016 The MathWorks, Inc.
+                          R2016b (9.1.0.441655) 64-bit (glnxa64)
+                                     September 7, 2016
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+------------------- freesurfer -------------------
+fshome	/home/admin/Documents/freesurfer
+fsmatlab	/home/admin/Documents/freesurfer/matlab
+fsfasthome	/home/admin/Documents/freesurfer/fsfast
+fsfasttoolbox	/home/admin/Documents/freesurfer/fsfast/toolbox
+------------------- iELVis -----------------------
+globalFsDir	/nas_share/cuenap_ssd/coregistration
+m00001:
+	Fraction marked as seizure: 0.001736405544
+	Fraction marked as seizure (n): 32689944
+	Fraction marked as seizure (pairwise): 0.001753777367
+	Fraction marked as seizure (pairwise n): 101337264
+m00003:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 30732534
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 95269293
+m00004:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 34552560
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 119204400
+m00005:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 43431752
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 195437970
+m00006:
+	Fraction marked as seizure: 0.028426551383
+	Fraction marked as seizure (n): 34974450
+	Fraction marked as seizure (pairwise): 0.028677450733
+	Fraction marked as seizure (pairwise n): 108418842
+m00017:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 25123560
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 95466602
+m00018:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 41697236
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 202225891
+m00019:
+	Fraction marked as seizure: 0.002979457944
+	Fraction marked as seizure (n): 19051452
+	Fraction marked as seizure (pairwise): 0.003009358775
+	Fraction marked as seizure (pairwise n): 59056767
+m00021:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 28520261
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 108373188
+m00022:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 34238050
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 130101664
+m00023:
+	Fraction marked as seizure: 0.002081725916
+	Fraction marked as seizure (n): 38131821
+	Fraction marked as seizure (pairwise): 0.002098271817
+	Fraction marked as seizure (pairwise n): 118207278
+m00024:
+	Fraction marked as seizure: 0.105289103548
+	Fraction marked as seizure (n): 20192004
+	Fraction marked as seizure (pairwise): 0.106001040042
+	Fraction marked as seizure (pairwise n): 41392575
+m00025:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 30461631
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 91382880
+m00026:
+	Fraction marked as seizure: 0.005124471770
+	Fraction marked as seizure (n): 11076849
+	Fraction marked as seizure (pairwise): 0.005176042318
+	Fraction marked as seizure (pairwise n): 34335693
+m00027:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 25210584
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 69327720
+m00028:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 28326375
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 87810786
+m00030:
+	Fraction marked as seizure: 0.002769614775
+	Fraction marked as seizure (n): 11386060
+	Fraction marked as seizure (pairwise): 0.002797331776
+	Fraction marked as seizure (pairwise n): 19355945
+m00032:
+	Fraction marked as seizure: 0.001708949043
+	Fraction marked as seizure (n): 40919886
+	Fraction marked as seizure (pairwise): 0.001724376838
+	Fraction marked as seizure (pairwise n): 126849303
+m00033:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 43938944
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 243853680
+m00035:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 50210069
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 225941625
+m00037:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 29936816
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 134713215
+m00038:
+	Fraction marked as seizure: 0.003051082930
+	Fraction marked as seizure (n): 58951200
+	Fraction marked as seizure (pairwise): 0.003081417096
+	Fraction marked as seizure (pairwise n): 306540780
+m00039:
+	Fraction marked as seizure: 0.007208804633
+	Fraction marked as seizure (n): 30713830
+	Fraction marked as seizure (pairwise): 0.007270489561
+	Fraction marked as seizure (pairwise n): 105960540
+m00043:
+	Fraction marked as seizure: 0.003331868572
+	Fraction marked as seizure (n): 49079667
+	Fraction marked as seizure (pairwise): 0.003337474274
+	Fraction marked as seizure (pairwise n): 220855635
+m00044:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 28068621
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 67363632
+m00045:
+	Fraction marked as seizure: 0.005411539566
+	Fraction marked as seizure (n): 43696807
+	Fraction marked as seizure (pairwise): 0.005462747586
+	Fraction marked as seizure (pairwise n): 166044648
+m00047:
+	Fraction marked as seizure: 0.006978760404
+	Fraction marked as seizure (n): 36002239
+	Fraction marked as seizure (pairwise): 0.007052221829
+	Fraction marked as seizure (pairwise n): 162006390
+m00048:
+	Fraction marked as seizure: 0.003821893810
+	Fraction marked as seizure (n): 21452977
+	Fraction marked as seizure (pairwise): 0.003860184950
+	Fraction marked as seizure (pairwise n): 96535530
+m00049:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 81732469
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 367792425
+m00052:
+	Fraction marked as seizure: 0.004599950648
+	Fraction marked as seizure (n): 45246355
+	Fraction marked as seizure (pairwise): 0.004645938633
+	Fraction marked as seizure (pairwise n): 171934686
+m00053:
+	Fraction marked as seizure: 0.004666215230
+	Fraction marked as seizure (n): 35818965
+	Fraction marked as seizure (pairwise): 0.004696156890
+	Fraction marked as seizure (pairwise n): 111037815
+m00055:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 36070160
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 200186280
+m00056:
+	Fraction marked as seizure: 0.032745934042
+	Fraction marked as seizure (n): 4123260
+	Fraction marked as seizure (pairwise): 0.032985690032
+	Fraction marked as seizure (pairwise n): 3916850
+m00058:
+	Fraction marked as seizure: 0.008934753959
+	Fraction marked as seizure (n): 16922682
+	Fraction marked as seizure (pairwise): 0.009014614845
+	Fraction marked as seizure (pairwise n): 21999276
+m00059:
+	Fraction marked as seizure: 0.007643977358
+	Fraction marked as seizure (n): 11826304
+	Fraction marked as seizure (pairwise): 0.007738932785
+	Fraction marked as seizure (pairwise n): 18330176
+m00060:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 58858877
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 223660514
+m00061:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 21290555
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 68128320
+m00068:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 15796011
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 60021038
+m00071:
+	Fraction marked as seizure: 0.002341127308
+	Fraction marked as seizure (n): 34107073
+	Fraction marked as seizure (pairwise): 0.002370524224
+	Fraction marked as seizure (pairwise n): 129604244
+m00073:
+	Fraction marked as seizure: 0.004482753489
+	Fraction marked as seizure (n): 16934904
+	Fraction marked as seizure (pairwise): 0.004501488095
+	Fraction marked as seizure (pairwise n): 52496640
+m00075:
+	Fraction marked as seizure: 0.004705304217
+	Fraction marked as seizure (n): 51280425
+	Fraction marked as seizure (pairwise): 0.004750399279
+	Fraction marked as seizure (pairwise n): 266655480
+m00079:
+	Fraction marked as seizure: 0.010934039041
+	Fraction marked as seizure (n): 43876924
+	Fraction marked as seizure (pairwise): 0.011033910609
+	Fraction marked as seizure (pairwise n): 197440425
+m00083:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 69205598
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 529414578
+m00084:
+	Fraction marked as seizure: 0.063911306553
+	Fraction marked as seizure (n): 27030272
+	Fraction marked as seizure (pairwise): 0.064404135953
+	Fraction marked as seizure (pairwise n): 90548222
+m00095:
+	Fraction marked as seizure: 0.002262500251
+	Fraction marked as seizure (n): 33451488
+	Fraction marked as seizure (pairwise): 0.002285169002
+	Fraction marked as seizure (pairwise n): 138819492
+m00096:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 39639120
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 156571680
+m00097:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 34914978
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 108235260
+m00100:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 7988078
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 38736950
+m00107:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 70620165
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 367217760
+m00122:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 58497390
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 304182060
+m00124:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 10122420
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 34920900
+mSu:
+	Fraction marked as seizure: 0.000000000000
+	Fraction marked as seizure (n): 3023888
+	Fraction marked as seizure (pairwise): 0.000000000000
+	Fraction marked as seizure (pairwise n): 16776984
+[?1l>

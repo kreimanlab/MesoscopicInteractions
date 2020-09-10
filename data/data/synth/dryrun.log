@@ -1,0 +1,131 @@
+[?1h=
+                            < M A T L A B (R) >
+                  Copyright 1984-2017 The MathWorks, Inc.
+                  R2017b (9.3.0.713579) 64-bit (glnxa64)
+                            September 14, 2017
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub1/
+[*     ] sub1: 6.0068 Days
+[sub1] BIP montage 0 of 63 channels exceed 20.00 mm.
+[  OK  ] 04-Apr-2007 18:57:35 - 05-Apr-2007 09:09:08 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub1/sub1_3eaa3d6f.hdf5 
+[  OK  ] 06-Apr-2007 15:30:06 - 07-Apr-2007 15:37:03 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub1/sub1_2710fd11.hdf5 
+[  OK  ] 07-Apr-2007 15:38:24 - 08-Apr-2007 08:22:06 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub1/sub1_f165694f.hdf5 
+[  OK  ] 08-Apr-2007 08:23:05 - 09-Apr-2007 08:46:18 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub1/sub1_9dd12f55.hdf5 
+[  OK  ] 10-Apr-2007 09:17:01 - 11-Apr-2007 08:29:33 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub1/sub1_54896fbf.hdf5 
+[  OK  ] 11-Apr-2007 08:31:37 - 12-Apr-2007 08:32:19 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub1/sub1_88f17245.hdf5 
+[  OK  ] 12-Apr-2007 13:03:57 - 13-Apr-2007 06:35:03 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub1/sub1_b60211cd.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub17/
+[*     ] sub17: 6.3861 Days
+[*] SF6[86]-SF7[87] 23.24 mm
+[sub17] BIP montage 1 of 91 channels exceed 20.00 mm.
+[  OK  ] 01-May-2009 15:03:20 - 05-May-2009 07:35:10 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub17/sub17_323b3ed9.hdf5 
+[  OK  ] 05-May-2009 14:20:36 - 05-May-2009 15:58:50 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub17/sub17_d4c74a97.hdf5 
+[  OK  ] 05-May-2009 16:08:23 - 08-May-2009 07:14:18 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub17/sub17_598a31c2.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub20/
+[*     ] sub20: 5.0783 Days
+[sub20] BIP montage 0 of 70 channels exceed 20.00 mm.
+[  OK  ] 30-Jul-2009 10:58:29 - 31-Jul-2009 16:19:15 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub20/sub20_9e89a6c3.hdf5 
+[  OK  ] 31-Jul-2009 17:23:11 - 03-Aug-2009 05:02:09 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub20/sub20_d7f64237.hdf5 
+[  OK  ] 03-Aug-2009 09:36:26 - 04-Aug-2009 18:29:31 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub20/sub20_0a403524.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub22/
+[*     ] sub22: 6.6300 Days
+[sub22] BIP montage 0 of 49 channels exceed 20.00 mm.
+[  OK  ] 13-Nov-2009 13:53:19 - 17-Nov-2009 17:22:33 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub22/sub22_757e63c2.hdf5 
+[  OK  ] 17-Nov-2009 18:37:21 - 20-Nov-2009 06:15:17 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub22/sub22_da311236.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub23/
+[*     ] sub23: 6.5682 Days
+[sub23] BIP montage 0 of 77 channels exceed 20.00 mm.
+[  OK  ] 18-Nov-2009 17:10:41 - 23-Nov-2009 06:03:58 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub23/sub23_be5a18ad.hdf5 
+[  OK  ] 23-Nov-2009 09:18:04 - 25-Nov-2009 10:02:59 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub23/sub23_98033c5f.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub24/
+[*     ] sub24: 4.5790 Days
+[sub24] BIP montage 0 of 91 channels exceed 20.00 mm.
+[  OK  ] 05-Feb-2010 16:32:19 - 10-Feb-2010 06:26:08 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub24/sub24_a289baf2.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub25/
+[*     ] sub25: 2.7286 Days
+[sub25] BIP montage 0 of 91 channels exceed 20.00 mm.
+[  OK  ] 16-Feb-2010 15:22:26 - 19-Feb-2010 08:51:33 (2000.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub25/sub25_eb85dfc1.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub30/
+[*     ] sub30: 2.3862 Days
+[sub30] BIP montage 0 of 20 channels exceed 20.00 mm.
+[  OK  ] 13-Aug-2010 16:15:14 - 14-Aug-2010 08:10:07 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub30/sub30_6c5d5970.hdf5 
+[  OK  ] 14-Aug-2010 08:36:09 - 15-Aug-2010 08:23:53 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub30/sub30_68717182.hdf5 
+[  OK  ] 15-Aug-2010 08:39:40 - 16-Aug-2010 02:13:06 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub30/sub30_61e40fa0.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub31/
+[*     ] sub31: 7.2542 Days
+[sub31] BIP montage 0 of 27 channels exceed 20.00 mm.
+[  OK  ] 04-Oct-2010 14:12:20 - 05-Oct-2010 08:10:01 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub31/sub31_a34004c3.hdf5 
+[  OK  ] 05-Oct-2010 08:12:41 - 06-Oct-2010 07:43:13 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub31/sub31_eb1c64e7.hdf5 
+[  OK  ] 06-Oct-2010 10:39:34 - 07-Oct-2010 08:19:53 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub31/sub31_40055cc3.hdf5 
+[  OK  ] 07-Oct-2010 08:20:42 - 08-Oct-2010 08:06:06 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub31/sub31_0d7082f3.hdf5 
+[  OK  ] 08-Oct-2010 14:51:56 - 09-Oct-2010 08:23:38 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub31/sub31_c01aa3b1.hdf5 
+[  OK  ] 09-Oct-2010 08:27:03 - 10-Oct-2010 07:00:29 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub31/sub31_b20c60c3.hdf5 
+[  OK  ] 10-Oct-2010 10:21:02 - 11-Oct-2010 09:17:07 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub31/sub31_8a63d5e4.hdf5 
+[  OK  ] 11-Oct-2010 09:19:10 - 12-Oct-2010 09:30:07 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub31/sub31_4a5e86a1.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub32/
+[*     ] sub32: 4.2783 Days
+[sub32] BIP montage 0 of 32 channels exceed 20.00 mm.
+[  OK  ] 13-Oct-2010 17:10:36 - 14-Oct-2010 08:46:29 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub32/sub32_b8c45c61.hdf5 
+[  OK  ] 14-Oct-2010 08:53:23 - 15-Oct-2010 08:11:55 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub32/sub32_461d4e3b.hdf5 
+[  OK  ] 15-Oct-2010 08:12:13 - 16-Oct-2010 08:00:23 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub32/sub32_370cdc75.hdf5 
+[  OK  ] 16-Oct-2010 08:00:59 - 17-Oct-2010 08:44:33 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub32/sub32_707115b3.hdf5 
+[  OK  ] 17-Oct-2010 08:44:46 - 17-Oct-2010 23:59:18 (499.9070 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub32/sub32_38e82636.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub34/
+[*     ] sub34: 3.7911 Days
+[sub34] BIP montage 0 of 65 channels exceed 20.00 mm.
+[  OK  ] 25-Oct-2010 13:55:09 - 26-Oct-2010 08:05:02 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub34/sub34_dcdce1b0.hdf5 
+[  OK  ] 26-Oct-2010 08:19:56 - 27-Oct-2010 08:29:39 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub34/sub34_dd69e165.hdf5 
+[  OK  ] 27-Oct-2010 08:30:22 - 28-Oct-2010 06:23:09 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub34/sub34_c5036be4.hdf5 
+[  OK  ] 28-Oct-2010 06:23:47 - 29-Oct-2010 09:10:31 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub34/sub34_70706eef.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub37/
+[*     ] sub37: 3.1112 Days
+[sub37] BIP montage 0 of 63 channels exceed 20.00 mm.
+[  OK  ] 31-Jul-2011 04:16:34 - 03-Aug-2011 06:56:42 (2000.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub37/sub37_129df1dd.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub38/
+[*     ] sub38: 5.6526 Days
+[sub38] BIP montage 0 of 105 channels exceed 20.00 mm.
+[  OK  ] 08-Sep-2011 14:42:03 - 14-Sep-2011 06:21:48 (1000.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub38/sub38_d4010703.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub39/
+[*     ] sub39: 5.5806 Days
+[sub39] BIP montage 0 of 91 channels exceed 20.00 mm.
+[  OK  ] 06-Oct-2011 16:18:33 - 10-Oct-2011 15:32:47 (2000.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub39/sub39_0d751796.hdf5 
+[  OK  ] 10-Oct-2011 15:35:57 - 12-Oct-2011 06:17:47 (2000.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub39/sub39_e9a25439.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub41/
+[*     ] sub41: 4.6007 Days
+[sub41] BIP montage 0 of 68 channels exceed 20.00 mm.
+[  OK  ] 24-Jan-2012 08:05:52 - 25-Jan-2012 08:37:49 (250.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub41/sub41_ac5bb0aa.hdf5 
+[  OK  ] 25-Jan-2012 14:59:00 - 26-Jan-2012 08:05:09 (250.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub41/sub41_cd853892.hdf5 
+[  OK  ] 26-Jan-2012 08:05:47 - 27-Jan-2012 06:47:37 (250.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub41/sub41_501329d1.hdf5 
+[  OK  ] 28-Jan-2012 08:20:06 - 29-Jan-2012 07:55:40 (250.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub41/sub41_8f2a6492.hdf5 
+[  OK  ] 29-Jan-2012 07:56:21 - 30-Jan-2012 06:25:55 (250.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub41/sub41_e35b5748.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub42/
+[*     ] sub42: 4.6092 Days
+[sub42] BIP montage 0 of 84 channels exceed 20.00 mm.
+[  OK  ] 31-Jul-2012 17:55:12 - 05-Aug-2012 08:32:24 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub42/sub42_e9003395.hdf5 
+Looking for companion artifact removed .hdf5 files
+Looking for clean h5eeg files in: /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub43/
+[*     ] sub43: 5.7348 Days
+[sub43] BIP montage 0 of 80 channels exceed 20.00 mm.
+[  OK  ] 09-Aug-2012 12:51:30 - 15-Aug-2012 06:29:40 (500.0000 Hz) /share2/CACHEDEV1_DATA/RawData/data/h5eeg/sub43/sub43_b1f7a52f.hdf5 
+Looking for companion artifact removed .hdf5 files
+[  OK  ] Filenames checked and ready.
+[?1l>

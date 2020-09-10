@@ -1,0 +1,11 @@
+Patient Name:	LASTNAME, FIRSTNAME
+Study Name:	UNKNOWN
+File Path:	F:\UNKNOWN
+Creation Date:	00:57:34 Jan 01, 1970
+
+     Time	Duration	Title
+d1 00:57:35  		Beginning of Recording
+d1 00:58:35  		Annotation Example 1
+d1 00:59:35  		Annotation Example 2
+d1 00:00:35  		Annotation Example 3
+d1 00:01:35  		End of Study
