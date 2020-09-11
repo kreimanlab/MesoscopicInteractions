@@ -1,8 +1,10 @@
 #!/bin/bash
 
 # Download
-echo rsync -avP ../downloads.tar.gz ./
-rsync -avP ../downloads.tar.gz ./
+#echo rsync -avP ../downloads.tar.gz ./
+#rsync -avP ../downloads.tar.gz ./
+echo curl http://kreiman.hms.harvard.edu/brainview/downloads.tar.gz --output ./downloads.tar.gz
+curl http://kreiman.hms.harvard.edu/brainview/downloads.tar.gz --output ./downloads.tar.gz
 echo rm -rf downloads
 rm -rf downloads
 echo tar -xzf downloads.tar.gz
