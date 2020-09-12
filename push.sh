@@ -1,12 +1,12 @@
 #!/bin/bash
 
 odir=/media/jerry/internal/data/release/MesoscopicInteractions
-c=0
+#c=0
 
-for file in `find .`
+for file in `find . -type f`
 do
-    if [ $c != 0 ]
-    then
+    #if [ $c != 0 ]
+    #then
         #cmd [option] "$file" >> results.out
         cdir=`pwd`
         echo rsync -avP --exclude . --exclude _Export-example_1.txt --exclude downloads --exclude downloads.tar.gz $file $odir/$file
@@ -21,6 +21,6 @@ do
         git push origin master
         echo cd $cdir
         cd $cdir
-    fi
-    c=$((c+1))
+    #fi
+    #c=$((c+1))
 done
