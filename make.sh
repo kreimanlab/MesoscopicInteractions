@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir stats/figures
+
 # Download
 #echo rsync -avP ../downloads.tar.gz ./
 #rsync -avP ../downloads.tar.gz ./
