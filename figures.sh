@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir stats/figures
 echo source downloads/pyenv/bin/activate
 source downloads/pyenv/bin/activate
 
