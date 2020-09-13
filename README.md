@@ -4,6 +4,13 @@ Code and data release for "Mesoscopic functional interactions in the human brain
 <h2>Quick Start</h2>
     run ./main.sh
 
+<h3>config.sh</h3>
+<h3>make.sh</h3>
+<h3>clean.sh</h3>
+<h3>preprocessing.sh</h3>
+<h3>coherence.sh</h3>
+<h3>figures.sh</h3>
+
 <h2>Contents</h2>
 
 1. /txt2h5eeg
