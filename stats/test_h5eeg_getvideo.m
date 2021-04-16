@@ -1,10 +1,10 @@
 close all;
 clear all;
 
-fn_h5 = '/media/klab/KLAB101/h5_notch20/sub14.h5';
+fn_h5 = '/media/klab/KLAB101/h5_notch20/m00030.h5';
 dir_stamp = '/media/klab/internal/data/stamps';
 dir_video = '/media/klab/internal/data/videos';
-% fn_stamp_1 = '/media/klab/KLAB101/stamps/sub1_2710fd11_stamps.txt';
+% fn_stamp_1 = '/media/klab/KLAB101/stamps/m00001_2710fd11_stamps.txt';
 % f = fopen(fn_stamp_1,'r');
 % fclose(f);
 ecog = H5eeg(fn_h5);

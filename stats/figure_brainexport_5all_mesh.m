@@ -1,7 +1,7 @@
 close all;
 clear;
 
-fn_paths = 'brainexport/sub48_5all.mat';
+fn_paths = 'brainexport/m00124_5all.mat';
 fprintf('[*] Loading %s ..\n',fn_paths)
 load(fn_paths);
 

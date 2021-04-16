@@ -13,8 +13,7 @@ paper_height = 6.5;
 
 % load surf
 dir_cacheLp = './cache';
-%dir_corLp = '/media/klab/internal/data/coreg';
-dir_corLp = '../data/coregistration';
+dir_corLp = '/media/klab/internal/data/coreg';
 metricsp = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'};
 metrics = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'};
 metrics_suffix = {'0.5-125 Hz','3-8 Hz','8-12 Hz','12-30 Hz','30-100 Hz'};
@@ -49,18 +48,16 @@ for iM = 1 %[1 5]
     %--------------------------------------------------------------------------
     %
     % original subject
-    sid = 'sub3';
+    sid = 'm00005';
     sid_i = str2double(sid(2:end));
     b1 = 35;
     b2 = 84;
     %CaR = load(sprintf('%s/fig_cluster2_reduce_%i_new',dir_cache,iM));
-    %CaA = load(sprintf('%s/xsub_out_all_%i',dir_cacheLp,iM));
-    CaA = load(sprintf('%s/xsub_out_all_%i_atl2',dir_cacheLp,iM));
+    CaA = load(sprintf('%s/xsub_out_all_%i',dir_cacheLp,iM));
 
     % convert to integer subject number
     sid_int = find(strcmp(CaA.Subjects,sid));
-    %Ca = load(sprintf('%s/xsub_out_%s_%i',dir_cacheLp,sid,iM));
-    Ca = load(sprintf('%s/xsub_out_%s_%i_atl2',dir_cacheLp,sid,iM));
+    Ca = load(sprintf('%s/xsub_out_%s_%i',dir_cacheLp,sid,iM));
 
     % Find ROIs bipolar electrodes map onto
     rois = Ca.C.AtlLabels{2};
@@ -252,6 +249,7 @@ for iM = 1 %[1 5]
     coord1 = l(l(:,end)==e1,2:4);
     e2 = Ca.ecog.bip(b2,1);
     coord2 = l(l(:,end)==e2,2:4);
+
     [x,y,z] = sphere(64);
     x = x * 1.2;
     y = y * 1.2;
@@ -263,6 +261,16 @@ for iM = 1 %[1 5]
 %     q2.SpecularStrength = 0;
     plot3(coord1(1)+20,coord1(2),coord1(3),'.','Color',const_elec_surface2,'MarkerSize',14);
     plot3(coord2(1)+20,coord2(2),coord2(3),'.','Color',const_elec_surface2,'MarkerSize',14);
+    
+    
+%     e1g = Ca.ecog.bip(b1,2);
+%     coord1g = l(l(:,end)==e1g,2:4);
+%     e2g = Ca.ecog.bip(b2,2);
+%     coord2g = l(l(:,end)==e2g,2:4);
+%     plot3(coord1g(1)+0,coord1g(2),coord1g(3),'.','Color',const_elec_surface2,'MarkerSize',14);
+%     plot3(coord2g(1)+0,coord2g(2),coord2g(3),'.','Color',const_elec_surface2,'MarkerSize',14);
+%     
+    
     %return
     
 
@@ -495,7 +503,7 @@ end
 % 23 janvier
 % [*] First loop complete.
 % [*] Second loop complete.
-% ERROR: could not open /fsaverage_sym/label/ielvis_sub3.label
+% ERROR: could not open /fsaverage_sym/label/ielvis_m00005.label
 % [*] Reading from fallback location..
 % Warning: Directory already exists. 
 % > In figure_t18 (line 322) 
@@ -504,7 +512,7 @@ end
 % 	Coherence mean: 0.30, std: 0.10, min: 0.19, max: 0.49
 % [*] First loop complete.
 % [*] Second loop complete.
-% ERROR: could not open /fsaverage_sym/label/ielvis_sub3.label
+% ERROR: could not open /fsaverage_sym/label/ielvis_m00005.label
 % [*] Reading from fallback location..
 % Warning: Directory already exists. 
 % > In figure_t18 (line 322) 

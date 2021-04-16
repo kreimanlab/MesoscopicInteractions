@@ -245,7 +245,7 @@ end
 cellQptContents = accumarray(qPtGridInds(ptsToConsidMask),find(ptsToConsidMask), [],@(x){x});
 gridsToCheck = unqQgridXY(~any(unqQgridXY<1 | unqQgridXY>gridSize, 2),:);
 cellQptContents(cellfun('isempty',cellQptContents)) = [];
-gridIndsToCheck = sub2ind(size(cells), gridsToCheck(:,2), gridsToCheck(:,1));
+gridIndsToCheck = m00003ind(size(cells), gridsToCheck(:,2), gridsToCheck(:,1));
 
 % For ease of multiplication, reshape qPt XY coords to [1-by-2-by-1-by-N]
 qPtsXY = permute(qPtsXY(':',':'),[4 2 3 1]);
@@ -397,7 +397,7 @@ while any(...
     minInds(mustAlterMask) = newMinInds(:);
     minVals(mustAlterMask) = newMv(:);
 end
-% Below is a tiny speedup on basically a sub2ind call.
+% Below is a tiny speedup on basically a m00003ind call.
 closestTriDistance = facetToQptDists((minInds-1)*size(facetToQptDists,1) + (1:size(facetToQptDists,1))');
 
 %% Input handling subfunctions

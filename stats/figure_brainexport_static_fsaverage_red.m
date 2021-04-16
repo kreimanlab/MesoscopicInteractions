@@ -6,12 +6,12 @@ dir_proj = '/home/jerry/Downloads/blend4web_ce/projects/brainview';
 dir_assets = sprintf('%s/assets',dir_proj);
 
 SubjectsLoc = { ...
-   'fsaverage_sym','sub1','sub2','sub3','sub4','sub5','sub6','sub7','sub8',...
-   'sub9','sub10','sub11','sub12','sub13','sub14','sub15','sub16',...
-   'sub17','sub18','sub19','sub20','sub21','sub22','sub23','sub24',... % 'sub23',
-   'sub25','sub26','sub27','sub28','sub29','sub30','sub31','sub32',... % 'sub30',
-   'sub33','sub34','sub35','sub36','sub37','sub38','sub39','sub40',...
-   'sub41','sub42','sub43','sub44','sub45','sub46','sub47','sub48'};
+   'fsaverage_sym','m00001','m00003','m00005','m00006','m00019','m00021','m00022','m00023',...
+   'm00024','m00025','m00026','m00027','m00028','m00030','m00032','m00033',...
+   'm00035','m00037','m00038','m00039','m00043','m00044','m00045','m00047',... % 'm00045',
+   'm00048','m00049','m00052','m00053','m00055','m00056','m00058','m00059',... % 'm00056',
+   'm00060','m00061','m00068','m00071','m00073','m00075','m00079','m00083',...
+   'm00084','m00095','m00096','m00097','m00100','m00107','m00122','m00124'};
 
 metrics = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'};
 hz_txt = {'0-125 Hz','3-8 Hz','8-12 Hz','12-30 Hz','30-100 Hz'};
@@ -133,7 +133,7 @@ for isub = 1:length(SubjectsLoc)
             l = [l(:,1), l(:,5), l(:,2:4)];
             Ca = load(sprintf('%s/xsub_out_%s_%i.mat',dir_cache,sid_const,metrici));
             %if (false)            
-            if (strcmp(sid_const,'sub26'))
+            if (strcmp(sid_const,'m00049'))
                 elec_hemi_idx = strcmp(Ca.C.EleHemi,upper(hemi));
                 E = []; %zeros(sum(elec_hemi_idx),5);
                 ic = 1;
@@ -253,7 +253,7 @@ for isub = 1:length(SubjectsLoc)
                 mag = A(i,j);
                 if (~isnan(mag))
 
-                    if (strcmp(sid_const,'sub26'))
+                    if (strcmp(sid_const,'m00049'))
                         path = Paths2{A_ind(i),A_ind(j)};
                     else
                         path = Paths{n};
@@ -286,7 +286,7 @@ for isub = 1:length(SubjectsLoc)
                     if (strcmp(sid_const,'fsaverage_sym'))
                         chan1 = cluster_i(i); %Count(Count(:,3) == n,1);
                         chan2 = cluster_i(j); %Count(Count(:,3) == n,2);
-                    elseif (strcmp(sid_const,'sub26'))
+                    elseif (strcmp(sid_const,'m00049'))
                         chan1 = A_ind(i);
                         chan2 = A_ind(j);
                     else
@@ -375,7 +375,7 @@ for isub = 1:length(SubjectsLoc)
         TitleElec = {};
         CoordElec = {};
         
-%         if (strcmp(sid_const,'sub26'))
+%         if (strcmp(sid_const,'m00049'))
 %             return
 %             n_locations = n_A;
 %         end

@@ -15,6 +15,7 @@ mkdir(sprintf('figures/T11_new'));
 %metricsp = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'};
 imetrics = [1 5]; % 1:5; 
 
+flag_cone = true;
 
 for imm = 1:length(imetrics)
     iM = imetrics(imm);
@@ -22,13 +23,12 @@ for imm = 1:length(imetrics)
     for trig_show_path = [0] %[0 1]
     
         % Read subject surface
-        sid = 'sub3';
+        sid = 'm00005';
         fn_paths = sprintf('brainexport/%s_6all_%i.mat',sid,iM);
         fprintf('[*] Loading %s ..\n',fn_paths)
         load(fn_paths);
         Paths = Paths(Paths_ind);
-        %fn_cache = sprintf('%s/xsub_out_%s_%i.mat',dir_cache,sid,iM);
-        fn_cache = sprintf('%s/xsub_out_%s_%i_atl2.mat',dir_cache,sid,iM);
+        fn_cache = sprintf('%s/xsub_out_%s_%i.mat',dir_cache,sid,iM);
         Ca = load(fn_cache);
         currdir = pwd;
         surface_type = 'pial';
@@ -107,6 +107,26 @@ for imm = 1:length(imetrics)
         %     else
         %         col_elec = const_elec_low;
         %     end
+        
+            is_bip = (sum(ecog.bip(:,1) == i) > 0);
+            if (is_bip && flag_cone) %((i == b1c1) || (i == b2c1))
+                cone_radius = [1.8 0.1];
+                cone_n = 32;
+                %cone_col = [1 1 1]*0.15;
+                cone_col = const_elec_surface;
+                cone_rref = 1.1;
+                coord_1 = ecog.bip(ecog.bip(:,1)==i,4:6);
+                coord_2 = ecog.bip(ecog.bip(:,1)==i,7:9);
+                [ConeH,EndPlate1,EndPlate2] = Cone(coord_1,coord_2,cone_radius,cone_n,cone_col,1,0);
+                ConeH.SpecularStrength = 0;
+                ConeH.SpecularExponent = 1;
+                % ref marker
+                [X,Y,Z] = sphere(cone_n);
+                q = surf(coord_2(1)+X*cone_rref,coord_2(2)+Y*cone_rref,coord_2(3)+Z*cone_rref,'EdgeColor','none','FaceColor',cone_col);
+                q.SpecularStrength = 0;
+                q.SpecularExponent = 1;
+            end
+        
             q = trisurf(elec_pa{i}.faces,vert(:,1),vert(:,2),vert(:,3),...
                 'EdgeColor','none','FaceColor',const_elec_surface);
             q.SpecularStrength = 0;
@@ -166,21 +186,59 @@ for imm = 1:length(imetrics)
         b2 = 84;
         b1c1 = ecog.bip(b1,1);
         b2c1 = ecog.bip(b2,1);
+        b1c2 = ecog.bip(b1,2);
+        b2c2 = ecog.bip(b2,2);
+        col_elec_bip = [0 1 0]*0.4;
         for i = 1:n_chan
             vert = elec_pa{i}.vertices;
             
             % Show bipolar electrodes only
             is_bip = (sum(ecog.bip(:,1) == i) > 0);
             if (is_bip)
+                
                 if ((i == b1c1) || (i == b2c1))
+                %if ((i == b1c1) || (i == b2c1) || (i == b1c2) || (i == b2c2))
                     col_elec = const_elec_surface;
                 else
                     col_elec = const_elec_low;
                 end
+                
+                % show bipolar ground indicator
+                if (flag_cone) %((i == b1c1) || (i == b2c1))
+                    %cone_radius = [1.8 0.1];
+                    %cone_n = 32;
+                    %cone_col = [1 1 1]*0.15;
+                    cone_col = col_elec;
+                    %cone_rref = 1.1;
+                    coord_1 = ecog.bip(ecog.bip(:,1)==i,4:6);
+                    coord_2 = ecog.bip(ecog.bip(:,1)==i,7:9);
+                    [ConeH,EndPlate1,EndPlate2] = Cone(coord_1,coord_2,cone_radius,cone_n,cone_col,1,0);
+                    ConeH.SpecularStrength = 0;
+                    ConeH.SpecularExponent = 1;
+                    % ref marker
+                    [X,Y,Z] = sphere(cone_n);
+                    q = surf(coord_2(1)+X*cone_rref,coord_2(2)+Y*cone_rref,coord_2(3)+Z*cone_rref,'EdgeColor','none','FaceColor',cone_col);
+                    q.SpecularStrength = 0;
+                    q.SpecularExponent = 1;
+                end
+                
+                % plot first electrode
                 q = trisurf(elec_pa{i}.faces,vert(:,1),vert(:,2),vert(:,3),...
                 'EdgeColor','none','FaceColor',col_elec);
                 q.SpecularStrength = 0;
                 q.SpecularExponent = 1;
+               
+                
+            else
+%                 % plot second electrode
+%                 if ((i == b1c2) || (i == b2c2))
+%                     %i_2 = ecog.bip(b1,2);
+%                     col_elec_bip = [0 1 0]*0.4;
+%                     q = trisurf(elec_pa{i}.faces,vert(:,1),vert(:,2),vert(:,3),...
+%                     'EdgeColor','none','FaceColor',col_elec_bip);
+%                     q.SpecularStrength = 0;
+%                     q.SpecularExponent = 1;
+%                 end
             end
             
         end
@@ -237,15 +295,43 @@ for imm = 1:length(imetrics)
             % Show bipolar electrodes only
             is_bip = (sum(ecog.bip(:,1) == i) > 0);
             if (is_bip)
+                
                 if ((i == b1c1) )
+                %if ((i == b1c1) || (i == b1c2))
                     col_elec = const_elec_surface;
                 else
                     col_elec = const_elec_low;
                 end
+                
+                % show bipolar ground indicator
+                if (flag_cone)%((i == b1c1) )
+                    cone_col = col_elec;
+                    coord_1 = ecog.bip(ecog.bip(:,1)==i,4:6);
+                    coord_2 = ecog.bip(ecog.bip(:,1)==i,7:9);
+                    [ConeH,EndPlate1,EndPlate2] = Cone(coord_1,coord_2,cone_radius,cone_n,cone_col,1,0);
+                    ConeH.SpecularStrength = 0;
+                    ConeH.SpecularExponent = 1;
+                    % ref marker
+                    [X,Y,Z] = sphere(cone_n);
+                    q = surf(coord_2(1)+X*cone_rref,coord_2(2)+Y*cone_rref,coord_2(3)+Z*cone_rref,'EdgeColor','none','FaceColor',cone_col);
+                    q.SpecularStrength = 0;
+                    q.SpecularExponent = 1;
+                end
+                
                 q = trisurf(elec_pa{i}.faces,vert(:,1),vert(:,2),vert(:,3),...
                 'EdgeColor','none','FaceColor',col_elec);
                 q.SpecularStrength = 0;
                 q.SpecularExponent = 1;
+            else
+%                 % plot second electrode
+%                 if ((i == b1c2))
+%                     %i_2 = ecog.bip(b1,2);
+%                     %col_elec_bip = [0 1 0]*0.4;
+%                     q = trisurf(elec_pa{i}.faces,vert(:,1),vert(:,2),vert(:,3),...
+%                     'EdgeColor','none','FaceColor',col_elec_bip);
+%                     q.SpecularStrength = 0;
+%                     q.SpecularExponent = 1;
+%                 end
             end
             
             
@@ -295,7 +381,7 @@ for imm = 1:length(imetrics)
         brainlight;
         view(90,0)
         axis off
-        fprintf('[*] sub2: # edges: %i, # bip: %i (%.2f%%)\n',ecount,bcount,100*(ecount/bcount));
+        fprintf('[*] m00003: # edges: %i, # bip: %i (%.2f%%)\n',ecount,bcount,100*(ecount/bcount));
         
 
 
@@ -309,15 +395,43 @@ for imm = 1:length(imetrics)
             % Show bipolar electrodes only
             is_bip = (sum(ecog.bip(:,1) == i) > 0);
             if (is_bip)
+                
                 if ( (i == b2c1))
+                %if ((i == b2c1) || (i == b2c2))
                     col_elec = const_elec_surface;
                 else
                     col_elec = const_elec_low;
                 end
+                
+                % show bipolar ground indicator
+                if (flag_cone) %((i == b1c1) )
+                    cone_col = col_elec;
+                    coord_1 = ecog.bip(ecog.bip(:,1)==i,4:6);
+                    coord_2 = ecog.bip(ecog.bip(:,1)==i,7:9);
+                    [ConeH,EndPlate1,EndPlate2] = Cone(coord_1,coord_2,cone_radius,cone_n,cone_col,1,0);
+                    ConeH.SpecularStrength = 0;
+                    ConeH.SpecularExponent = 1;
+                    % ref marker
+                    [X,Y,Z] = sphere(cone_n);
+                    q = surf(coord_2(1)+X*cone_rref,coord_2(2)+Y*cone_rref,coord_2(3)+Z*cone_rref,'EdgeColor','none','FaceColor',cone_col);
+                    q.SpecularStrength = 0;
+                    q.SpecularExponent = 1;
+                end
+                
                 q = trisurf(elec_pa{i}.faces,vert(:,1),vert(:,2),vert(:,3),...
                 'EdgeColor','none','FaceColor',col_elec);
                 q.SpecularStrength = 0;
                 q.SpecularExponent = 1;
+            else
+%                 % plot second electrode
+%                 if ((i == b2c2))
+%                     %i_2 = ecog.bip(b1,2);
+%                     %col_elec_bip = [0 1 0]*0.4;
+%                     q = trisurf(elec_pa{i}.faces,vert(:,1),vert(:,2),vert(:,3),...
+%                     'EdgeColor','none','FaceColor',col_elec_bip);
+%                     q.SpecularStrength = 0;
+%                     q.SpecularExponent = 1;
+%                 end
             end
             
         end
@@ -366,8 +480,8 @@ for imm = 1:length(imetrics)
         brainlight;
         view(90,0)
         axis off
-        %fprintf('[*] sub3: num of edges: %i\n',ecount);
-        fprintf('[*] sub3: # edges: %i, # bip: %i (%.2f%%)\n',ecount,bcount,100*(ecount/bcount));
+        %fprintf('[*] m00005: num of edges: %i\n',ecount);
+        fprintf('[*] m00005: # edges: %i, # bip: %i (%.2f%%)\n',ecount,bcount,100*(ecount/bcount));
         
 
 
@@ -395,6 +509,21 @@ for imm = 1:length(imetrics)
                 else
                     col_elec = const_elec_low;
                 end
+                
+                if (flag_cone) %((i == b1c1) )
+                    cone_col = col_elec;
+                    coord_1 = ecog.bip(ecog.bip(:,1)==i,4:6);
+                    coord_2 = ecog.bip(ecog.bip(:,1)==i,7:9);
+                    [ConeH,EndPlate1,EndPlate2] = Cone(coord_1,coord_2,cone_radius,cone_n,cone_col,1,0);
+                    ConeH.SpecularStrength = 0;
+                    ConeH.SpecularExponent = 1;
+                    % ref marker
+                    [X,Y,Z] = sphere(cone_n);
+                    q = surf(coord_2(1)+X*cone_rref,coord_2(2)+Y*cone_rref,coord_2(3)+Z*cone_rref,'EdgeColor','none','FaceColor',cone_col);
+                    q.SpecularStrength = 0;
+                    q.SpecularExponent = 1;
+                end
+                
                 q = trisurf(elec_pa{i}.faces,vert(:,1),vert(:,2),vert(:,3),...
                 'EdgeColor','none','FaceColor',col_elec);
                 q.SpecularStrength = 0;
@@ -466,7 +595,7 @@ for imm = 1:length(imetrics)
         brainlight;
         view(90,0)
         axis off
-        fprintf('[*] sub5: num of edges: %i\n',ecount);
+        fprintf('[*] m00019: num of edges: %i\n',ecount);
 
         % Show colorbar
         colormap(cmap);
@@ -506,6 +635,21 @@ for imm = 1:length(imetrics)
                 else
                     col_elec = const_elec_low;
                 end
+                
+                if (flag_cone) %((i == b1c1) )
+                    cone_col = col_elec;
+                    coord_1 = ecog.bip(ecog.bip(:,1)==i,4:6);
+                    coord_2 = ecog.bip(ecog.bip(:,1)==i,7:9);
+                    [ConeH,EndPlate1,EndPlate2] = Cone(coord_1,coord_2,cone_radius,cone_n,cone_col,1,0);
+                    ConeH.SpecularStrength = 0;
+                    ConeH.SpecularExponent = 1;
+                    % ref marker
+                    [X,Y,Z] = sphere(cone_n);
+                    q = surf(coord_2(1)+X*cone_rref,coord_2(2)+Y*cone_rref,coord_2(3)+Z*cone_rref,'EdgeColor','none','FaceColor',cone_col);
+                    q.SpecularStrength = 0;
+                    q.SpecularExponent = 1;
+                end
+                
                 q = trisurf(elec_pa{i}.faces,vert(:,1),vert(:,2),vert(:,3),...
                 'EdgeColor','none','FaceColor',col_elec);
                 q.SpecularStrength = 0;
@@ -562,9 +706,9 @@ for imm = 1:length(imetrics)
         brainlight;
         view(90,0)
         axis off
-        fprintf('[*] sub6: num of edges: %i\n',ecount);
+        fprintf('[*] m00021: num of edges: %i\n',ecount);
 
-        fn_fig = sprintf('figures/T11_new/figure_t11_metric-%i_curve-%i',iM,trig_show_path);
+        fn_fig = sprintf('figures/T11_new/figure_t11_metric-%i_curve-%i_cone-%i',iM,trig_show_path,flag_cone);
         print(h,fn_fig,'-depsc');
         print(h,fn_fig,'-dpng','-r300');
         close(h);
@@ -664,7 +808,7 @@ fprintf('[*] All Done.\n');
 % > In figure_t11_new (line 12) 
 % Warning: Directory already exists. 
 % > In figure_t11_new (line 13) 
-% [*] Loading brainexport/sub3_6all_1.mat ..
+% [*] Loading brainexport/m00005_6all_1.mat ..
 % [!] Mag range for subplot 4: interaction to both: 0.142108157 - 0.272080839
 % 	[*] Subplot 2,3,1, mag: 0.2213
 % 	[*] Subplot 2,3,1, mag_std: 0.0492
@@ -672,10 +816,10 @@ fprintf('[*] All Done.\n');
 % 	[*] Subplot 2,3,1, mag_null_std: 0.0492
 % 	[*] Subplot 2,3,1, ct: 0.4052
 % 	[*] Subplot 2,3,1, ct_null: 0.0018
-% [*] sub2: # edges: 20, # bip: 75 (26.67%)
-% [*] sub3: # edges: 23, # bip: 60 (38.33%)
-% [*] sub5: num of edges: 67
-% [*] sub6: num of edges: 138
+% [*] m00003: # edges: 20, # bip: 75 (26.67%)
+% [*] m00005: # edges: 23, # bip: 60 (38.33%)
+% [*] m00019: num of edges: 67
+% [*] m00021: num of edges: 138
 % [*] Saved to: figures/T11_new/figure_t11_metric-1_curve-0
 % [*] Details:
 % 	# pairs total: 4095
@@ -694,7 +838,7 @@ fprintf('[*] All Done.\n');
 % [*] n sig no both: 26
 % [*] n sig xor: 10
 % === end comment ===
-% [*] Loading brainexport/sub3_6all_5.mat ..
+% [*] Loading brainexport/m00005_6all_5.mat ..
 % [!] Mag range for subplot 4: interaction to both: 0.155799359 - 0.322029501
 % 	[*] Subplot 2,3,1, mag: 0.2062
 % 	[*] Subplot 2,3,1, mag_std: 0.0551
@@ -702,10 +846,10 @@ fprintf('[*] All Done.\n');
 % 	[*] Subplot 2,3,1, mag_null_std: 0.0551
 % 	[*] Subplot 2,3,1, ct: 0.4707
 % 	[*] Subplot 2,3,1, ct_null: 0.0017
-% [*] sub2: # edges: 20, # bip: 75 (26.67%)
-% [*] sub3: # edges: 20, # bip: 60 (33.33%)
-% [*] sub5: num of edges: 29
-% [*] sub6: num of edges: 80
+% [*] m00003: # edges: 20, # bip: 75 (26.67%)
+% [*] m00005: # edges: 20, # bip: 60 (33.33%)
+% [*] m00019: num of edges: 29
+% [*] m00021: num of edges: 80
 % [*] Saved to: figures/T11_new/figure_t11_metric-5_curve-0
 % [*] Details:
 % 	# pairs total: 4095

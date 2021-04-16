@@ -2,7 +2,7 @@ close all;
 clear;
 
 subjects_dir = '/media/jerry/internal/data/coreg';
-sid_const = 'sub3'; %"fsaverage_sym";
+sid_const = 'm00005'; %"fsaverage_sym";
 hemi = 'r';
 SURFACE_TYPE = 'pial';
 

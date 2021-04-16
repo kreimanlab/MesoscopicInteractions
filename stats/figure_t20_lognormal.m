@@ -23,7 +23,7 @@ for atl = [2] %1:20
 
     %system(sprintf('mkdir figures/T14_allatl/atl%i_%s',atl,AtlNames{atl}));
     
-    for iM = [1 5] %1:length(metrics) % [1 5] %
+    for iM = 5 %[1 5] %1:length(metrics) % [1 5] %
         metric = metrics{iM};
 
         % Load human cache
@@ -80,7 +80,7 @@ for atl = [2] %1:20
                         Adj(i1,i2) = 1;
                         AdjMag(i1,i2) = mean(AA(AA ~= 0));
                         AdjMagNoThreshCond(i1,i2) = true;
-                        AdjMagVar(i1,i2) = var(AA(AA ~= 0));
+                        AdjMagVar(i1,i2) = std(AA(AA ~= 0)); %var(AA(AA ~= 0));
                         AdjCT(i1,i2) = mean(AAct(AA ~= 0));
                         AdjCTVar(i1,i2) = var(AAct(AA ~= 0));
                         AdjMagL{i1,i2} = AA(AA~=0);
@@ -171,7 +171,7 @@ for atl = [2] %1:20
         
         %return
         hh = figure('visible','off');
-        set(hh,'Position',[0 0 150 150]);
+        set(hh,'Position',[0 0 200 200]);
         %h = histogram(log10(AdjV),'Normalization','pdf','DisplayStyle','bar','FaceColor',0.5*[1 1 1]);
         h = histogram(AdjV,'Normalization','pdf','DisplayStyle','bar','FaceColor',0.5*[1 1 1]);
         x_cen = linspace(h.BinLimits(1),h.BinLimits(2),100); %h.BinEdges + h.BinWidth/2;
@@ -180,11 +180,17 @@ for atl = [2] %1:20
         xticks([x_cen(1), 0.5*(x_cen(1)+x_cen(end)), x_cen(end)]);
         hold on;
         plot(x_cen,y_norm,'black-');
-        %hold on;
-        %y_norm2 = normpdf(x_cen,(nanmean((AdjV))),(nanstd((AdjV))));
-        %cc = plasma(2);
-        %plot(x_cen,y_norm2,'-','color',cc(1,:));
+        
+        
+        
+        hold on;
+        y_norm2 = normpdf(x_cen,(nanmean((AdjV))),(nanstd((AdjV))));
+        cc = plasma(2);
+        plot(x_cen,y_norm2,':','color',cc(1,:));
+        
         %return
+        
+        
         
         xlabel('Coherence');
         ylabel('pdf')
@@ -219,7 +225,7 @@ for atl = [2] %1:20
         
         
         hh = figure('visible','off');
-        set(hh,'Position',[0 0 150 150]);
+        set(hh,'Position',[0 0 200 200]);
         h = histogram(AdjVNoCtBelow,'Normalization','pdf','DisplayStyle','bar','FaceColor',0.5*[1 1 1]);
         x_cen = linspace(h.BinLimits(1),h.BinLimits(2),100); 
         y_norm = lognpdf(x_cen,(nanmean(log(AdjVNoCtBelow))),(nanstd(log(AdjVNoCtBelow))));
@@ -244,6 +250,61 @@ for atl = [2] %1:20
         fprintf('\tmin:%.8f, max:%.8f\n',min(Xt),max(Xt));
         print(hh,sprintf('figures/T20_lognormal/metric%i_atl%i_hist_below',iM,atl),'-dsvg');
         close(hh);
+        
+        
+        
+        
+        % -----------------------------------------------------------------
+        %
+        % Variance histogram
+        %
+        %
+        hh = figure('visible','off');
+        set(hh,'Position',[0 0 200 200]);
+        %h = histogram(log10(AdjV),'Normalization','pdf','DisplayStyle','bar','FaceColor',0.5*[1 1 1]);
+        h = histogram(AdjVv,'Normalization','pdf','DisplayStyle','bar','FaceColor',0.5*[1 1 1]);
+        x_cen = linspace(h.BinLimits(1),h.BinLimits(2),100); %h.BinEdges + h.BinWidth/2;
+        %y_norm = normpdf(x_cen,(nanmean(log10(AdjV))),(nanstd(log10(AdjV))));
+        lAdjVv = log10(AdjVv);
+        y_norm = lognpdf(x_cen,(nanmean(lAdjVv(~isinf(lAdjVv)))),(nanstd(lAdjVv(~isinf(lAdjVv)))));
+        xticks([x_cen(1), 0.5*(x_cen(1)+x_cen(end)), x_cen(end)]);
+        hold on;
+        plot(x_cen,y_norm,'black-');
+        hold on;
+        y_norm2 = normpdf(x_cen,(nanmean((AdjVv))),(nanstd((AdjVv))));
+        cc = plasma(2);
+        plot(x_cen,y_norm2,':','color',cc(1,:));
+        
+        xlabel('Coherence');
+        ylabel('pdf')
+        set(gca,'TickDir','out');
+        box off;
+        
+        % --- KS test ---
+        Xt = (log10(AdjVv));
+        [h,p,ksstat,cv] = kstest((Xt-mean(Xt(~isinf(Xt))))/std(Xt(~isinf(Xt)))); % std(Xt(~isinf(Xt)))
+        %[h,p,ksstat,cv] = kstest((Xt-mean(Xt))/std(Xt)); 
+        fprintf('[*] Log(C) kstest p=%.4d, n=%i\n',p,length(Xt));
+        fprintf('\tmin:%.8f, max:%.8f\n',min(Xt),max(Xt));
+        % --- Linear test ---
+        Xt = (AdjVv);
+        [h,p,ksstat,cv] = kstest((Xt-mean(Xt(~isinf(Xt))))/std(Xt(~isinf(Xt))));
+        %[h,p,ksstat,cv] = kstest((Xt-mean(Xt))/std(Xt));
+        fprintf('[*] Linear kstest p=%.4d, n=%i\n',p,length(Xt));
+        fprintf('\tmin:%.8f, max:%.8f\n',min(Xt),max(Xt));
+        
+        % Broadband
+        % [*] Log(C) kstest p=5.9133e-01, n=193
+        % Gamma
+        % [*] Log(C) kstest p=1.4780e-01, n=183
+        %return
+        print(hh,sprintf('figures/T20_lognormal/metric%i_atl%i_hist_std',iM,atl),'-dsvg');
+        %saveas(gcf,sprintf('figures/T20_lognormal/metric%i_atl%i_hist',iM,atl),'epsc');
+        close(hh);
+        
+        %
+        %
+        % -----------------------------------------------------------------
         
         
         
@@ -375,20 +436,21 @@ for iM = [1 5]
     AdjV = AdjV(AdjV>0);
     
     hh = figure('visible','off');
-    set(hh,'Position',[0 0 150 150]);
+    set(hh,'Position',[0 0 200 200]);
     %h = histogram(log10(AdjV),'Normalization','pdf','DisplayStyle','bar','FaceColor',0.5*[1 1 1]);
     h = histogram(AdjV,'Normalization','pdf','DisplayStyle','bar','FaceColor',0.5*[1 1 1]);
     x_cen = linspace(h.BinLimits(1),h.BinLimits(2),100); %h.BinEdges + h.BinWidth/2;
     %y_norm = normpdf(x_cen,(nanmean(log10(AdjV))),(nanstd(log10(AdjV))));
+    %y_norm = lognpdf(x_cen,(nanmean(log(AdjV))),(nanstd(log(AdjV))));
     y_norm = lognpdf(x_cen,(nanmean(log(AdjV))),(nanstd(log(AdjV))));
     xticks([x_cen(1), 0.5*(x_cen(1)+x_cen(end)), x_cen(end)]);
     hold on;
     plot(x_cen,y_norm,'black-');
     
-%     hold on;
-%     y_norm2 = normpdf(x_cen,(nanmean((AdjV))),(nanstd((AdjV))));
-%     cc = plasma(2);
-%     plot(x_cen,y_norm2,':','color',cc(1,:));
+    hold on;
+    y_norm2 = normpdf(x_cen,(nanmean((AdjV))),(nanstd((AdjV))));
+    cc = plasma(2);
+    plot(x_cen,y_norm2,':','color',cc(1,:));
     
     xlabel('Coherence');
     ylabel('pdf')

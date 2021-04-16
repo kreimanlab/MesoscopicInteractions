@@ -437,7 +437,7 @@ for atl = 2 %1:20 %1:20
                     %roi_dist(isinf(roi_dist)) = ;
                     clash = nansum(nansum(triu(roi_dist,1) - triu(roi_dist,2)));
                     fprintf('cluster clash: %.12f mm\n',clash)
-                    save(sprintf('./cache/figure_t14_noT_%i_atl%i_%s',iM,atl,AtlNames{atl}),'AdjMag','AdjMagVar','Adj_plt','Adj_plt2','Adj_plt2_cl','Y','Z','M','cluster_i','rois_plt','atl');
+                    save(sprintf('./cache/figure_t14_%i_atl%i_%s_noT',iM,atl,AtlNames{atl}),'AdjMag','AdjMagVar','Adj_plt','Adj_plt2','Adj_plt2_cl','Y','Z','M','cluster_i','rois_plt','atl');
                 %cluster_i = optimalleaforder(Z,Y);
                 end
 

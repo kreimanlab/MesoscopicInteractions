@@ -2,17 +2,44 @@ clear;
 close all;
 rng shuffle;
 
-dir_art = '../data/h5_notch20/art_nosz';
-dir_res = '../opencl/results';
-% number of coherence permutations should match filenames in results directory
-n_perm = 1000; % default: 10000, debug: 1000
-dir_cor = '../data/coregistration';
-dir_h5 = '../data/h5_notch20';
+[~,host] = system('hostname');
+if contains(host,'hopperu')
+    % Path definitions
+    dir_art = '/mnt/cuenap/data/scripts/v2/art_szs';%'/media/klab/KLAB101/h5_notch20/art_nosz';%'/mnt/cuenap/data/h5_notch20/art_nosz';
+    dir_res = '/mnt/cuenap/data/results/coh_w20';
+    dir_cor = '/mnt/cuenap_ssd/coregistration';
+    dir_h5 = '/mnt/cuenap/data/h5_notch20';
+    %dir_out = '/';
+elseif contains(host,'o2.rc.hms.harvard.edu')
+    % Path definitions
+    dir_art = '/n/groups/kreiman/jerry/data/h5/art';
+    dir_res = '/n/scratch2/jw324/data/results/coh_w10';
+    dir_cor = '/n/scratch2/jw324/data/coreg';
+    dir_h5 = '/n/groups/kreiman/jerry/data/h5';
+elseif contains(host,'kraken')
+    dir_art = '/media/klab/untitled/h5_notch20/art_nosz'; %'/media/klab/internal/data/h5_notch20/art';
+    dir_res = '/media/klab/untitled/results/coh_w10';
+    dir_cor = '/media/klab/internal/data/coreg'; %'/mnt/cuenap_ssd/coregistration';
+    dir_h5 = '/media/klab/untitled/h5_notch20';
+elseif contains(host,'ubuntu_1604')
+    dir_art = '/nas_share/RawData/data/h5_notch20/art_nosz';
+    dir_res = '/nas_share/RawData/scripts/opencl/results_res5hz';
+    dir_cor = '/mnt/cuenap_ssd/coregistration';
+    %dir_h5 = '/nas_share/RawData/data/h5_notch20';
+    dir_h5 = '/mnt/cuenap/data/h5_notch20';
+end
 
 setenv('SUBJECTS_DIR',dir_cor);
 
 % Patients
-Subjects = {'example'};
+Subjects = {'m00001','m00003','m00005','m00006','m00019','m00021','m00022','m00023',...
+    'm00024','m00025','m00026','m00027','m00028','m00030','m00032','m00033',...
+    'm00035','m00037','m00038','m00039','m00043','m00044','m00045','m00047',...
+    'm00048','m00049','m00052','m00053','m00055','m00056','m00058','m00059',...
+    'm00060','m00061','m00068','m00071','m00073','m00075','m00079','m00083',...
+    'm00084','m00095','m00096','m00097','m00100','m00107','m00122','m00124'};
+
+%Subjects = {'mSu'};
 
 % Randomly rearrange subjects
 %Subjects = Subjects(randperm(length(Subjects)));
@@ -29,10 +56,12 @@ metrics = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'}; % 'pcDelta'
 %metrics = metrics(randperm(length(metrics)));
 
 % atlas index: 1 - Destrieux, 2 - Desikan-Killiany, 6 - HCP-MMP1
+% Update: 1 for 150 area parcellation
 
 for atl = 2 %1:20  
 
 fprintf('Atlas: %i of 20\n',atl);
+n_perm = 10000;
 dist_thresh = 17; % mm
 
 % Thresholds
@@ -70,7 +99,7 @@ art_thresh = 0.25;
 % Cache files
 cfiles = cell(1,length(Subjects));
 for i = 1:length(cfiles)
-    cfiles{i} = sprintf('cache_debug/%s_R_null.mat',Subjects{i});
+    cfiles{i} = sprintf('cache/%s_R_null.mat',Subjects{i});
 end
 
 % parfor
@@ -83,7 +112,7 @@ curr_d = pwd;
 %     addAttachedFiles(poolobj,cfiles);
 % end
 
-for metrici = 1:length(metrics) %1:length(metrics)
+for metrici = [2 3 4]%1:length(metrics) %1:length(metrics)
     
     tic;
 
@@ -199,19 +228,68 @@ for metrici = 1:length(metrics) %1:length(metrics)
             R_null = zeros(size(R));
             %D = load(fn_dist);
             for j = 1:ecog.n_comb
-                R_null(j,:) = random(D.d{j},[1 n_graph]);
+                
+%                 coh_val = nan(1,n_graph);
+%                 for k = 1:n_graph
+%                     cond_pass = true;
+%                     while (cond_pass)
+%                         coh_val(k) = random(D.d{j},[1 1]);
+%                         cond_pass = ((coh_val(k) < 0) | (coh_val(k) > 1));
+%                     end
+%                 end
+                
+                coh_val = random(D.d{j},[1 n_graph]);
+                idx_out_of_range = ((coh_val < 0) | (coh_val > 1));
+                cond_pass = any(idx_out_of_range);
+                while (cond_pass)
+                    idx_out_of_range = ((coh_val < 0) | (coh_val > 1));
+                    coh_val(idx_out_of_range) = random(D.d{j},[1 sum(idx_out_of_range)]);
+                    cond_pass = any((coh_val < 0) | (coh_val > 1));
+                end
+
+                R_null(j,:) = coh_val; %random(D.d{j},[1 n_graph]);
+                
+%                 cond_pass = true;
+%                 while (cond_pass)
+%                     coh_val = random(D.d{j},[1 n_graph]);
+%                     cond_pass = any((coh_val < 0) | (coh_val > 1));
+%                 end
+%                 %R_null(j,:) = random(D.d{j},[1 n_graph]);
+%                 R_null(j,:) = coh_val;
             end
-            
+            save_tmp(sid,single(R_null),atl,metrici);
         else
             
-            fn_tmp = sprintf('%s/cache_debug/%s_R_null.mat',curr_d,sid);
+            %fn_tmp = sprintf('%s/cache/%s_R_null.mat',curr_d,sid);
+            %sprintf('cache/%s_R_null_atl%i',sid,atl)
+            fn_tmp = sprintf('cache/%s_R_null_atl%i_%i',sid,atl,metrici);
             if (~exist(fn_tmp,'file'))
                 R_null = zeros(size(R));
                 %D = load(fn_dist);
                 for j = 1:ecog.n_comb
-                    R_null(j,:) = random(D.d{j},[1 n_graph]);
+                    
+                    
+                    coh_val = random(D.d{j},[1 n_graph]);
+                    idx_out_of_range = ((coh_val < 0) | (coh_val > 1));
+                    cond_pass = any(idx_out_of_range);
+                    while (cond_pass)
+                        idx_out_of_range = ((coh_val < 0) | (coh_val > 1));
+                        coh_val(idx_out_of_range) = random(D.d{j},[1 sum(idx_out_of_range)]);
+                        cond_pass = any((coh_val < 0) | (coh_val > 1));
+                    end
+                    
+                    
+%                     coh_val = nan(1,n_graph);
+%                     for k = 1:n_graph
+%                         cond_pass = true;
+%                         while (cond_pass)
+%                             coh_val(k) = random(D.d{j},[1 1]);
+%                             cond_pass = ((coh_val(k) < 0) | (coh_val(k) > 1));
+%                         end
+%                     end
+                    R_null(j,:) = coh_val; %random(D.d{j},[1 n_graph]);
                 end
-                save_tmp(sid,single(R_null),atl);
+                save_tmp(sid,single(R_null),atl,metrici);
             else
                 try
                     R_null = load_tmp(fn_tmp);
@@ -220,9 +298,34 @@ for metrici = 1:length(metrics) %1:length(metrics)
                     % Re-sample and save if file is corrupt
                     R_null = zeros(size(R));
                     for j = 1:ecog.n_comb
-                        R_null(j,:) = random(D.d{j},[1 n_graph]);
+                        
+%                         coh_val = nan(1,n_graph);
+%                         for k = 1:n_graph
+%                             cond_pass = true;
+%                             while (cond_pass)
+%                                 coh_val(k) = random(D.d{j},[1 1]);
+%                                 cond_pass = ((coh_val(k) < 0) | (coh_val(k) > 1));
+%                             end
+%                         end
+
+                        coh_val = random(D.d{j},[1 n_graph]);
+                        idx_out_of_range = ((coh_val < 0) | (coh_val > 1));
+                        cond_pass = any(idx_out_of_range);
+                        while (cond_pass)
+                            idx_out_of_range = ((coh_val < 0) | (coh_val > 1));
+                            coh_val(idx_out_of_range) = random(D.d{j},[1 sum(idx_out_of_range)]);
+                            cond_pass = any((coh_val < 0) | (coh_val > 1));
+                        end
+                        
+                        R_null(j,:) = coh_val; %random(D.d{j},[1 n_graph]);
+%                         cond_pass = true;
+%                         while (cond_pass)
+%                             coh_val = random(D.d{j},[1 n_graph]);
+%                             cond_pass = any((coh_val < 0) | (coh_val > 1));
+%                         end
+%                         R_null(j,:) = coh_val; %random(D.d{j},[1 n_graph]);
                     end
-                    save_tmp(sid,single(R_null),atl);
+                    save_tmp(sid,single(R_null),atl,metrici);
                 end
             end
         
@@ -293,7 +396,7 @@ for metrici = 1:length(metrics) %1:length(metrics)
         R4mN(R_null < coh_thresh) = NaN; % --- Comment this line to include all points in average magnitude ---
         R4mN(art_idxB) = NaN;
         mag_null = double(nanmean(R4mN,2));
-        mag_null_std = double(nanstd(R4m')');
+        mag_null_std = double(nanstd(R4mN')');
         %fprintf('%i\t%s\t%s\t%.8f\t%.8f\t%.8f\t%.8f\n',v,sid,metric,coh_thresh,ct_thresh,frac_x,frac_x_null);
         %fprintf('%s\t%s\t%.8f\t%.8f\t%.8f\t%.8f\n',sid,metric,coh_thresh,ct_thresh,frac_x,frac_x_null);
         fprintf('%s\t%s\t%.8f\t%.8f\t%.8f\t%.8f\n',sid,metric,median(coh_thresh),ct_thresh,frac_x,frac_x_null);
@@ -445,7 +548,7 @@ for metrici = 1:length(metrics) %1:length(metrics)
         %fprintf('%s\tETA: %.2f hrs\n',sid,t_sing*(length(Subjects) - i)/3600)
         
         % Save individual subjects
-        save(sprintf('cache_debug/xsub_out_%s_%i_atl%i',sid,metrici,atl),'-v6','-regexp','^(?!(AdjAtl|AdjAtlN|AdjAtl_sid|R|R_null|R4m|R4mN|D|d_i|art_idx|art_idxB)$).');
+        save(sprintf('cache/xsub_out_%s_%i_atl%i',sid,metrici,atl),'-v6','-regexp','^(?!(AdjAtl|AdjAtlN|AdjAtl_sid|R|R_null|R4m|R4mN|D|d_i|art_idx|art_idxB)$).');
 
     end
     
@@ -474,7 +577,7 @@ for metrici = 1:length(metrics) %1:length(metrics)
     end
 
     % Save final result
-    save(sprintf('cache_debug/xsub_out_all_%i_atl%i',metrici,atl),'-v6','-regexp','^(?!(R|R_null|R4m|R4mN|D|d_i|art_idx|art_idxB)$).');
+    save(sprintf('cache/xsub_out_all_%i_atl%i',metrici,atl),'-v6','-regexp','^(?!(R|R_null|R4m|R4mN|D|d_i|art_idx|art_idxB)$).');
 
     %end
     %return;
@@ -494,8 +597,8 @@ end
 fprintf('All Done.\n')
 
 
-function save_tmp(sid, R_null, atl)
-    save(sprintf('cache_debug/%s_R_null_atl%i',sid,atl),'R_null','-v6');
+function save_tmp(sid, R_null, atl, metrici)
+    save(sprintf('cache/%s_R_null_atl%i_%i',sid,atl,metrici),'R_null','-v6');
 end
 
 function R_null = load_tmp(R_null_fn)

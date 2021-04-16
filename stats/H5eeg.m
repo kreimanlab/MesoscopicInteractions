@@ -8,7 +8,7 @@ classdef H5eeg
     %
     %[Example Usage]
     %
-    %   patient1 = H5eeg('sub1.hdf5')
+    %   patient1 = H5eeg('m00001.hdf5')
     %   
     %   patient1.readAttributes() returns a struct of descriptive
     %   information about the data.
@@ -203,15 +203,13 @@ classdef H5eeg
             % find file that corresponds to sampleNum
             fi_i = find(sampleNum <= cumsum(n_samples_l),1);
             subfile = files{fi_i};
-            %sid = self.filename((regexp(self.filename,'(?<=/m0)(.*)(?=h5)')-2):(end-3));
-            sid = self.filename((regexp(self.filename,'(?<=/sub)(.*)(?=h5)')-3):(end-3));
+            sid = self.filename((regexp(self.filename,'(?<=/m0)(.*)(?=h5)')-2):(end-3));
             
             % convert stamp index to line number in text file
             stamp = double(h5read(self.filename,'/h5eeg/aux',[1 sampleNum],[1 1]));
             stamps_fn = sprintf('%s/%s_%s_stamps.txt',stampsDir,sid,subfile);
             times_fn = sprintf('%s/%s_%s_times.txt',stampsDir,sid,subfile);
-            fprintf('Reading: %s\n',stamps_fn);
-            fprintf('Reading: %s\n',times_fn);
+            %fprintf('%s\n',stamps_fn)
             
             % init starting stamp number
             f = fopen(stamps_fn,'r');

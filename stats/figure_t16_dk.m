@@ -2,7 +2,7 @@ close all;
 clear;
 
 dir_cache = './cache';
-subjects_dir = '../data/coregistration';
+subjects_dir = '/media/klab/internal/data/coreg';
 %sid_const = 'fsaverage_sym';
 scale_mm_per_obj = 30;
 flag_export_obj = true;
@@ -16,10 +16,12 @@ mkdir(sprintf('figures/T16'));
 imetrics = [1 5];
 %imetrics = 1;
 
+flag_cone = false;
+
 trig_show_subject_num = false;
 trig_show_colorbar = trig_show_subject_num;
 trig_color_rois = true;
-trig_show_esm_elecs = true;
+trig_show_esm_elecs = false;
 
 
 try
@@ -55,17 +57,12 @@ for imm = 1:length(imetrics)
 
 
         % original subject
-        sid = 'sub3';
+        sid = 'm00005';
         sid_i = str2double(sid(2:end));
         b1 = 35;
         b2 = 84;
         CaR = load(sprintf('%s/fig_cluster2_reduce_%i_new',dir_cache,iM));
-        CaA = load(sprintf('%s/xsub_out_all_%i_atl2',dir_cache,iM));
-        tSubjects = {};
-        for isu = 1:length(CaA.Subjects)
-            tSubjects{isu} = sprintf('sub%i',isu);
-        end
-        CaA.Subjects = tSubjects;
+        CaA = load(sprintf('%s/xsub_out_all_%i',dir_cache,iM));
 
         % save vars
         sid_const = sid;
@@ -74,7 +71,7 @@ for imm = 1:length(imetrics)
         
         % convert to integer subject number
         sid_int = find(strcmp(CaA.Subjects,sid));
-        Ca = load(sprintf('%s/xsub_out_%s_%i_atl2',dir_cache,sid,iM));
+        Ca = load(sprintf('%s/xsub_out_%s_%i',dir_cache,sid,iM));
 
         % Find ROIs bipolar electrodes map onto
         rois = Ca.C.AtlLabels{2};
@@ -97,7 +94,7 @@ for imm = 1:length(imetrics)
         for isub = 1:length(usubs)
             s1 = usubs(isub);
             sid_t = CaA.Subjects{s1};
-            Ca_t = load(sprintf('%s/xsub_out_%s_%i_atl2',dir_cache,sid_t,iM));
+            Ca_t = load(sprintf('%s/xsub_out_%s_%i',dir_cache,sid_t,iM));
             
             
             % find magnitudes
@@ -109,9 +106,6 @@ for imm = 1:length(imetrics)
                     b1 = 1;
                     b2 = 1;
                     hemi_isr = strcmp(Ca_t.hemi_list{1},'R');
-                    
-                    
-                
                 else
                     sIdx = find(Ca_t.mag == mag_seek(k));
                     if (isempty(sIdx))
@@ -529,11 +523,13 @@ for imm = 1:length(imetrics)
             [Xe,Ye,Ze] = sphere(20);
             elec_pa = cell(1,n_chan);
             const_elec_radius = 2;
+            elec_ras = nan(n_chan,3);
             for j = 1:n_chan
                 X = Xe*const_elec_radius + s_vert(l(j,1)+1,1);
                 Y = Ye*const_elec_radius + s_vert(l(j,1)+1,2);
                 Z = Ze*const_elec_radius + s_vert(l(j,1)+1,3);
                 elec_pa{j} = surf2patch(X,Y,Z);
+                elec_ras(j,1:3) = s_vert(l(j,1)+1,1:3);
             end
             
             roisP = CaP.Ca.C.AtlLabels{2};
@@ -576,6 +572,35 @@ for imm = 1:length(imetrics)
                 % Show bipolar electrodes only
                 is_bip = (sum(CaP.ecog.bip(:,1) == k) > 0);
                 if (is_bip)
+                    if (flag_cone) %((i == b1c1) || (i == b2c1))
+                        %CaTmp = load([subjects_dir,'/',sid,'/label/all_parcellation.mat']);
+                        %ec = CaTmp.EleCoords;
+                        cone_radius = [1.8 0.1];
+                        cone_n = 32;
+                        %cone_col = [1 1 1]*0.15;
+                        cone_col = col_e;
+                        cone_rref = 1.1;
+                        
+                        %bc = find(CaP.Ca.ecog.bip(:,1)==k);
+                        %bc1 = CaP.Ca.ecog.bip(bc,1);
+                        %bc2 = CaP.Ca.ecog.bip(bc,2);
+                        %coord_1 = ec(ec(:,5)==bc1,2:4);
+                        %coord_2 = ec(ec(:,5)==bc2,2:4);
+                        
+                        ecog_local = H5eeg(['/media/jerry/untitled/h5_notch20/',sid,'.h5']);
+                        cone_bip = ecog_local.bip;
+                        coord_1 = elec_ras(cone_bip(cone_bip(:,1)==k,1),:); %cone_bip(cone_bip(:,1)==k,4:6);
+                        coord_2 = elec_ras(cone_bip(cone_bip(:,1)==k,2),:); %cone_bip(cone_bip(:,1)==k,7:9);
+                        [ConeH,EndPlate1,EndPlate2] = Cone(coord_1,coord_2,cone_radius,cone_n,cone_col,1,0);
+                        ConeH.SpecularStrength = 0;
+                        ConeH.SpecularExponent = 1;
+                        % ref marker
+                        [X,Y,Z] = sphere(cone_n);
+                        q = surf(coord_2(1)+X*cone_rref,coord_2(2)+Y*cone_rref,coord_2(3)+Z*cone_rref,'EdgeColor','none','FaceColor',cone_col);
+                        q.SpecularStrength = 0;
+                        q.SpecularExponent = 1;
+                    end
+                    
                     q = trisurf(elec_pa{k}.faces,vert(:,1),vert(:,2),vert(:,3),...
                         'EdgeColor','none','FaceColor',col_e);
                     q.SpecularStrength = 0;
@@ -613,8 +638,8 @@ for imm = 1:length(imetrics)
 
 
         % Save figure
-        print(h,sprintf('figures/T16/figure_t16_%i_curve-%i_DK_%i',iM,trig_show_path,trig_show_subject_num),'-depsc','-r400');
-        print(h,sprintf('figures/T16/figure_t16_%i_curve-%i_DK_%i',iM,trig_show_path,trig_show_subject_num),'-dpng','-r600');
+        print(h,sprintf('figures/T16/figure_t16_%i_curve-%i_DK_%i_cone-%i',iM,trig_show_path,trig_show_subject_num,flag_cone),'-depsc','-r400');
+        print(h,sprintf('figures/T16/figure_t16_%i_curve-%i_DK_%i_cone-%i',iM,trig_show_path,trig_show_subject_num,flag_cone),'-dpng','-r600');
 
         close(h);
 
@@ -650,10 +675,9 @@ for imm = 1:length(imetrics)
         pairs_isL = nan(1,length(n_sig_lines_sid2));
         for ius = 1:length(usubLR)
             sid = CaA.Subjects{usubLR(ius)};
-            %CaTmp = load(sprintf('./cache/xsub_out_%s_1.mat',sid));
-            CaTmp = load(sprintf('./cache/xsub_out_%s_1_atl2.mat',sid));
+            CaTmp = load(sprintf('./cache/xsub_out_%s_1.mat',sid));
             
-            % CaA.Subjects(usubLR) - does not include sub26, can assume
+            % CaA.Subjects(usubLR) - does not include m00049, can assume
             % all electrodes are either L or R
             is_L(ius) = (upper(CaTmp.C.EleHemi{1}) == 'L');
             is_R(ius) = (upper(CaTmp.C.EleHemi{1}) == 'R');
@@ -694,9 +718,9 @@ for imm = 1:length(imetrics)
         pairs_isL = nan(1,length(n_sig_lines_sid2_nosig));
         for ius = 1:length(usubLR)
             sid = CaA.Subjects{usubLR(ius)};
-            CaTmp = load(sprintf('./cache/xsub_out_%s_1_atl2.mat',sid));
+            CaTmp = load(sprintf('./cache/xsub_out_%s_1.mat',sid));
             
-            % CaA.Subjects(usubLR) - does not include sub26, can assume
+            % CaA.Subjects(usubLR) - does not include m00049, can assume
             % all electrodes are either L or R
             is_L(ius) = (upper(CaTmp.C.EleHemi{1}) == 'L');
             is_R(ius) = (upper(CaTmp.C.EleHemi{1}) == 'R');
@@ -762,7 +786,7 @@ return
 % for imm = 1:length(imetrics)
 %     iM = imetrics(imm);
 %     % Read subject surface
-%     sid = 'sub3';
+%     sid = 'm00005';
 %     fn_paths = sprintf('brainexport/%s_6all_%i.mat',sid,iM);
 %     fprintf('[*] Loading %s ..\n',fn_paths)
 %     load(fn_paths);
@@ -1248,75 +1272,75 @@ return
 % [*] component bipolar pair coherence stdev: 0.1339
 % [*] component bipolar pair coherence min: 0.1475
 % [*] component bipolar pair coherence max: 0.6771
-% [*] Loading brainexport/sub1_6all_1.mat ..
-% [2] sub1 coherence: 0.389735
-% [2] sub1 coherence: 0.291535
-% [2] sub1 coherence: 0.312130
-% [2] sub1 coherence: 0.238188
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub1/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub2_6all_1.mat ..
-% [3] sub2 coherence: 0.174183
-% [3] sub2 coherence: 0.188159
-% [3] sub2 coherence: 0.187294
-% [3] sub2 coherence: 0.191479
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub2/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub3_6all_1.mat ..
-% [4] sub3 coherence: 0.200970
-% [4] sub3 coherence: 0.226948
-% [4] sub3 coherence: 0.219356
-% [4] sub3 coherence: 0.173139
-% [4] sub3 coherence: 0.221297
-% [4] sub3 coherence: 0.224905
-% [4] sub3 coherence: 0.153515
-% [4] sub3 coherence: 0.147452
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub3/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub7_6all_1.mat ..
-% [5] sub7 coherence: 0.175796
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub7/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub10_6all_1.mat ..
-% [6] sub10 coherence: 0.173750
-% [6] sub10 coherence: 0.182594
-% [6] sub10 coherence: 0.188519
-% [6] sub10 coherence: 0.306254
-% [6] sub10 coherence: 0.546720
-% [6] sub10 coherence: 0.321457
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub10/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub11_6all_1.mat ..
-% [7] sub11 coherence: 0.366665
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub11/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub13_6all_1.mat ..
-% [8] sub13 coherence: 0.677078
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub13/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub23_6all_1.mat ..
-% [9] sub23 coherence: 0.303511
-% [9] sub23 coherence: 0.268442
-% [9] sub23 coherence: 0.302794
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub23/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub34_6all_1.mat ..
-% [10] sub34 coherence: 0.469501
-% [10] sub34 coherence: 0.504897
-% [10] sub34 coherence: 0.491773
-% [10] sub34 coherence: 0.607767
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub34/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub41_6all_1.mat ..
-% [11] sub41 coherence: 0.369821
-% [11] sub41 coherence: 0.208354
-% [11] sub41 coherence: 0.200404
-% [11] sub41 coherence: 0.199672
-% [11] sub41 coherence: 0.233960
-% [11] sub41 coherence: 0.437001
-% [11] sub41 coherence: 0.335854
-% [11] sub41 coherence: 0.478321
-% [11] sub41 coherence: 0.529557
-% [11] sub41 coherence: 0.524800
-% [11] sub41 coherence: 0.191681
-% [11] sub41 coherence: 0.192209
-% [11] sub41 coherence: 0.192287
-% [11] sub41 coherence: 0.270909
-% [11] sub41 coherence: 0.334145
-% [11] sub41 coherence: 0.245414
-% [11] sub41 coherence: 0.279114
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub41/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00001_6all_1.mat ..
+% [2] m00001 coherence: 0.389735
+% [2] m00001 coherence: 0.291535
+% [2] m00001 coherence: 0.312130
+% [2] m00001 coherence: 0.238188
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00001/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00003_6all_1.mat ..
+% [3] m00003 coherence: 0.174183
+% [3] m00003 coherence: 0.188159
+% [3] m00003 coherence: 0.187294
+% [3] m00003 coherence: 0.191479
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00003/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00005_6all_1.mat ..
+% [4] m00005 coherence: 0.200970
+% [4] m00005 coherence: 0.226948
+% [4] m00005 coherence: 0.219356
+% [4] m00005 coherence: 0.173139
+% [4] m00005 coherence: 0.221297
+% [4] m00005 coherence: 0.224905
+% [4] m00005 coherence: 0.153515
+% [4] m00005 coherence: 0.147452
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00005/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00022_6all_1.mat ..
+% [5] m00022 coherence: 0.175796
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00022/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00025_6all_1.mat ..
+% [6] m00025 coherence: 0.173750
+% [6] m00025 coherence: 0.182594
+% [6] m00025 coherence: 0.188519
+% [6] m00025 coherence: 0.306254
+% [6] m00025 coherence: 0.546720
+% [6] m00025 coherence: 0.321457
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00025/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00026_6all_1.mat ..
+% [7] m00026 coherence: 0.366665
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00026/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00028_6all_1.mat ..
+% [8] m00028 coherence: 0.677078
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00028/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00045_6all_1.mat ..
+% [9] m00045 coherence: 0.303511
+% [9] m00045 coherence: 0.268442
+% [9] m00045 coherence: 0.302794
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00045/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00061_6all_1.mat ..
+% [10] m00061 coherence: 0.469501
+% [10] m00061 coherence: 0.504897
+% [10] m00061 coherence: 0.491773
+% [10] m00061 coherence: 0.607767
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00061/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00084_6all_1.mat ..
+% [11] m00084 coherence: 0.369821
+% [11] m00084 coherence: 0.208354
+% [11] m00084 coherence: 0.200404
+% [11] m00084 coherence: 0.199672
+% [11] m00084 coherence: 0.233960
+% [11] m00084 coherence: 0.437001
+% [11] m00084 coherence: 0.335854
+% [11] m00084 coherence: 0.478321
+% [11] m00084 coherence: 0.529557
+% [11] m00084 coherence: 0.524800
+% [11] m00084 coherence: 0.191681
+% [11] m00084 coherence: 0.192209
+% [11] m00084 coherence: 0.192287
+% [11] m00084 coherence: 0.270909
+% [11] m00084 coherence: 0.334145
+% [11] m00084 coherence: 0.245414
+% [11] m00084 coherence: 0.279114
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00084/label/all_surf_ielvis.label
 % Number of pairs: 441
 % Number of subjects: 29
 % Consistency across pairs: 0.1111 (49 of 441)
@@ -1331,79 +1355,79 @@ return
 % [*] component bipolar pair coherence stdev: 0.1307
 % [*] component bipolar pair coherence min: 0.1590
 % [*] component bipolar pair coherence max: 0.7708
-% [*] Loading brainexport/sub1_6all_5.mat ..
-% [2] sub1 coherence: 0.370165
-% [2] sub1 coherence: 0.275318
-% [2] sub1 coherence: 0.282752
-% [2] sub1 coherence: 0.187649
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub1/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub2_6all_5.mat ..
-% [3] sub2 coherence: 0.199180
-% [3] sub2 coherence: 0.202934
-% [3] sub2 coherence: 0.197890
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub2/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub3_6all_5.mat ..
-% [4] sub3 coherence: 0.222912
-% [4] sub3 coherence: 0.216523
-% [4] sub3 coherence: 0.173722
-% [4] sub3 coherence: 0.206240
-% [4] sub3 coherence: 0.200862
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub3/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub7_6all_5.mat ..
-% [5] sub7 coherence: 0.211647
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub7/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub10_6all_5.mat ..
-% [6] sub10 coherence: 0.187313
-% [6] sub10 coherence: 0.201972
-% [6] sub10 coherence: 0.205284
-% [6] sub10 coherence: 0.334502
-% [6] sub10 coherence: 0.618738
-% [6] sub10 coherence: 0.357758
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub10/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub11_6all_5.mat ..
-% [7] sub11 coherence: 0.309830
-% [7] sub11 coherence: 0.305443
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub11/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub13_6all_5.mat ..
-% [8] sub13 coherence: 0.770846
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub13/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub23_6all_5.mat ..
-% [9] sub23 coherence: 0.217663
-% [9] sub23 coherence: 0.185935
-% [9] sub23 coherence: 0.230464
-% [9] sub23 coherence: 0.213993
-% [9] sub23 coherence: 0.181784
-% [9] sub23 coherence: 0.172569
-% [9] sub23 coherence: 0.170303
-% [9] sub23 coherence: 0.350004
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub23/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub24_6all_5.mat ..
-% [10] sub24 coherence: 0.158963
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub24/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub34_6all_5.mat ..
-% [11] sub34 coherence: 0.444970
-% [11] sub34 coherence: 0.480437
-% [11] sub34 coherence: 0.462720
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub34/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub41_6all_5.mat ..
-% [12] sub41 coherence: 0.317456
-% [12] sub41 coherence: 0.184946
-% [12] sub41 coherence: 0.168706
-% [12] sub41 coherence: 0.170113
-% [12] sub41 coherence: 0.192149
-% [12] sub41 coherence: 0.244291
-% [12] sub41 coherence: 0.356397
-% [12] sub41 coherence: 0.395376
-% [12] sub41 coherence: 0.281756
-% [12] sub41 coherence: 0.453921
-% [12] sub41 coherence: 0.514736
-% [12] sub41 coherence: 0.507080
-% [12] sub41 coherence: 0.208059
-% [12] sub41 coherence: 0.268381
-% [12] sub41 coherence: 0.186495
-% [12] sub41 coherence: 0.213882
-% [12] sub41 coherence: 0.203184
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub41/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00001_6all_5.mat ..
+% [2] m00001 coherence: 0.370165
+% [2] m00001 coherence: 0.275318
+% [2] m00001 coherence: 0.282752
+% [2] m00001 coherence: 0.187649
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00001/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00003_6all_5.mat ..
+% [3] m00003 coherence: 0.199180
+% [3] m00003 coherence: 0.202934
+% [3] m00003 coherence: 0.197890
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00003/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00005_6all_5.mat ..
+% [4] m00005 coherence: 0.222912
+% [4] m00005 coherence: 0.216523
+% [4] m00005 coherence: 0.173722
+% [4] m00005 coherence: 0.206240
+% [4] m00005 coherence: 0.200862
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00005/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00022_6all_5.mat ..
+% [5] m00022 coherence: 0.211647
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00022/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00025_6all_5.mat ..
+% [6] m00025 coherence: 0.187313
+% [6] m00025 coherence: 0.201972
+% [6] m00025 coherence: 0.205284
+% [6] m00025 coherence: 0.334502
+% [6] m00025 coherence: 0.618738
+% [6] m00025 coherence: 0.357758
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00025/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00026_6all_5.mat ..
+% [7] m00026 coherence: 0.309830
+% [7] m00026 coherence: 0.305443
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00026/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00028_6all_5.mat ..
+% [8] m00028 coherence: 0.770846
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00028/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00045_6all_5.mat ..
+% [9] m00045 coherence: 0.217663
+% [9] m00045 coherence: 0.185935
+% [9] m00045 coherence: 0.230464
+% [9] m00045 coherence: 0.213993
+% [9] m00045 coherence: 0.181784
+% [9] m00045 coherence: 0.172569
+% [9] m00045 coherence: 0.170303
+% [9] m00045 coherence: 0.350004
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00045/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00047_6all_5.mat ..
+% [10] m00047 coherence: 0.158963
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00047/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00061_6all_5.mat ..
+% [11] m00061 coherence: 0.444970
+% [11] m00061 coherence: 0.480437
+% [11] m00061 coherence: 0.462720
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00061/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00084_6all_5.mat ..
+% [12] m00084 coherence: 0.317456
+% [12] m00084 coherence: 0.184946
+% [12] m00084 coherence: 0.168706
+% [12] m00084 coherence: 0.170113
+% [12] m00084 coherence: 0.192149
+% [12] m00084 coherence: 0.244291
+% [12] m00084 coherence: 0.356397
+% [12] m00084 coherence: 0.395376
+% [12] m00084 coherence: 0.281756
+% [12] m00084 coherence: 0.453921
+% [12] m00084 coherence: 0.514736
+% [12] m00084 coherence: 0.507080
+% [12] m00084 coherence: 0.208059
+% [12] m00084 coherence: 0.268381
+% [12] m00084 coherence: 0.186495
+% [12] m00084 coherence: 0.213882
+% [12] m00084 coherence: 0.203184
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00084/label/all_surf_ielvis.label
 % Number of pairs: 441
 % Number of subjects: 29
 % Consistency across pairs: 0.1156 (51 of 441)

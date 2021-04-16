@@ -22,26 +22,26 @@ dir_h5L = '/media/klab/KLAB101/h5_notch20';
 metricspp = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'}; % 'pcDelta',
 
 % Patients
-Subjectspp = {'sub1','sub2','sub3','sub4','sub5','sub6','sub7','sub8',...
-    'sub9','sub10','sub11','sub12','sub13','sub14','sub15','sub16',...
-    'sub17','sub18','sub19','sub20','sub21','sub22','sub23','sub24',...
-    'sub25','sub26','sub27','sub28','sub29','sub30','sub31','sub32',...
-    'sub33','sub34','sub35','sub36','sub37','sub38','sub39','sub40',...
-    'sub41','sub42','sub43','sub44','sub45','sub46','sub47','sub48',...
+Subjectspp = {'m00001','m00003','m00005','m00006','m00019','m00021','m00022','m00023',...
+    'm00024','m00025','m00026','m00027','m00028','m00030','m00032','m00033',...
+    'm00035','m00037','m00038','m00039','m00043','m00044','m00045','m00047',...
+    'm00048','m00049','m00052','m00053','m00055','m00056','m00058','m00059',...
+    'm00060','m00061','m00068','m00071','m00073','m00075','m00079','m00083',...
+    'm00084','m00095','m00096','m00097','m00100','m00107','m00122','m00124',...
     'mSu'};
 
 % Exclude monkey
 Subjectspp = Subjectspp(1:(end-1));
 
 % bypass
-%[*] cost: -0.213723722	sub45	30	80	7315001
-Subjectspp = {'sub3'};
+%[*] cost: -0.213723722	m00100	30	80	7315001
+Subjectspp = {'m00005'};
 %r_samp_const = 106865001; % set to nan to pick randomly
 r_samp_const = NaN;%90545001;
 bchan1_const = 35;
 bchan2_const = 84;
 %Strengths = [0,0.25,0.5,0.75,1];
-%Strengths = [0.1,0.975,0.995]; % [0.1,0.975,0.995] for sub41 - 21 - 46
+%Strengths = [0.1,0.975,0.995]; % [0.1,0.975,0.995] for m00084 - 21 - 46
 %Strengths = [0.1, 0.9, 1];
 %Strengths = [0.1,0.5,0.9,0.91,0.92,0.93,0.94,0.95,0.96,0.97,0.98,0.99,0.994,0.995,0.996,0.997,0.998,0.999,1];
 %Strengths = [0.1,0.5,0.9,0.920,0.987,0.996,1];
@@ -55,12 +55,12 @@ Strengths = [0.1,0.5,0.9];
 %Strengths = linspace(0,1,200);
 %r_samp_const = NaN;
 
-% Subjectspp = {'sub24'};
+% Subjectspp = {'m00047'};
 % r_samp_const = NaN;
 % bchan1_const = 26;
 % bchan2_const = 54;
 
-%Subjectspp = {'sub34'};
+%Subjectspp = {'m00061'};
 
 % Pick areas to plot
 % C.AtlROIs{2}.LH.struct_names

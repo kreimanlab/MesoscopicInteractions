@@ -24,6 +24,7 @@ stride_axislabel = 1; % stride for x and y axis labels
 fig_fmt = '-dpng';
 trig_eps = true;
 trig_mag_no_cp = true;
+trig_ct = false;
 trig_plot_mag_cov = true;
 system('mkdir figures');
 system('mkdir figures/T14_allatl');
@@ -32,42 +33,37 @@ system('mkdir figures/T14_allatl');
 
 [~,host] = system('hostname');
 
-%if contains(host,'ubuntu_1604')
-%    dir_artL = '/nas_share/RawData/data/h5_notch20/art';
-%    dir_resL = '/nas_share/RawData/data/results/coh_w10';
-%    dir_corL = '/nas_share/RawData/data/coreg';
-%    dir_cacheL = './cache';
-%    subjects_dirL = '/mnt/cuenap_ssd/coregistration';
-%    dir_h5L = '/nas_share/RawData/data/h5_notch20';
-%else
-%    dir_artL = '/media/klab/KLAB101/h5_notch20/art_nosz';
-%    dir_resL = '/media/klab/KLAB101/results/coh_w10';
-%    dir_corL = '/media/klab/internal/data/coreg';
-%    dir_cacheL = './cache';
-%    subjects_dirL = '/mnt/cuenap_ssd/coregistration';
-%    dir_h5L = '/media/klab/KLAB101/h5_notch20';
-%end
-
-dir_artL = '../data/h5_notch20/art_nosz';
-dir_resL = '../opencl/results';
-dir_corL = '../data/coregistration';
-dir_cacheL = './cache';
-subjects_dirL = dir_corL;
-dir_h5L = '../data/h5_notch20';
-
+if contains(host,'ubuntu_1604')
+    dir_artL = '/nas_share/RawData/data/h5_notch20/art';
+    dir_resL = '/nas_share/RawData/data/results/coh_w10';
+    dir_corL = '/nas_share/RawData/data/coreg';
+    dir_cacheL = './cache';
+    subjects_dirL = '/mnt/cuenap_ssd/coregistration';
+    dir_h5L = '/nas_share/RawData/data/h5_notch20';
+else
+%     dir_artL = '/media/klab/internal/data/h5_notch20/art';
+%     dir_resL = '/media/klab/internal/data/results/coh_w10';
+%     dir_corL = '/media/klab/internal/data/coreg';
+    dir_artL = '/media/klab/KLAB101/h5_notch20/art_nosz';
+    dir_resL = '/media/klab/KLAB101/results/coh_w10';
+    dir_corL = '/media/klab/internal/data/coreg';
+    dir_cacheL = './cache';
+    subjects_dirL = '/mnt/cuenap_ssd/coregistration';
+    dir_h5L = '/media/klab/KLAB101/h5_notch20';
+end
 
 metrics = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'};
 metrics_suffix = {'0.5-125 Hz','3-8 Hz','8-12 Hz','12-30 Hz','30-100 Hz'};
 %metrics = {'pcBroadband'};
 
 % Get atlas names
-CaAtl = load(sprintf('./cache/xsub_out_all_%i_atl2',1));
+CaAtl = load(sprintf('./cache/xsub_out_all_%i',1));
 AtlNames = CaAtl.C.AtlNames;
-for atl = [2] %1:20 %1:20
+for atl = 2 %1:20 %1:20
 
     system(sprintf('mkdir figures/T14_allatl/atl%i_%s',atl,AtlNames{atl}));
     
-    for iM = [1] %1:5 %1:length(metrics) % [1 5] %
+    for iM = 5 %1:length(metrics) % [1 5] %
         metric = metrics{iM};
 
         % Load human cache
@@ -77,26 +73,33 @@ for atl = [2] %1:20 %1:20
         % Calculate final functional interaction matrix
         Adj = nan(n_rois,n_rois);
         AdjMag = nan(n_rois,n_rois);
+        AdjMagNull = nan(n_rois,n_rois);
         AdjMag4cl = nan(n_rois,n_rois);
         AdjNpairs = nan(n_rois,n_rois);
         AdjNpairs_sig = nan(n_rois,n_rois);
         AdjNusubs = nan(n_rois,n_rois);
         AdjNusubs_sig = nan(n_rois,n_rois);
         AdjCP = nan(n_rois,n_rois);
+        AdjCT = nan(n_rois,n_rois);
+        AdjCTVar = nan(n_rois,n_rois);
         AdjMagVar = nan(n_rois,n_rois);
         AdjMagReS = nan(n_rois,n_rois);
         AdjMagL = cell(n_rois,n_rois);
+        KS_p = nan(n_rois,n_rois);
         %AdjCPVar = nan(n_rois,n_rois);
         N_bchan = nan(n_rois,n_rois);
         cp_thresh = cp_thresh_override;
         Dmat = Inf(n_rois,n_rois); % set to inf to avoid removing from every instance
         DistsAtl = [];
 
+        
         for i1 = 1:n_rois
             for i2 = 1:n_rois
                 AA = Ca_hum.AdjAtl{i1,i2};
+                AA_null = Ca_hum.AdjAtlN{i1,i2};
                 AA_dist = Ca_hum.adjct_dist{i1,i2};
                 AA_sub = Ca_hum.AdjAtl_sid{i1,i2};
+                AA_ct = Ca_hum.AdjAtlCT{i1,i2};
                 n_pairs = length(AA_sub);
                 n_subs = length(unique(AA_sub));
                 n_subs_ct = length(unique(AA_sub(AA ~= 0)));
@@ -110,13 +113,32 @@ for atl = [2] %1:20 %1:20
                         %return;
                         Adj(i1,i2) = 1;
                         AdjMag(i1,i2) = mean(AA(AA ~= 0));
-                        AdjMagVar(i1,i2) = var(AA(AA ~= 0));
+                        AdjMagNull(i1,i2) = mean(AA_null(AA_null ~= 0));
+%                         if (std(AA(AA ~= 0)) == 0)
+%                             AdjMagVar(i1,i2) = NaN;
+%                         else
+%                             AdjMagVar(i1,i2) = std(AA(AA ~= 0));
+%                         end
+                        AdjMagVar(i1,i2) = std(AA(AA ~= 0));
                         AdjNpairs(i1,i2) = n_pairs;
                         AdjNpairs_sig(i1,i2) = length(AA(AA ~= 0));
                         AdjNusubs(i1,i2) = n_subs;
                         AdjNusubs_sig(i1,i2) = n_subs_ct;
+                        AdjCT(i1,i2) = mean(AA_ct(AA~=0));
+                        AdjCTVar(i1,i2) = std(AA_ct(AA~=0));
                         AdjMagL{i1,i2} = AA(AA~=0);
                         DistsAtl = [DistsAtl; [mean(AA_dist(AA ~= 0)), mean(AA(AA ~= 0))]];
+                        
+                        % KS Test
+%                         x = AA(AA ~= 0);
+%                         if (length(x(~isnan(x)))>1)
+%                             try
+%                                 xn = (x - nanmean(x))/nanstd(x);
+%                                 [h,p] = kstest(xn);
+%                                 KS_p(i1,i2) = p;
+%                             end
+%                         end
+                        
     %                     % resample
     %                     AAs = nan(n_resample,1);
     %                     AAr = AA;
@@ -129,7 +151,14 @@ for atl = [2] %1:20 %1:20
                     else
                         Adj(i1,i2) = 0;
                         AdjMag(i1,i2) = 0;
+                        AdjMagNull(i1,i2) = 0;
                         AdjMagVar(i1,i2) = 0;
+                        AdjNpairs(i1,i2) = 0;
+                        AdjNpairs_sig(i1,i2) = 0;
+                        AdjNusubs(i1,i2) = 0;
+                        AdjNusubs_sig(i1,i2) = 0;
+                        AdjCT(i1,i2) = 0;
+                        AdjCTVar(i1,i2) = 0;
                         AdjMagL{i1,i2} = [];
                     end
                 end
@@ -167,7 +196,7 @@ for atl = [2] %1:20 %1:20
             % Make figure
             %##################################################################
 
-            for iii2 = 1:2
+            for iii2 = 1:6 % 1:2
 
                 %h = figure('visible','on');
                 h = figure('visible','off');
@@ -176,23 +205,44 @@ for atl = [2] %1:20 %1:20
                 set(h,'PaperPosition',[0 0 8.5 6.8]);
 
                 if (iii == 1)
-                    if (trig_mag_no_cp)
-                        Adj_plt = AdjMag;
+                    if (trig_ct)
+                        Adj_plt = AdjCT;
                     else
-                        Adj_plt = AdjCP;
+                        if (trig_mag_no_cp)
+                            Adj_plt = AdjMag;
+                        else
+                            Adj_plt = AdjCP;
+                        end
                     end
                 elseif (iii == 2)
                     Adj_plt = Adj;
                 elseif (iii == 3)
                     if (trig_mag_no_cp)
                         if (iii2 == 1)
-                            Adj_plt = AdjMag;
+                            if (trig_ct)
+                                Adj_plt = AdjCT;
+                            else
+                                Adj_plt = AdjMag;
+                            end
                         elseif (iii2 == 2)
-                            Adj_plt = AdjMagVar;
+                            if (trig_ct)
+                                Adj_plt = AdjCTVar;
+                            else
+                                Adj_plt = AdjMagVar;
+                            end
+                        elseif (iii2 == 3)
+                            Adj_plt = AdjNpairs_sig;
+                        elseif (iii2 == 4)
+                            Adj_plt = AdjNpairs;
+                        elseif (iii2 == 5)
+                            Adj_plt = AdjNusubs_sig;
+                        elseif (iii2 == 6)
+                            Adj_plt = AdjNusubs;
                         end
                     else
                         Adj_plt = AdjCP;
                     end
+                    Adj_plt_null = AdjMagNull;
                     %Adj_plt(Adj == 0) = 0;
                     color_not_sig = color_not_sig0;
                 end
@@ -227,6 +277,7 @@ for atl = [2] %1:20 %1:20
                 known_idx = (~ cond_contains);
                 ind_isnan_master(~known_idx) = true;
                 Adj_plt = Adj_plt(known_idx,known_idx);
+                Adj_plt_null = Adj_plt_null(known_idx,known_idx);
                 Adj_plt_var = Adj_plt_var(known_idx,known_idx);
                 Adj_plt2_cl = Adj_plt2_cl(known_idx,known_idx);
                 Adj_plt_npairs = Adj_plt_npairs(known_idx,known_idx);
@@ -235,6 +286,10 @@ for atl = [2] %1:20 %1:20
                 Adj_plt_nusubs_sig = Adj_plt_nusubs_sig(known_idx,known_idx);
                 rois_plt = rois_plt(known_idx);
                 Dmat_plt = Dmat_plt(known_idx,known_idx);
+                
+                % mag and CT
+                AM = AdjMag(known_idx,known_idx);
+                ACT = AdjCT(known_idx,known_idx);
 
                 % Clean ROI labels for human readability
                 for i = 1:length(rois_plt)
@@ -311,12 +366,22 @@ for atl = [2] %1:20 %1:20
                 Adj_plt2_nusubs_sig = Adj_plt_nusubs_sig;
                 dist_thresh = Ca_hum.dist_thresh;
                 Adj_plt(Dmat_plt <= dist_thresh) = nan;
+                Adj_plt_null(Dmat_plt <= dist_thresh) = nan;
                 Adj_plt2_cl(Dmat_plt <= dist_thresh) = nan;
+                
+                % mag and Ct
+                AM(Dmat_plt <= dist_thresh) = nan;
+                ACT(Dmat_plt <= dist_thresh) = nan;
 
                 %return
                 % Filter out nans nodes
-                cov_idx = ~ all(isnan(Adj_plt));
+                if (iii2 == 1)
+                    % only compute cov_idx for mean, not std
+                    cov_idx = ~ all(isnan(Adj_plt));
+                end
+                
                 Adj_plt = Adj_plt(cov_idx,cov_idx);
+                Adj_plt_null = Adj_plt_null(cov_idx,cov_idx);
                 Adj_plt2 = Adj_plt2(cov_idx,cov_idx);
                 Adj_plt2_var = Adj_plt2_var(cov_idx,cov_idx);
                 Adj_plt2_npairs = Adj_plt2_npairs(cov_idx,cov_idx);
@@ -327,6 +392,26 @@ for atl = [2] %1:20 %1:20
                 rois_plt = rois_plt(cov_idx);
                 Dmat_plt = Dmat_plt(cov_idx,cov_idx);
                 ind_isnan_master(~cov_idx) = true;
+                
+                % mag and ct
+                AM = AM(cov_idx,cov_idx); %(Dmat_plt <= dist_thresh) = nan;
+                ACT = ACT(cov_idx,cov_idx); %(Dmat_plt <= dist_thresh) = nan;
+                vAM = nan(nchoosek(length(AM),2),1);
+                vACT = nan(nchoosek(length(ACT),2),1);
+                cvam = 1;
+                for ivam = 1:(length(AM)-1)
+                    for ivam2 = (ivam+1):length(AM)
+                        vAM(cvam) = AM(ivam,ivam2);
+                        vACT(cvam) = ACT(ivam,ivam2);
+                        cvam = cvam + 1;
+                    end
+                end
+                pIdx = ((~isnan(vAM)) & (vAM ~= 0)) & ((~isnan(vACT)) & (vACT ~= 0));
+                vAM = vAM(pIdx);
+                vACT = vACT(pIdx);
+                [r,p] = corr(vAM,vACT);
+                fprintf('[*] corr Coh vs. CT: %.4f, p=%.4d, n=%i\n',r,p,length(vAM));
+                %[*] corr Coh vs. CT: 0.1103, p=1.2676e-01, n=193
 
                 % Get number of nodes
                 [n_roi_p,~] = size(Adj_plt);
@@ -440,8 +525,14 @@ for atl = [2] %1:20 %1:20
                     %roi_dist(isinf(roi_dist)) = ;
                     clash = nansum(nansum(triu(roi_dist,1) - triu(roi_dist,2)));
                     fprintf('cluster clash: %.12f mm\n',clash)
-                    save(sprintf('./cache/figure_t14_%i_atl%i_%s',iM,atl,AtlNames{atl}),'AdjMag','AdjMagVar','Adj_plt','Adj_plt2','Adj_plt2_cl','Y','Z','M','cluster_i','rois_plt','atl');
-                %cluster_i = optimalleaforder(Z,Y);
+                    if (trig_ct)
+                        save(sprintf('./cache/figure_t14_%i_atl%i_%s_ct',iM,atl,AtlNames{atl}),'AdjMag','AdjMagVar','Adj_plt','Adj_plt2','Adj_plt_null','Adj_plt2_cl','Y','Z','M','cluster_i','rois_plt','atl');
+                    else
+                        save(sprintf('./cache/figure_t14_%i_atl%i_%s',iM,atl,AtlNames{atl}),'AdjMag','AdjMagVar','Adj_plt','Adj_plt2','Adj_plt_null','Adj_plt2_cl','Y','Z','M','cluster_i','rois_plt','atl');
+                    end
+                    
+                    %return
+                    %cluster_i = optimalleaforder(Z,Y);
                 end
 
                 % -------------------------------------------------------------------------
@@ -469,9 +560,21 @@ for atl = [2] %1:20 %1:20
                         %close all;
                     elseif (iii2 == 2)
                         coh_mtxt = 'std';
-                        Adj_tmp = sqrt(Adj_plt2(cluster_i,cluster_i));
+                        Adj_tmp = Adj_plt2(cluster_i,cluster_i);
                         %imagesc(Adj_tmp); colormap inferno; colorbar;
                         %return
+                    elseif (iii2 == 3)
+                        coh_mtxt = 'nsigpair';
+                        Adj_tmp = Adj_plt2(cluster_i,cluster_i);
+                    elseif (iii2 == 4)
+                        coh_mtxt = 'npair';
+                        Adj_tmp = Adj_plt2(cluster_i,cluster_i);
+                    elseif (iii2 == 5)
+                        coh_mtxt = 'nsigusub';
+                        Adj_tmp = Adj_plt2(cluster_i,cluster_i);
+                    elseif (iii2 == 6)
+                        coh_mtxt = 'nusub';
+                        Adj_tmp = Adj_plt2(cluster_i,cluster_i);
                     end
                     
                     idx_1 = strcmp(rois_plt,'Pars Opercularis');
@@ -613,7 +716,11 @@ for atl = [2] %1:20 %1:20
                     ss = 'bin';
                 elseif (iii == 3)
                     if (trig_mag_no_cp)
-                        ss = ['Mag-bin_',AtlNames{atl}];
+                        if (trig_ct)
+                            ss = ['CT-bin_',AtlNames{atl}];
+                        else
+                            ss = ['Mag-bin_',AtlNames{atl}];
+                        end
                         %ss = sprintf('%s_cov-',ss,round(1000*));
         %                 mag_min = min(AdjMag(AdjMag ~= 0 ));
         %                 mag_max = max(AdjMag(AdjMag ~= 0 ));
@@ -642,32 +749,98 @@ for atl = [2] %1:20 %1:20
                 %-----------------------------------------
                 colormap(map);
                 if (((~isnan(minv)) && (~isnan(maxv))) && (minv ~= maxv))
-                    cytick = linspace(minv,maxv,3);
-                    cytick_str = cell(1,length(cytick));
-                    for kk = 1:length(cytick)
-                        cytick_str{kk} = sprintf('%.2f',cytick(kk));
+                    if (iii <= 2)
+                        % Coherence values use 3 ticks
+                        cytick = linspace(minv,maxv,3);
+                        cytick_str = cell(1,length(cytick));
+                    else
+                        % Integer values use increments
+                        cytick = linspace(minv,maxv,3);
+                        cytick_str = cell(1,length(cytick));
                     end
-                    cb = colorbar('ytick',cytick,'yticklabel',cytick_str,'FontSize',fontsz);
+                    
+                    for kk = 1:length(cytick)
+                        if (iii2 == 1) % Mean of Coherence
+                            cytick_str{kk} = sprintf('%.2f',cytick(kk));
+                        elseif (iii2 == 2) % Std of Coherence
+                            cytick_str{kk} = sprintf('%.3f',cytick(kk));
+                        elseif (iii2 == 3) % Number of significant pairs
+                            cytick_str{kk} = sprintf('%.0f',cytick(kk));
+                        elseif (iii2 == 4) % Number of pairs
+                            cytick_str{kk} = sprintf('%.0f',cytick(kk));
+                        elseif (iii2 == 5) % Number of significant subjects
+                            cytick_str{kk} = sprintf('%.0f',cytick(kk));
+                        elseif (iii2 == 6) % Number of subjects
+                            cytick_str{kk} = sprintf('%.0f',cytick(kk));
+                        end
+                    end
+                    
+                    if ((iii2 <= 2))
+                        % Coherence values
+                        cb = colorbar('ytick',cytick,'yticklabel',cytick_str,'FontSize',fontsz);
+                    else
+                        % Integer values
+                        cb = colorbar('FontSize',fontsz);
+                    end
                     caxis([minv maxv]);
                 else
                     cb = colorbar('ytick',minv);
                 end
                 set(cb,'TickDir','out');
-                set(cb,'TickLength',0);
+                
+                if ((iii2 <= 2))
+                    % Coherence values
+                    set(cb,'TickLength',0);
+                else
+                    % Integer values
+                    %set(cb,'TickLength',0);
+                end
                 
                 %--- display frequency band range ----
                 metricTxt = metric(3:end);
                 if (strcmp(metricTxt,'Broadband'))
                     if (iii2 == 1)
-                        ylabel(cb,sprintf('Coherence'));
+                        if (trig_ct)
+                            ylabel(cb,sprintf('Time Consistency'));
+                        else
+                            ylabel(cb,sprintf('Coherence'));
+                        end
                     elseif (iii2 == 2)
-                        ylabel(cb,sprintf('Variance of Coherence'));
+                        if (trig_ct)
+                            ylabel(cb,sprintf('Std of Time Consistency'));
+                        else
+                            ylabel(cb,sprintf('Std of Coherence'));
+                        end
+                    elseif (iii2 == 3)
+                        ylabel(cb,sprintf('Number of significant pairs'));
+                    elseif (iii2 == 4)
+                        ylabel(cb,sprintf('Number of pairs'));
+                    elseif (iii2 == 5)
+                        ylabel(cb,sprintf('Number of significant subjects'));
+                    elseif (iii2 == 6)
+                        ylabel(cb,sprintf('Number of subjects'));
                     end
                 else
                     if (iii2 == 1)
-                        ylabel(cb,sprintf('%s Coherence (%s)',metric(3:end),metrics_suffix{iM}));
+                        if (trig_ct)
+                            ylabel(cb,sprintf('%s (%s) Time Consistency',metric(3:end),metrics_suffix{iM}));
+                        else
+                            ylabel(cb,sprintf('%s Coherence (%s)',metric(3:end),metrics_suffix{iM}));
+                        end
                     elseif (iii2 == 2)
-                        ylabel(cb,sprintf('Variance of %s Coherence (%s)',metric(3:end),metrics_suffix{iM}));
+                        if (trig_ct)
+                            ylabel(cb,sprintf('Std of %s Time Consistency (%s)',metric(3:end),metrics_suffix{iM}));
+                        else
+                            ylabel(cb,sprintf('Std of %s Coherence (%s)',metric(3:end),metrics_suffix{iM}));
+                        end
+                    elseif (iii2 == 3)
+                        ylabel(cb,sprintf('Number of significant pairs'))
+                    elseif (iii2 == 4)
+                        ylabel(cb,sprintf('Number of pairs'))
+                    elseif (iii2 == 5)
+                        ylabel(cb,sprintf('Number of significant subjects'))
+                    elseif (iii2 == 6)
+                        ylabel(cb,sprintf('Number of subjects'))
                     end
                 end
                 %-------------------------------------
@@ -755,8 +928,7 @@ for atl = [2] %1:20 %1:20
                     %ax2 = axes('Position',[ax1.Position(1)+ax1.Position(3)+ax2_offset,ax1.Position(2),0.1,ax1.Position(4)]);
                     ax2 = axes('Position',[ax.Position(1)+ax.Position(3)+ax2_offset,ax.Position(2),0.1,ax.Position(4)]);
                     hD = dendrogram(Z,0,'Reorder',fliplr(cluster_i),'Orientation','right','ColorThreshold',0); %[a,b,c]
-                    
-                    
+
                     
                     for ihD = 1:length(hD)
                         hD(ihD).Color = 0*[1 1 1];
@@ -778,6 +950,7 @@ for atl = [2] %1:20 %1:20
                     
                     AM = Adj_plt2(cluster_i,cluster_i);
                     AMvar = Adj_plt2_var(cluster_i,cluster_i);
+                    
                     AM(AM==0) = NaN;
                     [min_vals,min_idxs] = min(AM);
                     [minv,mini] = min(min_vals);
@@ -814,7 +987,16 @@ for atl = [2] %1:20 %1:20
                 %export_fig(sprintf('figures/T14/Adj_%s_%s_2',metric,ss),'-eps');
                 if (iii2 == 2)
                     ss = [ss,'_var'];
+                elseif (iii2 == 3)
+                    ss = [ss, '_nsigpairs'];
+                elseif (iii2 == 4)
+                    ss = [ss, '_npairs'];
+                elseif (iii2 == 5)
+                    ss = [ss, '_nsigsubs'];
+                elseif (iii2 == 6)
+                    ss = [ss, '_nsubs'];
                 end
+                
                 %
                 print(h,sprintf('figures/T14_allatl/atl%i_%s/Adj_%s_%s',atl,AtlNames{atl},metric,ss),fig_fmt);
                 if (trig_eps)
@@ -1165,7 +1347,7 @@ for atl = [2] %1:20 %1:20
                 subplot(3,1,1);
                 plot(Npairs(is_sig_mag),MagVar(is_sig_mag),'black.');
                 xlabel('Number of bipolar pairs');
-                ylabel(sprintf('%s Coherence Variance',metric(3:end)));
+                ylabel(sprintf('%s Coherence Std',metric(3:end)));
                 axis tight;
                 box off;
                 set(gca,'TickDir','out');
@@ -1215,7 +1397,7 @@ for atl = [2] %1:20 %1:20
                 subplot(3,1,1);
                 plot(Nsubs(is_sig_mag),MagVar(is_sig_mag),'black.');
                 xlabel('Number of patients');
-                ylabel(sprintf('%s Coherence Variance',metric(3:end)));
+                ylabel(sprintf('%s Coherence Std',metric(3:end)));
                 axis tight;
                 box off;
                 set(gca,'TickDir','out');

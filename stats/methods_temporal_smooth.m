@@ -1,8 +1,8 @@
 close all;
 
-%D = h5read('/media/jerry/internal/data/h5_notch20/sub3.h5','/h5eeg/eeg',[1 1],[1 500]);
+%D = h5read('/media/jerry/internal/data/h5_notch20/m00005.h5','/h5eeg/eeg',[1 1],[1 500]);
 
-ecog = H5eeg('/media/jerry/internal/data/h5_notch20/sub3.h5');
+ecog = H5eeg('/media/jerry/internal/data/h5_notch20/m00005.h5');
 
 w = 10;
 l = round(ecog.fs)*w;

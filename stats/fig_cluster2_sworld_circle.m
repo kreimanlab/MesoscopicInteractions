@@ -2,7 +2,6 @@ close all;
 clear;
 
 addpath(genpath('SWP'));
-addpath(genpath('BCT'));
 
 
 
@@ -60,7 +59,6 @@ for iM = [1:5] %[1 5]
 
     % load cache
     fn_ca4 = sprintf('./cache/figure_t14_%i',iM);
-    %fn_ca4 = sprintf('./cache/figure_t14_%i_atl2_Desikan-Killiany',iM);
     Ca4 = load(fn_ca4);
     rois2 = Ca4.rois_plt(Ca4.cluster_i);
     Ahs = Ca4.Adj_plt2(Ca4.cluster_i,Ca4.cluster_i);
@@ -306,7 +304,7 @@ for iM = [1:5] %[1 5]
 
     % Small world index calculations
     trig_swi = false;
-    D_anat = load('../data/coregistration/AdjMKFV.mat');
+    D_anat = load('../coreg/AdjMKFV.mat');
     
     if (trig_swi)
 
@@ -559,8 +557,8 @@ for iM = [1:5] %[1 5]
 
 
         % Macaque
-        D_anat = load('../data/coregistration/AdjMKFV.mat');
-        D = load('../data/coregistration/AdjSu.mat');
+        D_anat = load('../coreg/AdjMKFV.mat');
+        D = load('../coreg/AdjSu.mat');
 
         % convert to symmetric
         AdjMKneurons = D_anat.AdjMKneurons;

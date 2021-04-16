@@ -4,7 +4,7 @@ clear; close all;
 behaviors = {'BODY MOVEMENT','CONTACT','EATING','HEAD MOVEMENT',...
     'PATIENT IS TALKING','QUIET','SLEEP','SOMEONE IS TALKING','VIDEO GAMES',...
     'WATCH TV'};
-f_in = fopen('sub21.index','r');
+f_in = fopen('m00043.index','r');
 D = textscan(f_in,'%s','Delimiter','\n');
 D = D{1};
 beh_etime = zeros(1,length(D));
@@ -16,7 +16,7 @@ for i = 1:length(D)
 end
 
 % Parse behaviors
-fn_h5 = '/media/klab/KLAB101/h5_notch20/sub21.h5';
+fn_h5 = '/media/klab/KLAB101/h5_notch20/m00043.h5';
 startEtime = h5read(fn_h5,'/h5eeg/aux',[1 1],[1 1]);
 N_COH = 53934; % number of coherence time points computed
 thresh_warn_annot_hrs = 1;
@@ -55,7 +55,7 @@ end
 
 %return;
 
-%fn_h5 = '/media/klab/KLAB101/sub21_4ce6814b.hdf5';
+%fn_h5 = '/media/klab/KLAB101/m00043_4ce6814b.hdf5';
 h5_info = h5info(fn_h5);
 
 % H5eeg object
@@ -92,7 +92,7 @@ data = h5read(fn_h5,'/h5eeg/eeg',start_pos,read_block);
 aux = h5read(fn_h5,'/h5eeg/aux',start_pos,[1 read_block(2)]);
 
 fprintf('[*] Saving..\n')
-save('sub21_24hr','-v7.3','-nocompression')
+save('m00043_24hr','-v7.3','-nocompression')
 fprintf('[!] Done.\n')
 
 

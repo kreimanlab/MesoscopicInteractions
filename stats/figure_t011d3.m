@@ -17,12 +17,12 @@ setenv('SUBJECTS_DIR',subjects_dir);
 metrics = {'pcBroadband'};
 
 % Patients
-SubjectsL = {'sub1','sub2','sub3','sub4','sub5','sub6','sub7','sub8',...
-    'sub9','sub10','sub11','sub12','sub13','sub14','sub15','sub16',...
-    'sub17','sub18','sub19','sub20','sub21','sub22','sub23','sub24',... % 'sub23',
-    'sub25','sub26','sub27','sub28','sub29','sub30','sub31','sub32',... % 'sub30',
-    'sub33','sub34','sub35','sub36','sub37','sub38','sub39','sub40',...
-    'sub41','sub42','sub43','sub44','sub45','sub46','sub47','sub48',...
+SubjectsL = {'m00001','m00003','m00005','m00006','m00019','m00021','m00022','m00023',...
+    'm00024','m00025','m00026','m00027','m00028','m00030','m00032','m00033',...
+    'm00035','m00037','m00038','m00039','m00043','m00044','m00045','m00047',... % 'm00045',
+    'm00048','m00049','m00052','m00053','m00055','m00056','m00058','m00059',... % 'm00056',
+    'm00060','m00061','m00068','m00071','m00073','m00075','m00079','m00083',...
+    'm00084','m00095','m00096','m00097','m00100','m00107','m00122','m00124',...
     'mSu'};
 
 % Exclude monkey
@@ -51,9 +51,9 @@ SIGMA_NOMAP_MM = 3;
 
 % Plot specific channel and time
 r_samp_const = 22755001;
-bchan1_const = NaN; % 13; % sub1 13
-bchan2_const = 58; % 58; % sub1 58
-sid = 'sub1';
+bchan1_const = NaN; % 13; % m00001 13
+bchan2_const = 58; % 58; % m00001 58
+sid = 'm00001';
 trig_coh_line_not_pt = true;
 
 

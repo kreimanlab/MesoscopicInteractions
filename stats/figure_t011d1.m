@@ -15,12 +15,12 @@ setenv('SUBJECTS_DIR',subjects_dir);
 metrics = {'pcBroadband'};
 
 % Patients
-SubjectsL = {'sub1','sub2','sub3','sub4','sub5','sub6','sub7','sub8',...
-    'sub9','sub10','sub11','sub12','sub13','sub14','sub15','sub16',...
-    'sub17','sub18','sub19','sub20','sub21','sub22','sub23','sub24',... % 'sub23',
-    'sub25','sub26','sub27','sub28','sub29','sub30','sub31','sub32',... % 'sub30',
-    'sub33','sub34','sub35','sub36','sub37','sub38','sub39','sub40',...
-    'sub41','sub42','sub43','sub44','sub45','sub46','sub47','sub48',...
+SubjectsL = {'m00001','m00003','m00005','m00006','m00019','m00021','m00022','m00023',...
+    'm00024','m00025','m00026','m00027','m00028','m00030','m00032','m00033',...
+    'm00035','m00037','m00038','m00039','m00043','m00044','m00045','m00047',... % 'm00045',
+    'm00048','m00049','m00052','m00053','m00055','m00056','m00058','m00059',... % 'm00056',
+    'm00060','m00061','m00068','m00071','m00073','m00075','m00079','m00083',...
+    'm00084','m00095','m00096','m00097','m00100','m00107','m00122','m00124',...
     'mSu'};
 
 % Exclude monkey
@@ -46,9 +46,9 @@ SIGMA_NOMAP_MM = 3;
 
 % Plot specific channel and time
 r_samp_const = 72056321;
-bchan1_const = 35; % 13; % sub1 13
-bchan2_const = 84; % 58; % sub1 58
-sid = 'sub3';
+bchan1_const = 35; % 13; % m00001 13
+bchan2_const = 84; % 58; % m00001 58
+sid = 'm00005';
 trig_coh_line_not_pt = true;
 
 
@@ -66,11 +66,11 @@ trig_covered_rois = false;
 system('mkdir figures');
 system('mkdir figures/T11d4');
 
-fn_cache = sprintf('cache/sub3_flat.mat');
-fn_cache_dk = sprintf('cache/sub3_flat_dk.mat');
-fn_cache_rtxt = sprintf('cache/sub3_flat_rtxt.mat');
-fn_patch = sprintf('%s/%s/surf/%s.full.flat.patch.3d',subjects_dir,'sub3','rh'); % check hemisphere
-fn_pial = sprintf('%s/%s/surf/%s.pial',subjects_dir,'sub3','rh'); % check hemisphere
+fn_cache = sprintf('cache/m00005_flat.mat');
+fn_cache_dk = sprintf('cache/m00005_flat_dk.mat');
+fn_cache_rtxt = sprintf('cache/m00005_flat_rtxt.mat');
+fn_patch = sprintf('%s/%s/surf/%s.full.flat.patch.3d',subjects_dir,'m00005','rh'); % check hemisphere
+fn_pial = sprintf('%s/%s/surf/%s.pial',subjects_dir,'m00005','rh'); % check hemisphere
 
 % Check if patch cache exists:
 if (exist(fn_cache,'file') && (~trig_overwrite_cache))
@@ -142,7 +142,7 @@ for iM = 1:length(metrics)
     else
         % read desikan-killiany labels
         fprintf('[*] Computing Desikan-Killiany borders..\n')
-        annot_dir = sprintf('%s/%s/label',subjects_dir,'sub3');
+        annot_dir = sprintf('%s/%s/label',subjects_dir,'m00005');
         atl_fname = sprintf('%s/%s.aparc.annot',annot_dir,'rh');
         [v,l2,c] = read_annotation(atl_fname);
         roi_id = l2(pa.vno + 1);
@@ -277,7 +277,7 @@ for iM = 1:length(metrics)
     
     % plot surface
     %h = figure('visible','off');
-    fprintf('[*] Plotting sub3 flat patch..\n')
+    fprintf('[*] Plotting m00005 flat patch..\n')
     h = figure;
     fig_w = 10.5;
     fig_h = 10.5;
@@ -439,8 +439,8 @@ for iM = 1:length(metrics)
     chan2 = Ca.chan2 + 1;
     
     % Load bipolar electrode coordinates
-    %l = read_label('sub3',sprintf('ielvis_%s',sid));
-    l = read_label('sub3',sprintf('all_surf_ielvis'));
+    %l = read_label('m00005',sprintf('ielvis_%s',sid));
+    l = read_label('m00005',sprintf('all_surf_ielvis'));
     [n_lchan,~] = size(l);
     if (n_lchan ~= ecog.n_chan)
         fprintf(2,'E: number of channels in %s.label does not match .h5 file\n',sprintf('ielvis_%s',sid))
@@ -505,7 +505,7 @@ for iM = 1:length(metrics)
 %     chan2 = chan2(Ca.is_x);
     
     system('mkdir figures/T011d1');
-    oname = sprintf('figures/T011d1/sub3_electrodes_only');
+    oname = sprintf('figures/T011d1/m00005_electrodes_only');
     print(h,oname,'-dpng','-r300');
     print(h,oname,'-depsc');
     return;

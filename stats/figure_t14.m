@@ -59,6 +59,7 @@ for iM = [1:5] %1:length(metrics) % [1 5] %
     % Calculate final functional interaction matrix
     Adj = nan(n_rois,n_rois);
     AdjMag = nan(n_rois,n_rois);
+    AdjMagNull = nan(n_rois,n_rois);
     AdjCP = nan(n_rois,n_rois);
     AdjMagVar = nan(n_rois,n_rois);
     AdjMagReS = nan(n_rois,n_rois);
@@ -73,6 +74,7 @@ for iM = [1:5] %1:length(metrics) % [1 5] %
     for i1 = 1:n_rois
         for i2 = 1:n_rois
             AA = Ca_hum.AdjAtl{i1,i2};
+            AA_null = Ca_hum.AdjAtlN{i1,i2};
             AA_dist = Ca_hum.adjct_dist{i1,i2};
             AA_sub = Ca_hum.AdjAtl_sid{i1,i2};
             n_pairs = length(AA_sub);
@@ -88,6 +90,10 @@ for iM = [1:5] %1:length(metrics) % [1 5] %
                     %return;
                     Adj(i1,i2) = 1;
                     AdjMag(i1,i2) = mean(AA(AA ~= 0));
+                    AdjMagNull(i1,i2) = mean(AA_null(AA_null ~= 0));
+                    if (mean(AA_null(AA_null ~= 0)) > 0)
+                        return
+                    end
                     AdjMagVar(i1,i2) = var(AA(AA ~= 0));
                     AdjMagL{i1,i2} = AA(AA~=0);
                     DistsAtl = [DistsAtl; [mean(AA_dist(AA ~= 0)), mean(AA(AA ~= 0))]];
@@ -104,6 +110,7 @@ for iM = [1:5] %1:length(metrics) % [1 5] %
                 else
                     Adj(i1,i2) = 0;
                     AdjMag(i1,i2) = 0;
+                    AdjMagNull(i1,i2) = 0;
                     AdjMagVar(i1,i2) = 0;
                     AdjMagL{i1,i2} = [];
                    % DistsAtl = [DistsAtl; mean(AA_dist)];
@@ -159,6 +166,7 @@ for iM = [1:5] %1:length(metrics) % [1 5] %
             else
                 Adj_plt = AdjCP;
             end
+            Adj_plt_null = AdjMagNull;
             %Adj_plt(Adj == 0) = 0;
             color_not_sig = color_not_sig0;
         end
@@ -176,6 +184,7 @@ for iM = [1:5] %1:length(metrics) % [1 5] %
         known_idx = (~ strcmp(rois,'unknown'));
         ind_isnan_master(~known_idx) = true;
         Adj_plt = Adj_plt(known_idx,known_idx);
+        Adj_plt_null = Adj_plt_null(known_idx,known_idx);
         rois_plt = rois_plt(known_idx);
         Dmat_plt = Dmat_plt(known_idx,known_idx);
         Adj_dist = Adj_dist(known_idx,known_idx);
@@ -193,12 +202,14 @@ for iM = [1:5] %1:length(metrics) % [1 5] %
         dist_thresh = Ca_hum.dist_thresh;
         Adj_plt2 = Adj_plt;
         Adj_plt(Dmat_plt <= dist_thresh) = nan;
+        Adj_plt_null(Dmat_plt <= dist_thresh) = nan;
         
         %return
         % Filter out nans nodes
         cov_idx = ~ all(isnan(Adj_plt));
         Adj_plt = Adj_plt(cov_idx,cov_idx);
         Adj_plt2 = Adj_plt2(cov_idx,cov_idx);
+        Adj_plt_null = Adj_plt_null(cov_idx,cov_idx);
         rois_plt = rois_plt(cov_idx);
         Dmat_plt = Dmat_plt(cov_idx,cov_idx);
         Adj_dist = Adj_dist(cov_idx,cov_idx);
@@ -305,7 +316,7 @@ for iM = [1:5] %1:length(metrics) % [1 5] %
 
         % -------------------------------------------------------------------------
 
-        save(sprintf('./cache/figure_t14_%i',iM),'Adj_plt','Adj_plt2','cluster_i','rois_plt','Adj_dist');
+        save(sprintf('./cache/figure_t14_%i',iM),'Adj_plt','Adj_plt2','Adj_plt_null','cluster_i','rois_plt','Adj_dist');
         
         % Apply clustering
         Im = Im(cluster_i,cluster_i,:);

@@ -27,33 +27,33 @@ cp_thresh_override = 0.05;
 p_val = 0.01;
 
 % Fast i/o definitions
-dir_resLpp =  '/home/jerry/data/results/coh_w10'; %'/media/jerry/KLAB101/results/coh_w10';
+dir_resLpp =  '/media/jerry/untitled/results/coh_w10'; %'/home/jerry/data/results/coh_w10'; %'/media/jerry/KLAB101/results/coh_w10';
 dir_corLpp = '/media/jerry/internal/data/coreg';
 dir_cacheLpp = './cache';
 %subjects_dirL = '/mnt/cuenap_ssd/coregistration';
 
 % Slow i/o definitions
-dir_h5L = '/media/klab/internal/data/h5_notch20'; %'/media/klab/KLAB101/h5_notch20';
+dir_h5L = '/media/jerry/untitled/h5_notch20';%'/media/klab/internal/data/h5_notch20'; %'/media/klab/KLAB101/h5_notch20';
 dir_artLpp = sprintf('%s/art_nosz',dir_h5L);
 %dir_h5L = '/mnt/cuenap/data/h5_notch20';
 
 metricspp = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'}; % ,'pcDelta'
 
 % Patients
-Subjectspp = {'sub1','sub2','sub3','sub4','sub5','sub6','sub7','sub8',...
-    'sub9','sub10','sub11','sub12','sub13','sub14','sub15','sub16',...
-    'sub17','sub18','sub19','sub20','sub21','sub22','sub23','sub24',...
-    'sub25','sub26','sub27','sub28','sub29','sub30','sub31','sub32',...
-    'sub33','sub34','sub35','sub36','sub37','sub38','sub39','sub40',...
-    'sub41','sub42','sub43','sub44','sub45','sub46','sub47','sub48',...
+Subjectspp = {'m00001','m00003','m00005','m00006','m00019','m00021','m00022','m00023',...
+    'm00024','m00025','m00026','m00027','m00028','m00030','m00032','m00033',...
+    'm00035','m00037','m00038','m00039','m00043','m00044','m00045','m00047',...
+    'm00048','m00049','m00052','m00053','m00055','m00056','m00058','m00059',...
+    'm00060','m00061','m00068','m00071','m00073','m00075','m00079','m00083',...
+    'm00084','m00095','m00096','m00097','m00100','m00107','m00122','m00124',...
     'mSu'};
 
 % Exclude monkey
 Subjectspp = Subjectspp(1:(end-1));
 
 % bypass
-%[*] cost: -0.213723722	sub45	30	80	7315001
-Subjectspp = {'sub3'};
+%[*] cost: -0.213723722	m00100	30	80	7315001
+Subjectspp = {'m00005'};
 %r_samp_const = 106865001; % set to nan to pick randomly
 %r_samp_const = nan;%90545001;
 %r_samp_const = 22755001; 
@@ -78,26 +78,26 @@ roi_2_chans = {'PT5','PT6','PT7'};
 % bchan2_const = NaN; % 46 58
 %bchan2_const = [41,58]; %bchan1_const = 30
 %bchan2_const = [94]; %bchan1_const = 80
-%bchan2_const = [58,53,57,61]; %sub1
+%bchan2_const = [58,53,57,61]; %m00001
 
 
 % roi_1 = 'parstriangularis';
 % roi_2 = 'inferiorparietal';
 
-% === sub41 ===================
+% === m00084 ===================
 % - 30 precentral
 % - 33 supramarginal
 % - 49 middletemporal
 % ==============================
 
-% Subjectspp = {'sub34'};
+% Subjectspp = {'m00061'};
 % r_samp_const = 79817501;
 % bchan1_const = 27;
 % bchan2_const = NaN;
 % roi_1 = 'parsopercularis';
 % roi_2 = 'inferiorparietal';
 
-% Subjectspp = {'sub24'};
+% Subjectspp = {'m00047'};
 % r_samp_const = 64875001;
 % bchan1_const = 54;
 % bchan2_const = NaN;
@@ -128,7 +128,7 @@ Strengths = [1];
 system('mkdir figures');
 fig_fmt = '-dpng';
 trig_title = false; % show titles
-trig_both_elec = false;
+trig_both_elec = true; % bipolar
 trig_eps = true;
 trig_brain = true;
 trig_t1 = true;

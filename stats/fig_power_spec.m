@@ -4,25 +4,26 @@ clear;
 system('mkdir figures/power_spec');
 
 
-Subjects = {'sub1','sub2','sub3','sub4','sub5','sub6','sub7','sub8',...
-    'sub9','sub10','sub11','sub12','sub13','sub14','sub15','sub16',...
-    'sub17','sub18','sub19','sub20','sub21','sub22','sub23','sub24',...
-    'sub25','sub26','sub27','sub28','sub29','sub30','sub31','sub32',...
-    'sub33','sub34','sub35','sub36','sub37','sub38','sub39','sub40',...
-    'sub41','sub42','sub43','sub44','sub45','sub46','sub47','sub48'};
+Subjects = {'m00001','m00003','m00005','m00006','m00019','m00021','m00022','m00023',...
+    'm00024','m00025','m00026','m00027','m00028','m00030','m00032','m00033',...
+    'm00035','m00037','m00038','m00039','m00043','m00044','m00045','m00047',...
+    'm00048','m00049','m00052','m00053','m00055','m00056','m00058','m00059',...
+    'm00060','m00061','m00068','m00071','m00073','m00075','m00079','m00083',...
+    'm00084','m00095','m00096','m00097','m00100','m00107','m00122','m00124'};
 
 metric = 'pcBroadband';
 metrici = 1;
-dir_res = '/media/jerry/KLAB101/results/coh_w10';
-dir_art = '/media/jerry/KLAB101/h5_notch20/art_nosz';
+dir_res = '/media/jerry/untitled/results/coh_w10';
+dir_art = '/media/jerry/untitled/h5_notch20/art_nosz';
 dir_cache = './cache';
-dir_h5 = '/media/klab/KLAB101/h5_notch20';
+dir_h5 = '/media/klab/untitled/h5_notch20';
 
 
 P = [];
 P0 = [];
 F = [];
-for i = 5%1:length(Subjects)
+P_allsub = [];
+for i = 20:length(Subjects)
     sid = Subjects{i};
     fn_graph = sprintf('%s/%s_graph-%s.h5',dir_res,sid,metric);
     fprintf('[*] Reading: %s ..\n',fn_graph);
@@ -71,35 +72,90 @@ for i = 5%1:length(Subjects)
         if (end_idx > n_R2)
             end_idx = n_R2;
         end
-        %return
-        for j = 1:n_R
-            % Interp nans
-            x = double(R(j,start_idx:end_idx));
-            nanx = isnan(x);
-            t = 1:numel(x);
-            x(nanx) = interp1(t(~nanx), x(~nanx), t(nanx));
-            [pxx,f] = pwelch(x,window,[],[],fs);
+        
+        % Check that there are enough samples in subfile
+        cond_enough = length(start_idx:end_idx) >= length(window);
+        
+        if (cond_enough)
+            %return
+            for j = 1:(n_R)
+                % Interp nans
+                x = double(R(j,start_idx:end_idx));
+                nanx = isnan(x);
+                t = 1:numel(x);
+                x(nanx) = interp1(t(~nanx), x(~nanx), t(nanx));
+    %             if (isnan(x(end)))
+    %                 x(end) = x(end-1);
+    %             end
+    %             if (isnan(x(1)))
+    %                 x(1) = x(2);
+    %             end
+                if (~isnan(nanmean(x)))
+                    x(isnan(x)) = nanmean(x);
+                else
+                    x(isnan(x)) = 0;
+                    fprintf(2,'[!] Warn, all coherence are NaNs\n.');
+                end
 
-            P = [P, pxx];
+                [pxx,f] = pwelch(x,window,[],[],fs);
 
-            % perm
-            x0 = double(Rp(j,:));
-            nanx = isnan(x0);
-            t = 1:numel(x0);
-            x0(nanx) = interp1(t(~nanx), x0(~nanx), t(nanx));
-            [pxx0,f0] = pwelch(x0,window,[],[],fs);
+                P = [P, pxx];
 
-            P0 = [P0, pxx0];
+                % perm
+                x0 = double(Rp(j,:));
+                nanx = isnan(x0);
+                t = 1:numel(x0);
+                x0(nanx) = interp1(t(~nanx), x0(~nanx), t(nanx));
+    %             if (isnan(x0(end)))
+    %                 x0(end) = x0(end-1);
+    %             end
+    %             if (isnan(x0(1)))
+    %                 x0(1) = x0(2);
+    %             end
+                %x0(isnan(x0)) = nanmean(x0);
+                if (~isnan(nanmean(x0)))
+                    x0(isnan(x0)) = nanmean(x0);
+                else
+                    x0(isnan(x0)) = 0;
+                    fprintf(2,'[!] Warn, all coherence are NaNs\n.');
+                end
+                [pxx0,f0] = pwelch(x0,window,[],[],fs);
 
-            fprintf('\t(%s) %i of %i , %i of %i\n',sid,k,length(starts),j,n_R)
+                P0 = [P0, pxx0];
+
+                fprintf('\t(%s) %i of %i , %i of %i\n',sid,k,length(starts),j,n_R)
+            end
+        
         end
+    end
+    
+    try
+        % plot per subject
+        h = figure('visible','off','Position',[0,0,600,300]);
+        Pp = P; %P - P0;
+        pxx = nanmean(Pp,2);
+        pxx_s = nanstd(Pp')';
+        plot(f,10*log10(real(pxx)),'black-'); hold all;
+        plot(f,10*log10(real(pxx + pxx_s)),'black:'); hold on;
+        plot(f,10*log10(real(pxx - pxx_s)),'black:'); % )10*log10(
+        axis tight;
+        xlabel('Frequency (hour^-^1)')
+        ylabel('Power Spectral Density (dB)')
+        box off;
+        set(gca,'TickDir','out');
+        print(h,sprintf('./figures/power_spec/%i_%s',i,Subjects{i}),'-depsc');
+        print(h,sprintf('./figures/power_spec/%i_%s',i,Subjects{i}),'-dpng','-r900');
+        close(h);
+
+        P = [];
+        P_allsub = [P_allsub, P];
     end
 end
 
 
 %%
 
-Pp = P; %P - P0;
+Pp = P_allsub; %P - P0;
 
 pxx = nanmean(Pp,2);
 %pxx = P(:,5*13);
@@ -109,6 +165,7 @@ pxx_s = nanstd(Pp')';
 % semilogy(f,pxx+pxx_s,'black:'); hold all;
 % semilogy(f,pxx-pxx_s,'black:'); hold all;
 
+h = figure('visible','on','Position',[0,0,600,300]);
 
 plot(f,10*log10(real(pxx)),'black-'); hold all;
 plot(f,10*log10(real(pxx + pxx_s)),'black:'); hold on;

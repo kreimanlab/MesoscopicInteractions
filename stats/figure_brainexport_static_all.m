@@ -2,7 +2,7 @@ close all;
 clear;
 
 dir_cache = './cache';
-sid_const = 'sub48';
+sid_const = 'm00124';
 scale_mm_per_obj = 30;
 
 mkdir('brainexport');

@@ -16,8 +16,8 @@
 %       h - figure handle
 %
 %   Example:
-%       brainplot_one('sub1',[1 2]) - plot blank pial surface with electrodes
-%       brainplot_one('sub1',[1 2],'mmp') - plot surface and electrodes colored with MMP atlas
+%       brainplot_one('m00001',[1 2]) - plot blank pial surface with electrodes
+%       brainplot_one('m00001',[1 2],'mmp') - plot surface and electrodes colored with MMP atlas
 %
 
 function [ h ] = brainplot_one( sid, chan_num, atlas, roi_str )
@@ -54,8 +54,7 @@ SURFACE_TYPE = 'pial'; % Which surface to plot (e.g. pial, white, inflated)
 % [~,subjects_dir] = system('echo $SUBJECTS_DIR');
 % subjects_dir = strip(subjects_dir);
 %subjects_dir = '/mnt/cuenap_ssd/coregistration';
-%subjects_dir = '/media/klab/internal/data/coreg';
-subjects_dir = '../data/coregistration';
+subjects_dir = '/media/klab/internal/data/coreg';
 setenv('SUBJECTS_DIR',subjects_dir);
 %fprintf('subjects_dir: %s\n',subjects_dir);
 

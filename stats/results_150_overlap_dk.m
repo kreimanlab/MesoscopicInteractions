@@ -12,7 +12,7 @@ SURFACE_TYPE = 'pial';
 iM = 1;
 
 % original subject
-sid = 'sub3';
+sid = 'm00005';
 sid_i = str2double(sid(2:end));
 b1 = 35;
 b2 = 84;

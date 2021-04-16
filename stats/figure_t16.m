@@ -43,7 +43,7 @@ for imm = 1:length(imetrics)
 
 
         % original subject
-        sid = 'sub3';
+        sid = 'm00005';
         sid_i = str2double(sid(2:end));
         b1 = 35;
         b2 = 84;
@@ -413,7 +413,7 @@ return
 for imm = 1:length(imetrics)
     iM = imetrics(imm);
     % Read subject surface
-    sid = 'sub3';
+    sid = 'm00005';
     fn_paths = sprintf('brainexport/%s_6all_%i.mat',sid,iM);
     fprintf('[*] Loading %s ..\n',fn_paths)
     load(fn_paths);
@@ -891,81 +891,81 @@ fprintf('[*] All Done.\n');
 % Warning: Directory already exists. 
 % > In figure_t16 (line 13) 
 % [*] Loading brainexport/red_6all_fsaverage_1.mat ..
-% [!] sub2: bchan 41, 14
-% [!] sub3: bchan 35, 84
-% [!] sub3: bchan 35, 91
-% [!] sub4: bchan 13, 28
-% [!] sub10: bchan 39, 6
-% [!] sub10: bchan 39, 7
-% [!] sub15: bchan 49, 55
-% [!] sub20: bchan 36, 14
-% [!] sub21: bchan 71, 68
-% [!] sub21: bchan 71, 74
-% [!] sub23: bchan 46, 20
-% [!] sub23: bchan 46, 21
-% [!] sub23: bchan 47, 20
-% [!] sub23: bchan 47, 21
-% [!] sub34: bchan 42, 21
-% [!] sub36: bchan 77, 20
-% [!] sub41: bchan 44, 22
-% [!] sub42: bchan 34, 21
-% [!] sub43: bchan 21, 79
-% [!] sub43: bchan 21, 80
-% [!] sub44: bchan 28, 35
-% [!] sub44: bchan 56, 35
+% [!] m00003: bchan 41, 14
+% [!] m00005: bchan 35, 84
+% [!] m00005: bchan 35, 91
+% [!] m00006: bchan 13, 28
+% [!] m00025: bchan 39, 6
+% [!] m00025: bchan 39, 7
+% [!] m00032: bchan 49, 55
+% [!] m00039: bchan 36, 14
+% [!] m00043: bchan 71, 68
+% [!] m00043: bchan 71, 74
+% [!] m00045: bchan 46, 20
+% [!] m00045: bchan 46, 21
+% [!] m00045: bchan 47, 20
+% [!] m00045: bchan 47, 21
+% [!] m00061: bchan 42, 21
+% [!] m00071: bchan 77, 20
+% [!] m00084: bchan 44, 22
+% [!] m00095: bchan 34, 21
+% [!] m00096: bchan 21, 79
+% [!] m00096: bchan 21, 80
+% [!] m00097: bchan 28, 35
+% [!] m00097: bchan 56, 35
 % Average coherence: 0.223101
-% [*] Loading brainexport/sub2_6all_1.mat ..
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub2/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub3_6all_1.mat ..
-% [3] sub3 coherence: 0.221297
-% [3] sub3 coherence: 0.224905
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub3/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub4_6all_1.mat ..
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub4/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub10_6all_1.mat ..
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub10/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub15_6all_1.mat ..
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub15/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00003_6all_1.mat ..
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00003/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00005_6all_1.mat ..
+% [3] m00005 coherence: 0.221297
+% [3] m00005 coherence: 0.224905
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00005/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00006_6all_1.mat ..
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00006/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00025_6all_1.mat ..
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00025/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00032_6all_1.mat ..
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00032/label/all_surf_ielvis.label
 % Number of pairs: 22
 % Number of subjects: 14
 % Consistency across pairs: 0.0909
 % Consistency across subjects: 0.0714
 % [*] Loading brainexport/red_6all_fsaverage_5.mat ..
-% [!] sub2: bchan 41, 14
-% [!] sub3: bchan 35, 84
-% [!] sub3: bchan 35, 91
-% [!] sub4: bchan 13, 28
-% [!] sub10: bchan 39, 6
-% [!] sub10: bchan 39, 7
-% [!] sub15: bchan 49, 55
-% [!] sub20: bchan 36, 14
-% [!] sub21: bchan 71, 68
-% [!] sub21: bchan 71, 74
-% [!] sub23: bchan 46, 20
-% [!] sub23: bchan 46, 21
-% [!] sub23: bchan 47, 20
-% [!] sub23: bchan 47, 21
-% [!] sub34: bchan 42, 21
-% [!] sub36: bchan 77, 20
-% [!] sub41: bchan 44, 22
-% [!] sub42: bchan 34, 21
-% [!] sub43: bchan 21, 79
-% [!] sub43: bchan 21, 80
-% [!] sub44: bchan 28, 35
-% [!] sub44: bchan 56, 35
+% [!] m00003: bchan 41, 14
+% [!] m00005: bchan 35, 84
+% [!] m00005: bchan 35, 91
+% [!] m00006: bchan 13, 28
+% [!] m00025: bchan 39, 6
+% [!] m00025: bchan 39, 7
+% [!] m00032: bchan 49, 55
+% [!] m00039: bchan 36, 14
+% [!] m00043: bchan 71, 68
+% [!] m00043: bchan 71, 74
+% [!] m00045: bchan 46, 20
+% [!] m00045: bchan 46, 21
+% [!] m00045: bchan 47, 20
+% [!] m00045: bchan 47, 21
+% [!] m00061: bchan 42, 21
+% [!] m00071: bchan 77, 20
+% [!] m00084: bchan 44, 22
+% [!] m00095: bchan 34, 21
+% [!] m00096: bchan 21, 79
+% [!] m00096: bchan 21, 80
+% [!] m00097: bchan 28, 35
+% [!] m00097: bchan 56, 35
 % Average coherence: 0.203551
-% [*] Loading brainexport/sub2_6all_5.mat ..
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub2/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub3_6all_5.mat ..
-% [3] sub3 coherence: 0.206240
-% [3] sub3 coherence: 0.200862
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub3/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub4_6all_5.mat ..
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub4/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub10_6all_5.mat ..
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub10/label/all_surf_ielvis.label
-% [*] Loading brainexport/sub15_6all_5.mat ..
-% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/sub15/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00003_6all_5.mat ..
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00003/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00005_6all_5.mat ..
+% [3] m00005 coherence: 0.206240
+% [3] m00005 coherence: 0.200862
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00005/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00006_6all_5.mat ..
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00006/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00025_6all_5.mat ..
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00025/label/all_surf_ielvis.label
+% [*] Loading brainexport/m00032_6all_5.mat ..
+% ERROR: could not open /media/klab/internal/data/coreg//media/klab/internal/data/coreg/m00032/label/all_surf_ielvis.label
 % Number of pairs: 22
 % Number of subjects: 14
 % Consistency across pairs: 0.0909

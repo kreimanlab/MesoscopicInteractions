@@ -22,12 +22,12 @@ dir_h5Lp = '/media/jerry/KLAB101/h5_notch20';
 metricsp = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'}; % ,'pcDelta'
 
 % Patients
-Subjectsp = {'sub1','sub2','sub3','sub4','sub5','sub6','sub7','sub8',...
-    'sub9','sub10','sub11','sub12','sub13','sub14','sub15','sub16',...
-    'sub17','sub18','sub19','sub20','sub21','sub22','sub23','sub24',...
-    'sub25','sub26','sub27','sub28','sub29','sub30','sub31','sub32',...
-    'sub33','sub34','sub35','sub36','sub37','sub38','sub39','sub40',...
-    'sub41','sub42','sub43','sub44','sub45','sub46','sub47','sub48',...
+Subjectsp = {'m00001','m00003','m00005','m00006','m00019','m00021','m00022','m00023',...
+    'm00024','m00025','m00026','m00027','m00028','m00030','m00032','m00033',...
+    'm00035','m00037','m00038','m00039','m00043','m00044','m00045','m00047',...
+    'm00048','m00049','m00052','m00053','m00055','m00056','m00058','m00059',...
+    'm00060','m00061','m00068','m00071','m00073','m00075','m00079','m00083',...
+    'm00084','m00095','m00096','m00097','m00100','m00107','m00122','m00124',...
     'mSu'};
 
 % Exclude monkey
@@ -121,6 +121,7 @@ Fracsig = zeros(2,n_eg);
 Npairs = zeros(2,n_eg);
 Npairs_sig = zeros(2,n_eg);
 Elecs_mSu = cell(2,n_eg);
+Elecs_mSu_Gnd = cell(2,n_eg);
 for i = 1:n_eg
     if (length(Roi2{i}) <= 1)
         roi2txt = Roi2{i}{1};
@@ -235,6 +236,7 @@ for i = 1:n_eg
     % DEBUG adjust ct threshold
     Ca.ct_thresh = 0.05;
     
+    
     if (i == 1)
         %return
     end
@@ -249,7 +251,9 @@ for i = 1:n_eg
     roi2 = Roi2{i};
     count = 1;
     rois_idx_mSu = [];
+    rois_idx_mSu_Gnd = [];
     rois_idx_mSu2 = [];
+    rois_idx_mSu2_Gnd = [];
     for ii = 1:(ecog.n_bchan-1)
         for jj = (ii+1):ecog.n_bchan
             b1c1 = ecog.bip(ii,1);
@@ -262,6 +266,7 @@ for i = 1:n_eg
             %m132L = Ca.C.AtlLabels{atlM};
             m132L = D.AtlasLabels{1}; % replace with macaque labels
             
+            % Manually edit badly-localized electrodes
             manual_prune = find(strcmp(m132L,'V4_M132'));
             m132L{manual_prune(6)} = 'V3_M132';
             m132L{manual_prune(7)} = 'V3_M132';
@@ -269,6 +274,8 @@ for i = 1:n_eg
             m132L{manual_prune(end)} = 'V4_M132';
             m132L{28} = '8l_M132';
             m132L{28-8} = '8l_M132';
+            manual_prune = find(strcmp(m132L,'V1_M132'));
+            m132L{manual_prune(8)} = 'Unknown_M132';
             
             roi1a = [roi1{1},'_M132'];
             %roi2a = [roi2{1},'_M132'];
@@ -343,19 +350,28 @@ for i = 1:n_eg
                 
                 if (sat_fwd)
                     c1_sav = b1c1;
+                    c1_sav_gnd = b1c2;
                     c2_sav = b2c1;
+                    c2_sav_gnd = b2c2;
                 else
                     c1_sav = b2c1;
+                    c1_sav_gnd = b2c2;
                     c2_sav = b1c1;
+                    c2_sav_gnd = b1c2; 
                 end
                 rois_idx_mSu = [rois_idx_mSu, c1_sav];
                 rois_idx_mSu2 = [rois_idx_mSu2, c2_sav];
+                rois_idx_mSu_Gnd = [rois_idx_mSu_Gnd, c1_sav_gnd];
+                rois_idx_mSu2_Gnd = [rois_idx_mSu2_Gnd, c2_sav_gnd];
             end
             count = count + 1;
         end
     end
+    
     Elecs_mSu{1,i} = sort(unique(rois_idx_mSu));
     Elecs_mSu{2,i} = sort(unique(rois_idx_mSu2));
+    Elecs_mSu_Gnd{1,i} = sort(unique(rois_idx_mSu_Gnd));
+    Elecs_mSu_Gnd{2,i} = sort(unique(rois_idx_mSu2_Gnd));
     
     n_pairs_sig = sum(~isnan(coh_sig));
     avg_mag = nanmean(coh_sig);
@@ -467,16 +483,32 @@ for i = 1:n_eg
     yticks([]);
     
     %Im(xs,ys,:) = [1 0 0];
-    imagesc(Im); hold on;
+    imagesc(Im); hold all;
     for ii = 1:2
         elecs = Elecs_mSu{ii,i};
+        elecs_gnd = Elecs_mSu_Gnd{ii,i};
         xs = D_SuMAP.Su.X(elecs);
         ys = D_SuMAP.Su.Y(elecs);
+        xsg = D_SuMAP.Su.X(elecs_gnd);
+        ysg = D_SuMAP.Su.Y(elecs_gnd);
         %plot(xs,ys,'black.'); hold on;
         
         mstyle = '.';
         for j = 1:length(xs)
             %plot(xs(j),ys(j),'.','Color',col_elec_border,'MarkerSize',size_elec); hold on;
+            
+            % plot bipolar ground
+            %plot(xsg(j),ysg(j),mstyle,'Color',col_elecs{ii},'MarkerSize',0.5*factor_elec_border*size_elec); hold on;
+            
+            plot([xsg(j),xs(j)],[ysg(j),ys(j)],'-','Color',col_elecs{ii});
+            
+            % show bipolar connection
+%             p1 = [xs(j) ys(j)]; %[xsg(j),xs(j)];
+%             p2 = [xsg(j) ysg(j)];%[ysg(j),ys(j)];
+%             dp = p2 - p1;
+%             quiver(p1(1),p1(2),dp(1),dp(2),0,'Color',col_elecs{ii});
+            
+            % plot bipolar lead
             plot(xs(j),ys(j),mstyle,'Color',col_elecs{ii},'MarkerSize',factor_elec_border*size_elec); hold on;
         end
     end
@@ -702,14 +734,112 @@ for i = 1:length(Roi1)
     end
 end
 
+
 if (trig_divide_avg_coh)
-    print(h,sprintf('figures/T7d1/%s_fraction',pname),'-depsc');
-    print(h,sprintf('figures/T7d1/%s_fraction',pname),'-dpng');
+    print(h,sprintf('figures/T7d1/%s_fraction',pname),'-depsc','-r900');
+    print(h,sprintf('figures/T7d1/%s_fraction',pname),'-dpng','-r900');
 else
-    print(h,sprintf('figures/T7d1/%s',pname),'-depsc');
-    print(h,sprintf('figures/T7d1/%s',pname),'-dpng');
+    print(h,sprintf('figures/T7d1/%s',pname),'-depsc','-r900');
+    print(h,sprintf('figures/T7d1/%s',pname),'-dpng','-r900');
 end
 %close(h);
+
+% Janv. 11, 2021
+% 
+% figure_t7d1
+% mkdir: cannot create directory ‘figures’: File exists
+% mkdir: cannot create directory ‘figures/T7d1’: File exists
+% [*] Example Zhou-Desimone, V4 & TEad, TEpd
+% 	n_pairs: 67
+% 	n_unique_subs: 9
+% 	avg mag: 0.147301, std: 0.005760
+% 	nosig avg mag: 0.328500, std: 0.224745
+% 	frac sig: 0.044776 (3 of 67)
+% 	distance: 36.92 mm, std: 9.23 mm
+% 	n_pairs_mSu: 15
+% 	avg mag mSu: 0.151323, std: 0.010874
+% 	nosig avg mag: NaN, std: NaN
+% 	frac sig mSu: 1.000000 (15 of 15)
+% 	distance: 59.02 mm?, std: 22.96 mm?
+% length(coh_all) == n_pairs
+% length(coh_all_mSu) == n_pairs_mSu
+% [*] Example Bastos-Fries, V1 & V4
+% 	n_pairs: 248
+% 	n_unique_subs: 6
+% 	avg mag: 0.175235, std: 0.014740
+% 	nosig avg mag: 0.300564, std: 0.186477
+% 	frac sig: 0.431452 (107 of 248)
+% 	distance: 30.90 mm, std: 7.46 mm
+% 	n_pairs_mSu: 40
+% 	avg mag mSu: 0.154812, std: 0.006985
+% 	nosig avg mag: NaN, std: NaN
+% 	frac sig mSu: 1.000000 (40 of 40)
+% 	distance: 37.69 mm?, std: 8.59 mm?
+% length(coh_all) == n_pairs
+% length(coh_all_mSu) == n_pairs_mSu
+% [*] Example Bastos-Fries, V1 & TEO
+% 	n_pairs: 32
+% 	n_unique_subs: 2
+% 	avg mag: 0.189168, std: 0.009524
+% 	nosig avg mag: 0.214511, std: 0.125758
+% 	frac sig: 0.187500 (6 of 32)
+% 	distance: 38.22 mm, std: 9.34 mm
+% 	n_pairs_mSu: 48
+% 	avg mag mSu: 0.151129, std: 0.007161
+% 	nosig avg mag: 0.144061, std: 0.001081
+% 	frac sig mSu: 0.937500 (45 of 48)
+% 	distance: 50.66 mm?, std: 10.09 mm?
+% length(coh_all) == n_pairs
+% length(coh_all_mSu) == n_pairs_mSu
+% [*] Example Markov-Kennedy, V4 & 9
+% 	n_pairs: 2
+% 	n_unique_subs: 1
+% 	avg mag: NaN, std: NaN
+% 	nosig avg mag: 0.171336, std: 0.009398
+% 	frac sig: 0.000000 (0 of 2)
+% 	distance: 99.02 mm, std: 3.39 mm
+% 	n_pairs_mSu: 10
+% 	avg mag mSu: NaN, std: NaN
+% 	nosig avg mag: 0.137903, std: 0.002810
+% 	frac sig mSu: 0.000000 (0 of 10)
+% 	distance: 121.26 mm?, std: 16.56 mm?
+% length(coh_all) == n_pairs
+% length(coh_all_mSu) == n_pairs_mSu
+% [*] Example Markov-Kennedy, V1 & 7B
+% 	n_pairs: 17
+% 	n_unique_subs: 2
+% 	avg mag: NaN, std: NaN
+% 	nosig avg mag: 0.163018, std: 0.020873
+% 	frac sig: 0.000000 (0 of 17)
+% 	distance: 69.97 mm, std: 6.82 mm
+% 	n_pairs_mSu: 24
+% 	avg mag mSu: 0.143386, std: 0.003852
+% 	nosig avg mag: 0.147484, std: 0.008421
+% 	frac sig mSu: 0.083333 (2 of 24)
+% 	distance: 64.80 mm?, std: 9.55 mm?
+% length(coh_all) == n_pairs
+% length(coh_all_mSu) == n_pairs_mSu
+% 1:
+% [2.0789e-03] 1 4	pass: 1	ranksum: 260.000000	effect: 0.013420
+% [1.6741e+00] 1 5	pass: 0	ranksum: 338.000000	effect: 0.004181
+% [7.8460e-06] 2 4	pass: 1	ranksum: 1220.000000	effect: 0.016909
+% [2.1347e-03] 2 5	pass: 1	ranksum: 1558.000000	effect: 0.007669
+% [1.6961e-05] 3 4	pass: 1	ranksum: 1644.000000	effect: 0.012784
+% [3.7942e-01] 3 5	pass: 0	ranksum: 1908.000000	effect: 0.003545
+% [*] Average effect size: 0.012695 (9.21 %)
+% [*] Max effect size: 0.016909 (12.26 %)
+% [*] Min effect size: 0.007669 (5.56 %)
+% 2:
+% [4.3309e+00] 1 4	pass: 0	ranksum: 1701.000000	effect: 0.147627
+% [2.6902e+00] 1 5	pass: 0	ranksum: 2197.000000	effect: 0.155946
+% [2.6285e+00] 2 4	pass: 0	ranksum: 28516.000000	effect: 0.072645
+% [2.2239e-04] 2 5	pass: 1	ranksum: 31425.000000	effect: 0.080964
+% [5.4755e+00] 3 4	pass: 0	ranksum: 562.000000	effect: 0.038423
+% [1.1356e+00] 3 5	pass: 0	ranksum: 863.000000	effect: 0.046742
+% [*] Average effect size: 0.080964 (49.67 %)
+% [*] Max effect size: 0.080964 (49.67 %)
+% [*] Min effect size: 0.080964 (49.67 %)
+
 
 
 

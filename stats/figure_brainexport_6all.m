@@ -12,14 +12,13 @@ max_iter = 32*4;
 [~,hname] = system('hostname');
 hname = hname(1:(end-1));
 
-subjects_dir = '../data/coregistration';
-%if (strcmp(hname,'kraken'))
-%    subjects_dir = '/media/jerry/internal/data/coreg';
-%    %dir_h5 = '/media/jerry/KLAB101/h5_notch20';
-%else
-%    subjects_dir = '/n/groups/kreiman/jerry/data/coreg';
-%    %dir_h5 = '/n/groups/kreiman/jerry/data/h5';
-%end
+if (strcmp(hname,'kraken'))
+    subjects_dir = '/media/jerry/internal/data/coreg';
+    %dir_h5 = '/media/jerry/KLAB101/h5_notch20';
+else
+    subjects_dir = '/n/groups/kreiman/jerry/data/coreg';
+    %dir_h5 = '/n/groups/kreiman/jerry/data/h5';
+end
 
 
 %subjects_dir = '/nas_share/cuenap_ssd/coregistration';
@@ -28,21 +27,21 @@ subjects_dir = '../data/coregistration';
 %dir_h5 = '/mnt/cuenap/data/h5_notch20';
 %Subjects = fliplr(Subjects);
 
-Subjects = {'sub1','sub2','sub3','sub4','sub5','sub6','sub7','sub8',...
-   'sub9','sub10','sub11','sub12','sub13','sub14','sub15','sub16',...
-   'sub17','sub18','sub19','sub20','sub21','sub22','sub23','sub24',... % 'sub23',
-   'sub25','sub26','sub27','sub28','sub29','sub30','sub31','sub32',... % 'sub30',
-   'sub33','sub34','sub35','sub36','sub37','sub38','sub39','sub40',...
-   'sub41','sub42','sub43','sub44','sub45','sub46','sub47','sub48'};
+Subjects = {'m00001','m00003','m00005','m00006','m00019','m00021','m00022','m00023',...
+   'm00024','m00025','m00026','m00027','m00028','m00030','m00032','m00033',...
+   'm00035','m00037','m00038','m00039','m00043','m00044','m00045','m00047',... % 'm00045',
+   'm00048','m00049','m00052','m00053','m00055','m00056','m00058','m00059',... % 'm00056',
+   'm00060','m00061','m00068','m00071','m00073','m00075','m00079','m00083',...
+   'm00084','m00095','m00096','m00097','m00100','m00107','m00122','m00124'};
 
 metrics = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'};
 
 % What to plot
-for sid_i = 1:length(Subjects)
+for sid_i = 26 %1:length(Subjects)
 
     %sid_i = randi([1 length(Subjects)]);
     sid = Subjects{sid_i};
-    %sid = 'sub3';
+    %sid = 'm00005';
 
     l = read_label(sprintf('%s/%s',subjects_dir,sid),'all_surf_ielvis');
     if (isempty(l))
@@ -61,7 +60,7 @@ for sid_i = 1:length(Subjects)
     %     fn_h5 = sprintf('%s/%s.h5',dir_h5,sid);
     %     ecog = H5eeg(fn_h5);
 
-        Ca = load(sprintf('cache/xsub_out_%s_%i_atl2',sid,metrici));
+        Ca = load(sprintf('cache/xsub_out_%s_%i',sid,metrici));
         ecog = Ca.ecog;
         % Read ielvis electrodeNames
         fn_enames = sprintf('%s/%s/elec_recon/%s.electrodeNames',subjects_dir,sid,sid);

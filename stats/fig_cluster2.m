@@ -2,7 +2,7 @@ close all;
 clear;
 rng('shuffle');
 
-%/media/klab/internal/data/coreg/fsaverage_sym/label/all_surf_ielvis_sub18.label
+%/media/klab/internal/data/coreg/fsaverage_sym/label/all_surf_ielvis_m00037.label
 dir_artLp = '/media/klab/internal/data/h5_notch20/art';
 dir_corLp = '/media/klab/internal/data/coreg';
 dir_resLp = '/home/jerry/data/results/coh_w10';

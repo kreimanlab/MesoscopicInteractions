@@ -22,12 +22,12 @@ dir_h5Lp = '/media/jerry/KLAB101/h5_notch20';
 metricsp = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'}; % ,'pcDelta'
 
 % Patients
-Subjectsp = {'sub1','sub2','sub3','sub4','sub5','sub6','sub7','sub8',...
-    'sub9','sub10','sub11','sub12','sub13','sub14','sub15','sub16',...
-    'sub17','sub18','sub19','sub20','sub21','sub22','sub23','sub24',...
-    'sub25','sub26','sub27','sub28','sub29','sub30','sub31','sub32',...
-    'sub33','sub34','sub35','sub36','sub37','sub38','sub39','sub40',...
-    'sub41','sub42','sub43','sub44','sub45','sub46','sub47','sub48',...
+Subjectsp = {'m00001','m00003','m00005','m00006','m00019','m00021','m00022','m00023',...
+    'm00024','m00025','m00026','m00027','m00028','m00030','m00032','m00033',...
+    'm00035','m00037','m00038','m00039','m00043','m00044','m00045','m00047',...
+    'm00048','m00049','m00052','m00053','m00055','m00056','m00058','m00059',...
+    'm00060','m00061','m00068','m00071','m00073','m00075','m00079','m00083',...
+    'm00084','m00095','m00096','m00097','m00100','m00107','m00122','m00124',...
     'mSu'};
 
 % Exclude monkey
@@ -282,7 +282,9 @@ for i = 1:n_eg
     roi2 = Roi2{i};
     count = 1;
     rois_idx_mSu = [];
+    rois_idx_mSu_Gnd = [];
     rois_idx_mSu2 = [];
+    rois_idx_mSu2_Gnd = [];
     for ii = 1:(ecog.n_bchan-1)
         for jj = (ii+1):ecog.n_bchan
             b1c1 = ecog.bip(ii,1);
@@ -374,21 +376,30 @@ for i = 1:n_eg
                 
                 dists_mm_mSu = [dists_mm_mSu, dist_count];
                 
+                
                 if (sat_fwd)
                     c1_sav = b1c1;
+                    c1_sav_gnd = b1c2;
                     c2_sav = b2c1;
+                    c2_sav_gnd = b2c2;
                 else
                     c1_sav = b2c1;
+                    c1_sav_gnd = b2c2;
                     c2_sav = b1c1;
+                    c2_sav_gnd = b1c2; 
                 end
                 rois_idx_mSu = [rois_idx_mSu, c1_sav];
                 rois_idx_mSu2 = [rois_idx_mSu2, c2_sav];
+                rois_idx_mSu_Gnd = [rois_idx_mSu_Gnd, c1_sav_gnd];
+                rois_idx_mSu2_Gnd = [rois_idx_mSu2_Gnd, c2_sav_gnd];
             end
             count = count + 1;
         end
     end
     Elecs_mSu{1,i} = sort(unique(rois_idx_mSu));
     Elecs_mSu{2,i} = sort(unique(rois_idx_mSu2));
+    Elecs_mSu_Gnd{1,i} = sort(unique(rois_idx_mSu_Gnd));
+    Elecs_mSu_Gnd{2,i} = sort(unique(rois_idx_mSu2_Gnd));
     
     n_pairs_sig = sum(~isnan(coh_sig));
     avg_mag = nanmean(coh_sig);
@@ -503,13 +514,19 @@ for i = 1:n_eg
     imagesc(Im); hold on;
     for ii = 1:2
         elecs = Elecs_mSu{ii,i};
+        elecs_gnd = Elecs_mSu_Gnd{ii,i};
         xs = D_SuMAP.Su.X(elecs);
         ys = D_SuMAP.Su.Y(elecs);
+        xsg = D_SuMAP.Su.X(elecs_gnd);
+        ysg = D_SuMAP.Su.Y(elecs_gnd);
         %plot(xs,ys,'black.'); hold on;
         
         mstyle = '.';
         for j = 1:length(xs)
             %plot(xs(j),ys(j),'.','Color',col_elec_border,'MarkerSize',size_elec); hold on;
+            
+            plot([xsg(j),xs(j)],[ysg(j),ys(j)],'-','Color',col_elecs{ii});
+            
             plot(xs(j),ys(j),mstyle,'Color',col_elecs{ii},'MarkerSize',factor_elec_border*size_elec); hold on;
         end
     end

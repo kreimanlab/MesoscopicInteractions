@@ -22,12 +22,12 @@ dir_h5Lp = '/media/jerry/KLAB101/h5_notch20';
 metricsp = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'}; % ,'pcDelta'
 
 % Patients
-Subjectsp = {'sub1','sub2','sub3','sub4','sub5','sub6','sub7','sub8',...
-    'sub9','sub10','sub11','sub12','sub13','sub14','sub15','sub16',...
-    'sub17','sub18','sub19','sub20','sub21','sub22','sub23','sub24',...
-    'sub25','sub26','sub27','sub28','sub29','sub30','sub31','sub32',...
-    'sub33','sub34','sub35','sub36','sub37','sub38','sub39','sub40',...
-    'sub41','sub42','sub43','sub44','sub45','sub46','sub47','sub48',...
+Subjectsp = {'m00001','m00003','m00005','m00006','m00019','m00021','m00022','m00023',...
+    'm00024','m00025','m00026','m00027','m00028','m00030','m00032','m00033',...
+    'm00035','m00037','m00038','m00039','m00043','m00044','m00045','m00047',...
+    'm00048','m00049','m00052','m00053','m00055','m00056','m00058','m00059',...
+    'm00060','m00061','m00068','m00071','m00073','m00075','m00079','m00083',...
+    'm00084','m00095','m00096','m00097','m00100','m00107','m00122','m00124',...
     'mSu'};
 
 % Exclude monkey
@@ -67,7 +67,7 @@ for ix = 1:4 %1:4
             %[!] Fraction of covered pairs significantly consistent in time: 0.875
             %       Numbers: 7 of 8
             %[!] Average Broadband coherence: 0.288
-            %Subjectsp = {'sub21'};
+            %Subjectsp = {'m00043'};
             bchan1_const = NaN; % 70
             bchan2_const = NaN; % 1
             r_samp_const = 1;
@@ -105,7 +105,7 @@ for ix = 1:4 %1:4
             %[!] Average Broadband coherence: 0.277
             
             
-            %Subjectsp = {'sub35'};
+            %Subjectsp = {'m00068'};
             bchan1_const = NaN; % 50
             bchan2_const = NaN; % 32
             r_samp_const = 1;
@@ -133,7 +133,7 @@ for ix = 1:4 %1:4
             %         0.277 m83 35 88 ct143 (30mm)
             %         0.296 m83 34 87 ct124 (33mm)
             %         0.266 m83 31 88 ct128 (41mm)
-            %Subjectsp = {'sub25'};
+            %Subjectsp = {'m00048'};
 
             %roi_2s = {'TEO_M132','DP_M132'};
             %[!] Fraction of covered pairs significantly consistent in time: 1.000
@@ -173,7 +173,7 @@ for ix = 1:4 %1:4
             %    Numbers: 0 of 26
             %[!] Average Broadband coherence: NaN
             
-            %Subjectsp = {'sub42'};
+            %Subjectsp = {'m00095'};
             bchan1_const = NaN; % 79 V1, V1
             bchan2_const = NaN; % 14 ProM, ProM
             r_samp_const = 47272501;

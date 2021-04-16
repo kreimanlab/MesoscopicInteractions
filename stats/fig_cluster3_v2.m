@@ -20,12 +20,12 @@ close all;
 clear;
 rng('shuffle');
 
-dir_art = '../data/h5_notch20/art_nosz';
-dir_cor = '../data/coregistration';
-dir_res = '../opencl/results';
+dir_art = '/media/klab/internal/data/h5_notch20/art';
+dir_cor = '/media/klab/internal/data/coreg';
+dir_res = '/home/jerry/data/results/coh_w10';
 setenv('SUBJECTS_DIR',dir_cor);
 dir_cache = './cache';
-dir_h5 = '../data/h5_notch20';
+dir_h5 = '/media/klab/internal/data/h5_notch20';
 
 metrics = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'};
 
@@ -57,8 +57,7 @@ for iM = 1%1:length(metrics)
     
     % Plot adjacency matrix ===============================================
     
-    %Ca = load(sprintf('%s/xsub_out_all_%i.mat',dir_cache,iM));
-    Ca = load(sprintf('%s/xsub_out_all_%i_atl2.mat',dir_cache,iM));
+    Ca = load(sprintf('%s/xsub_out_all_%i.mat',dir_cache,iM));
     CaT14 = load(sprintf('./cache/figure_t14_%i_150',iM));
     
     % Set adjacency matrix to plot

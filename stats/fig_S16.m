@@ -1,24 +1,13 @@
 close all; clear; rng('shuffle');
 
-%dir_artLp = '/media/klab/internal/data/h5_notch20/art';
-dir_artLp = '../data/h5_notch20/art_nosz';
-%dir_corLp = '/media/klab/internal/data/coreg';
-dir_corLp = '../data/coregistration';
+dir_artLp = '/media/klab/internal/data/h5_notch20/art';
+dir_corLp = '/media/klab/internal/data/coreg';
 setenv('SUBJECTS_DIR',dir_corLp);
 dir_cacheLp = './cache';
-%dir_h5Lp = '/media/klab/KLAB101/h5_notch20';
-dir_h5Lp = '../data/h5_notch20';
+dir_h5Lp = '/media/klab/KLAB101/h5_notch20';
 
 %metricsp = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'};
 metricsp = {'pcBroadband'};
-
-Sp = {'1','3','5','6','19','21','22','23',...
-    '24','25','26','27','28','30','32','33',...
-    '35','37','38','39','43','44','45','47',...
-    '48','49','52','53','55','56','58','59',...
-    '60','61','68','71','73','75','79','83',...
-    '84','95','96','97','100','107','122','124'};
-
 
 SurfT = {'pial'};
 
@@ -99,20 +88,16 @@ trig_plot_mag_dist = false;
 trig_kmeans = false;
 
 for iM = 1:length(metricsp)
-    %fn_cache = [dir_cacheLp,'/xsub_out_all_',num2str(iM)];
-    fn_cache = [dir_cacheLp,'/xsub_out_all_',num2str(iM),'_atl2'];
+    fn_cache = [dir_cacheLp,'/xsub_out_all_',num2str(iM)];
     Ca = load(fn_cache);
 
     % Build fsaverage electrode list
     fprintf('[*] Building subject on fsaverage bipolar coord list..\n')
     Coord = [];
     for iI = 1:length(Ca.Subjects)
-        %sid = Ca.Subjects{iI};
-        sid = sprintf('sub%i',iI);
-        %sid_int = str2double(sid(2:end));
-        sid_int = str2double(Sp{iI});
-        %Cs = load(sprintf('%s/xsub_out_%s_%i',dir_cacheLp,sid,iM));
-        Cs = load(sprintf('%s/xsub_out_%s_%i_atl2',dir_cacheLp,sid,iM));
+        sid = Ca.Subjects{iI};
+        sid_int = str2double(sid(2:end));
+        Cs = load(sprintf('%s/xsub_out_%s_%i',dir_cacheLp,sid,iM));
         l = read_label(sprintf('fsaverage_sym'),sprintf('ielvis_%s',sid));
         l(:,1) = l(:,1) + 1;
         for iJ = 1:Cs.ecog.n_bchan

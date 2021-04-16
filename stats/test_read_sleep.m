@@ -5,7 +5,7 @@ clear;
 dir_annot = '/home/jerry/data/behavior/combined';
 dir_h5 = '/home/jerry/data/h5_notch20';
 dir_stamps = '/media/jerry/internal/data/stamps';
-fn_annot = 'sub21_4ce6814b';
+fn_annot = 'm00043_4ce6814b';
 
 
 

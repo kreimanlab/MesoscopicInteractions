@@ -21,11 +21,11 @@ clear;
 % 	n_pairs: 13
 % 	n_usub: 4
 % [*] === Left-Right lateralization analysis === Frequency band: 1
-% 	Subject: sub1
+% 	Subject: m00001
 
 
 sid_int_const = 5; 
-sid_const = 'sub3';
+sid_const = 'm00005';
 bchan1_const = 35;
 bchan2_const = 84;
 

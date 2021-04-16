@@ -24,26 +24,24 @@ dir_cacheLp = './cache';
 [~,hname] = system('hostname');
 
 % Paths
-%if contains(hname,'kraken')
-%    dir_artLp = '/media/klab/internal/data/h5_notch20/art_nosz';
-%    dir_h5Lp = '/mnt/cuenap/data/h5_notch20';
-%elseif contains(hname,'hopperu')
-%    dir_artLp = '/mnt/cuenap/data/h5_notch20/art_nosz';
-%    dir_h5Lp = '/mnt/cuenap/data/h5_notch20';
-%end
-dir_artLp = '../data/h5_notch20/art_nosz';
-dir_h5Lp = '../data/h5_notch20';
+if contains(hname,'kraken')
+    dir_artLp = '/media/klab/internal/data/h5_notch20/art_nosz';
+    dir_h5Lp = '/mnt/cuenap/data/h5_notch20';
+elseif contains(hname,'hopperu')
+    dir_artLp = '/mnt/cuenap/data/h5_notch20/art_nosz';
+    dir_h5Lp = '/mnt/cuenap/data/h5_notch20';
+end
 
 %metricsp = {'pcBroadband','pcDelta','pcTheta','pcAlpha','pcBeta','pcGamma'};
 metricsp = {'pcBroadband','pcGamma'};
 
 % Patients
-Subjectsp = {'sub1','sub2','sub3','sub4','sub5','sub6','sub7','sub8',...
-    'sub9','sub10','sub11','sub12','sub13','sub14','sub15','sub16',...
-    'sub17','sub18','sub19','sub20','sub21','sub22','sub23','sub24',...
-    'sub25','sub26','sub27','sub28','sub29','sub30','sub31','sub32',...
-    'sub33','sub34','sub35','sub36','sub37','sub38','sub39','sub40',...
-    'sub41','sub42','sub43','sub44','sub45','sub46','sub47','sub48',...
+Subjectsp = {'m00001','m00003','m00005','m00006','m00019','m00021','m00022','m00023',...
+    'm00024','m00025','m00026','m00027','m00028','m00030','m00032','m00033',...
+    'm00035','m00037','m00038','m00039','m00043','m00044','m00045','m00047',...
+    'm00048','m00049','m00052','m00053','m00055','m00056','m00058','m00059',...
+    'm00060','m00061','m00068','m00071','m00073','m00075','m00079','m00083',...
+    'm00084','m00095','m00096','m00097','m00100','m00107','m00122','m00124',...
     'mSu'};
 
 % Exclude monkey
@@ -139,7 +137,7 @@ vrange = 800; % 2.5 * 1e3;
 n_samp = 2;
 Artids = 1:3;
 
-sid_const = 'sub40';
+sid_const = 'm00083';
 Bchans_i = NaN; 
 Samps_j = NaN; 
 
@@ -161,9 +159,9 @@ Samps_j =  [1298945  2175233  86966017  10280961  2123777  64310017 ];
 %Samps_j = [95708673,53505,1240321];
 
 % top 2
-%sub40__x-7_bchan-105_samp-95708673_x-12648_bchan-12_samp-53505_x-1391_bchan-45_samp-1240065
+%m00083__x-7_bchan-105_samp-95708673_x-12648_bchan-12_samp-53505_x-1391_bchan-45_samp-1240065
 % last
-%sub40__x-6_bchan-105_samp-90326273_x-11930_bchan-62_samp-883201_x-1311_bchan-15_samp-1240321
+%m00083__x-6_bchan-105_samp-90326273_x-11930_bchan-62_samp-883201_x-1311_bchan-15_samp-1240321
 
 chosen_already = all(~isnan([Bchans_i, Samps_j]));
 if (chosen_already)
@@ -172,10 +170,10 @@ end
 
 for i = 1:1 %length(Subjectsp)
     %sid = Subjectsp{i};
-    sid = sid_const; %'sub40';
+    sid = sid_const; %'m00083';
     fn_art = sprintf('%s/%s_art.h5',dir_artLp,sid);
     fn_h5 = sprintf('%s/%s.h5',dir_h5Lp,sid);
-    Ca = load(sprintf('cache/xsub_out_%s_1_atl2.mat',sid));
+    Ca = load(sprintf('cache/xsub_out_%s_1.mat',sid));
     ecog = Ca.ecog;
     %ecog = H5eeg(fn_h5);
     art = h5read(fn_art,'/artifacts');
@@ -246,27 +244,16 @@ for i = 1:1 %length(Subjectsp)
             % read v
             b1c1 = ecog.bip(idx_i,1);
             b1c2 = ecog.bip(idx_i,2);
+            v1 = h5read(fn_h5,'/h5eeg/eeg',[b1c1 idx_j],[1 round(ecog.fs)]);
+            v2 = h5read(fn_h5,'/h5eeg/eeg',[b1c2 idx_j],[1 round(ecog.fs)]);
+            v = v1 - v2;
+            v = v - mean(v);
             
             % full v
             sec_offset = 5;
             sec_length = 10;
-            
-            fn_h5cache = sprintf('./cache/figure_t4_h5cache_%i',j);
-            if (exist([fn_h5cache,'.mat'],'file'))
-                fprintf('[!] Using previously saved .mat file instead of reading .h5 file.\n');
-                load(fn_h5cache);
-            else
-                v1 = h5read(fn_h5,'/h5eeg/eeg',[b1c1 idx_j],[1 round(ecog.fs)]);
-                v2 = h5read(fn_h5,'/h5eeg/eeg',[b1c2 idx_j],[1 round(ecog.fs)]);
-                vf1 = h5read(fn_h5,'/h5eeg/eeg',[b1c1 idx_j-sec_offset*round(ecog.fs)],[1 sec_length*round(ecog.fs)]);
-                vf2 = h5read(fn_h5,'/h5eeg/eeg',[b1c2 idx_j-sec_offset*round(ecog.fs)],[1 sec_length*round(ecog.fs)]);
-                save(fn_h5cache,'v1','v2','vf1','vf2');
-            end
-            
-            % bipolar montage
-            v = v1 - v2;
-            v = v - mean(v);
-            
+            vf1 = h5read(fn_h5,'/h5eeg/eeg',[b1c1 idx_j-sec_offset*round(ecog.fs)],[1 sec_length*round(ecog.fs)]);
+            vf2 = h5read(fn_h5,'/h5eeg/eeg',[b1c2 idx_j-sec_offset*round(ecog.fs)],[1 sec_length*round(ecog.fs)]);
             vf = vf1 - vf2;
             vf = vf - mean(vf);
             

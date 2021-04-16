@@ -21,18 +21,18 @@ dir_video = '/media/klab/internal/data/videos';
 dir_h5 = '/media/klab/KLAB101/h5_notch20';
 %dir_h5L = '/mnt/cuenap/data/h5_notch20';
 
-Subjects = {'sub3'};
+Subjects = {'m00005'};
 r_samp_const = [107865601, 72056321, 110476801, 25121281];
 coh_const = [0.535, 0.364, 0.280, 0.093];
 coh_annot = {'No interaction','Fig. 1','Strong interaction','Medium interaction'};
 % High - 0.535, str996
-%sub3__35_superiortemporal_PT7-PT8__84_parsopercularis_RP55-RP56__29mm_ct405_mag221_coh1t172_str996_Br535_Th727_Al286_Be154_Ga536_Samp107865601_BrN445_ThN467_AlN132_BeN574_GaN575_SampN107865601.eps
+%m00005__35_superiortemporal_PT7-PT8__84_parsopercularis_RP55-RP56__29mm_ct405_mag221_coh1t172_str996_Br535_Th727_Al286_Be154_Ga536_Samp107865601_BrN445_ThN467_AlN132_BeN574_GaN575_SampN107865601.eps
 % Original - 0.364, str987
-%sub3__35_superiortemporal_PT7-PT8__84_parsopercularis_RP55-RP56__29mm_ct405_mag221_coh1t172_str987_Br364_Th662_Al277_Be149_Ga394_Samp72056321_BrN337_ThN405_AlN162_BeN316_GaN440_SampN72056321
+%m00005__35_superiortemporal_PT7-PT8__84_parsopercularis_RP55-RP56__29mm_ct405_mag221_coh1t172_str987_Br364_Th662_Al277_Be149_Ga394_Samp72056321_BrN337_ThN405_AlN162_BeN316_GaN440_SampN72056321
 % Low - 0.280 - str920 
-%sub3__35_superiortemporal_PT7-PT8__84_parsopercularis_RP55-RP56__29mm_ct405_mag221_coh1t172_str920_Br280_Th663_Al143_Be293_Ga211_Samp110476801_BrN247_ThN356_AlN218_BeN154_GaN278_SampN110476801
+%m00005__35_superiortemporal_PT7-PT8__84_parsopercularis_RP55-RP56__29mm_ct405_mag221_coh1t172_str920_Br280_Th663_Al143_Be293_Ga211_Samp110476801_BrN247_ThN356_AlN218_BeN154_GaN278_SampN110476801
 % Not sig - 0.093 - str100 nosig
-%sub3__35_superiortemporal_PT7-PT8__84_parsopercularis_RP55-RP56__29mm_ct405_mag221_coh1t172_str100_Br93_Th237_Al77_Be98_Ga82_Samp25121281_BrN112_ThN136_AlN112_BeN70_GaN126_SampN25121281
+%m00005__35_superiortemporal_PT7-PT8__84_parsopercularis_RP55-RP56__29mm_ct405_mag221_coh1t172_str100_Br93_Th237_Al77_Be98_Ga82_Samp25121281_BrN112_ThN136_AlN112_BeN70_GaN126_SampN25121281
 
 bchan1_const = 35;
 bchan2_const = 84;

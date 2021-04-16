@@ -62,7 +62,7 @@ for atl = [2] %1:20
 
     system(sprintf('mkdir figures/T14_allatl_resampTv2/atl%i_%s',atl,AtlNames{atl}));
     
-    for iM = [1] %1:length(metrics) % [1 5] %
+    for iM = [5] %1:length(metrics) % [1 5] %
         metric = metrics{iM};
 
         % Temporal resampling
@@ -1365,10 +1365,14 @@ for atl = [2] %1:20
 %         vAA_1 = vAA_1(idx_both);
 %         vAA_2 = vAA_2(idx_both);
         
-        [p,~,~] = ranksum(vAA_1,vAA_2);
-        [~,pt,~] = ttest(vAA_1,vAA_2);
-        fprintf('[*] Robustness of time-averaged coherence\n\tRanskum p=%.6d, T p=%.6d, n=%i\n\tDifference mean=%.8f, std=%.8f\n',...
-            p,pt,length(vAA_1),mean(vAA_1-vAA_2),std(vAA_1-vAA_2));
+        
+        try
+            [p,~,~] = ranksum(vAA_1,vAA_2);
+            [~,pt,~] = ttest(vAA_1,vAA_2);
+            fprintf('[*] Robustness of time-averaged coherence\n\tRanskum p=%.6d, T p=%.6d, n=%i\n\tDifference mean=%.8f, std=%.8f\n',...
+                p,pt,length(vAA_1),mean(vAA_1-vAA_2),std(vAA_1-vAA_2));
+        catch
+        end
         
         % Rep1 : keep second half
         % Rep2 : keep first half
@@ -1406,22 +1410,22 @@ for atl = [2] %1:20
         v_A1 = v_A1(is_sig);
         v_A2 = v_A2(is_sig);
         
-        fprintf('Remove first half of data.\n');
-        fprintf('[*] mean diff: %0.6f\n',mean(v_d1));
-        fprintf('[*] stdev diff: %0.6f\n',std(v_d1));
-        f_d = 1 - (v_A1./v_A);
-        fprintf('[*] mean diff: %0.2f%%\n',mean(100*f_d));
-        fprintf('[*] stdev diff: %0.2f%%\n',std(100*f_d));
+        %fprintf('Remove first half of data.\n');
+        %fprintf('[*] mean diff: %0.6f\n',mean(v_d1));
+        %fprintf('[*] stdev diff: %0.6f\n',std(v_d1));
+        %f_d = 1 - (v_A1./v_A);
+        %fprintf('[*] mean diff: %0.2f%%\n',mean(100*f_d));
+        %fprintf('[*] stdev diff: %0.2f%%\n',std(100*f_d));
         
         
         ind_both = (v_A1 > 0) & (v_A2 > 0);
         fprintf('Compare first half with second.\n');
-        fprintf('[*] mean diff: %0.6f\n',mean(v_d3(ind_both)));
-        fprintf('[*] stdev diff: %0.6f\n',std(v_d3(ind_both)));
+        fprintf('[*] mean diff: %0.6f\n',mean(abs(v_d3(ind_both))));
+        fprintf('[*] stdev diff: %0.6f\n',std(abs(v_d3(ind_both))));
         f_d = 1 - (v_A1./v_A2);
         f_d(isinf(f_d)) = NaN;
-        fprintf('[*] mean diff: %0.2f%%\n',nanmean(100*f_d(ind_both)));
-        fprintf('[*] stdev diff: %0.2f%%\n',nanstd(100*f_d(ind_both)));
+        fprintf('[*] mean diff: %0.2f%%\n',nanmean(100*abs(f_d(ind_both))));
+        fprintf('[*] stdev diff: %0.2f%%\n',nanstd(100*abs(f_d(ind_both))));
         fprintf('[*] n: %i\n',length(f_d(ind_both)))
         
         
@@ -1444,6 +1448,32 @@ for atl = [2] %1:20
     end
 
 end
+
+% 15 dec. 2020
+%(Broadband)
+% Compare first half with second.
+% [*] mean diff: 0.015445
+% [*] stdev diff: 0.020261
+% [*] mean diff: 5.38%
+% [*] stdev diff: 6.08%
+% [*] n: 186
+% 	Ranksum	p=8.8309e-01
+% 	T-test	p=7.1961e-01
+% 	n=193
+% 	both n=186
+% (Gamma)
+% Compare first half with second.
+% [*] mean diff: 0.009405
+% [*] stdev diff: 0.011484
+% [*] mean diff: 3.28%
+% [*] stdev diff: 3.72%
+% [*] n: 179
+% 	Ranksum	p=7.8508e-01
+% 	T-test	p=9.6347e-03
+% 	n=184
+% 	both n=179
+
+
 
 % 19 fevr. 2020
 % (Gamma)

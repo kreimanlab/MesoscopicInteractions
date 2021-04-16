@@ -318,12 +318,15 @@ AdjMK_f = AdjMag(ind_hum2mac,ind_hum2mac);
 %v2 = AdjMKflne(~isnan(AdjMK_f));
 %v2(isnan(v2)) = 0;
 
+Dmat_plt = Dmat(ind_hum2mac,ind_hum2mac);
+
 % triangle conversion
 v1t = [];
 v2t = [];
 v3t = [];
 v4t = [];
 v5t = [];
+vDist = [];
 for iz = 1:(length(AdjMK_f)-1)
     for iiz = (iz + 1):length(AdjMK_f)
         if ((~isnan(AdjMK_f(iz,iiz))) && (~isnan(AdjMKflne(iz,iiz))))
@@ -337,6 +340,7 @@ for iz = 1:(length(AdjMK_f)-1)
             v3t = [v3t; AdjMKRaw(iz,iiz)];
             v4t = [v4t; AdjMKflne(iz,iiz)];
             v5t = [v5t; AdjMKflneRaw(iz,iiz)];
+            vDist = [vDist; Dmat_plt(iz,iiz)];
         end
     end
 end
@@ -354,11 +358,24 @@ fprintf('Mag vs log neurons Pearson: r = %.4f, p = %d\n',rS2,p_valS2);
 [rSf,p_valSf] = corr(v1t,v4t,'type','Spearman');
 [rS2f,p_valS2f] = corr(v1t,v4t,'type','Pearson');
 [rSrf,p_valSrf] = corr(v1t,v5t,'type','Spearman');
+
+% adjust for interelectrode distance
+[rSrf_P,p_valSrf_P] = partialcorr([v1t,v5t,vDist],'type','Spearman');
+rSrf_P = rSrf_P(1,2);
+p_valSrf_P = p_valSrf_P(1,2);
+
+[rSrf_Pp,p_valSrf_Pp] = partialcorr([v1t,v5t,vDist],'type','Pearson');
+rSrf_Pp = rSrf_Pp(1,2);
+p_valSrf_Pp = p_valSrf_Pp(1,2);
+
 [rS2rf,p_valS2rf] = corr(v1t,v5t,'type','Pearson');
-fprintf('Mag vs FLNe Spearman: r = %.4f, p = %d, n=%i\n',rSrf,p_valSrf,length(v1t));
+fprintf('Mag vs FLNe Spearman: r = %.4f, p = %d, n=%i [*]\n',rSrf,p_valSrf,length(v1t));
+fprintf('Mag vs FLNe | Distance Spearman: r = %.4f, p = %d, n=%i [*]\n',rSrf_P,p_valSrf_P,length(v1t));
 fprintf('Mag vs FLNe Pearson: r = %.4f, p = %d, n=%i\n',rS2rf,p_valS2rf,length(v1t));
+fprintf('Mag vs FLNe | Distance Pearson: r = %.4f, p = %d, n=%i [*]\n',rSrf_Pp,p_valSrf_Pp,length(v1t));
 fprintf('Mag vs log FLNe Spearman: r = %.4f, p = %d, n=%i\n',rSf,p_valSf,length(v1t));
 fprintf('Mag vs log FLNe Pearson: r = %.4f, p = %d, n=%i\n',rS2f,p_valS2f,length(v1t));
+
 
 % Calculate lognormal fit
 X_ecog = v1t;
@@ -870,3 +887,84 @@ fclose(of);
 
 
 end
+
+% 26 oct. 2020
+% 
+% figure_t8d1
+% mkdir: cannot create directory ‘figures’: File exists
+% mkdir: cannot create directory ‘figures/T8d1’: File exists
+% pcBroadband - mSu fraction of ROIs significant: 0.1233
+% Binary r: 0.2531, p = 3.014649e-12
+% Mag vs neurons Spearman: r = 0.2528, p = 1.853669e-07
+% Mag vs neurons Pearson: r = 0.1290, p = 8.595719e-03
+% Mag vs log neurons Spearman: r = 0.2528, p = 1.853669e-07
+% Mag vs log neurons Pearson: r = 0.2383, p = 9.369700e-07
+% Mag vs FLNe Spearman: r = 0.3097, p = 1.179367e-10, n=414 [*]
+% Mag vs FLNe | Distance Spearman: r = 0.2759, p = 1.187828e-08, n=414 [*]
+% Mag vs FLNe Pearson: r = 0.1501, p = 2.189751e-03, n=414
+% Mag vs FLNe | Distance Pearson: r = 0.1323, p = 7.099370e-03, n=414 [*]
+% Mag vs log FLNe Spearman: r = 0.3097, p = 1.176165e-10, n=414
+% Mag vs log FLNe Pearson: r = 0.2636, p = 5.188657e-08, n=414
+% cluster clash: Inf mm
+% [*] Log(C) kstest p=8.6333e-07, n=479
+% 	min:-0.86703422, max:-0.66056529
+% pcTheta - mSu fraction of ROIs significant: 0.0546
+% Binary r: 0.2274, p = 4.091678e-10
+% Mag vs neurons Spearman: r = 0.2324, p = 1.752742e-06
+% Mag vs neurons Pearson: r = 0.1775, p = 2.829980e-04
+% Mag vs log neurons Spearman: r = 0.2324, p = 1.752742e-06
+% Mag vs log neurons Pearson: r = 0.2391, p = 8.578891e-07
+% Mag vs FLNe Spearman: r = 0.2327, p = 1.696991e-06, n=414 [*]
+% Mag vs FLNe | Distance Spearman: r = 0.2281, p = 2.817363e-06, n=414 [*]
+% Mag vs FLNe Pearson: r = 0.2197, p = 6.441317e-06, n=414
+% Mag vs FLNe | Distance Pearson: r = 0.2167, p = 8.834511e-06, n=414 [*]
+% Mag vs log FLNe Spearman: r = 0.2327, p = 1.692108e-06, n=414
+% Mag vs log FLNe Pearson: r = 0.2413, p = 6.742322e-07, n=414
+% cluster clash: 1196.042003759200 mm
+% [*] Log(C) kstest p=1.4929e-01, n=211
+% 	min:-0.52359067, max:-0.07958682
+% pcAlpha - mSu fraction of ROIs significant: 0.1360
+% Binary r: 0.2533, p = 2.860908e-12
+% Mag vs neurons Spearman: r = 0.4660, p = 1.034129e-23
+% Mag vs neurons Pearson: r = 0.1236, p = 1.184973e-02
+% Mag vs log neurons Spearman: r = 0.4660, p = 1.034129e-23
+% Mag vs log neurons Pearson: r = 0.3407, p = 1.030567e-12
+% Mag vs FLNe Spearman: r = 0.5021, p = 7.936168e-28, n=414 [*]
+% Mag vs FLNe | Distance Spearman: r = 0.4804, p = 3.070654e-25, n=414 [*]
+% Mag vs FLNe Pearson: r = 0.1381, p = 4.882700e-03, n=414
+% Mag vs FLNe | Distance Pearson: r = 0.1183, p = 1.613795e-02, n=414 [*]
+% Mag vs log FLNe Spearman: r = 0.5021, p = 7.978616e-28, n=414
+% Mag vs log FLNe Pearson: r = 0.3642, p = 1.968300e-14, n=414
+% cluster clash: Inf mm
+% [*] Log(C) kstest p=2.4183e-06, n=529
+% 	min:-0.59845192, max:-0.43614449
+% pcBeta - mSu fraction of ROIs significant: 0.1236
+% Binary r: 0.2891, p = 1.119405e-15
+% Mag vs neurons Spearman: r = 0.3222, p = 1.875605e-11
+% Mag vs neurons Pearson: r = 0.0649, p = 1.878297e-01
+% Mag vs log neurons Spearman: r = 0.3222, p = 1.875605e-11
+% Mag vs log neurons Pearson: r = 0.2532, p = 1.769584e-07
+% Mag vs FLNe Spearman: r = 0.3552, p = 9.406806e-14, n=414 [*]
+% Mag vs FLNe | Distance Spearman: r = 0.3438, p = 6.673387e-13, n=414 [*]
+% Mag vs FLNe Pearson: r = 0.1228, p = 1.237314e-02, n=414
+% Mag vs FLNe | Distance Pearson: r = 0.1014, p = 3.933175e-02, n=414 [*]
+% Mag vs log FLNe Spearman: r = 0.3552, p = 9.406103e-14, n=414
+% Mag vs log FLNe Pearson: r = 0.2913, p = 1.543793e-09, n=414
+% cluster clash: Inf mm
+% [*] Log(C) kstest p=2.2729e-07, n=479
+% 	min:-0.64814856, max:-0.46809896
+% pcGamma - mSu fraction of ROIs significant: 0.1060
+% Binary r: 0.2274, p = 4.100367e-10
+% Mag vs neurons Spearman: r = 0.2353, p = 1.291964e-06
+% Mag vs neurons Pearson: r = 0.1488, p = 2.394759e-03
+% Mag vs log neurons Spearman: r = 0.2353, p = 1.291964e-06
+% Mag vs log neurons Pearson: r = 0.2234, p = 4.436390e-06
+% Mag vs FLNe Spearman: r = 0.2709, p = 2.136069e-08, n=414 [*]
+% Mag vs FLNe | Distance Spearman: r = 0.2520, p = 2.094740e-07, n=414 [*]
+% Mag vs FLNe Pearson: r = 0.1670, p = 6.464210e-04, n=414
+% Mag vs FLNe | Distance Pearson: r = 0.1515, p = 2.014938e-03, n=414 [*]
+% Mag vs log FLNe Spearman: r = 0.2709, p = 2.130325e-08, n=414
+% Mag vs log FLNe Pearson: r = 0.2500, p = 2.551388e-07, n=414
+% cluster clash: Inf mm
+% [*] Log(C) kstest p=7.2893e-08, n=413
+% 	min:-0.82782921, max:-0.61772266

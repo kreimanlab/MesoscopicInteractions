@@ -4,8 +4,7 @@ close all;
 addpath(genpath('/home/jerry/Documents/MATLAB/iELvis/iELVis_MAIN'));
 addpath(genpath('/home/jerry/Documents/MATLAB/iELvis/iELVis_MATLAB_ADMIN'));
 
-%subjects_dir = '/media/jerry/internal/data/coreg';
-subjects_dir = '../data/coregistration';
+subjects_dir = '/media/jerry/internal/data/coreg';
 setenv('SUBJECTS_DIR',subjects_dir);
 
 groupAvgCoords = [];
@@ -13,14 +12,14 @@ groupLabels = [];
 groupIsLeft = [];
 cfg = [];
 cfg.plotEm = 0;
-%sid_const = 'sub6';
-%subs = {'sub6'}; %{'sub1','sub3'};
-subs = {'sub1','sub2','sub3','sub4','sub5','sub6','sub7','sub8',...
-        'sub9','sub10','sub11','sub12','sub13','sub14','sub15','sub16',...
-        'sub17','sub18','sub19','sub20','sub21','sub22','sub23','sub24',... % 'sub23',
-        'sub25','sub26','sub27','sub28','sub29','sub30','sub31','sub32',... % 'sub30',
-        'sub33','sub34','sub35','sub36','sub37','sub38','sub39','sub40',...
-        'sub41','sub42','sub43','sub44','sub45','sub46','sub47','sub48'};
+%sid_const = 'm00021';
+%subs = {'m00021'}; %{'m00001','m00005'};
+subs = {'m00001','m00003','m00005','m00006','m00019','m00021','m00022','m00023',...
+        'm00024','m00025','m00026','m00027','m00028','m00030','m00032','m00033',...
+        'm00035','m00037','m00038','m00039','m00043','m00044','m00045','m00047',... % 'm00045',
+        'm00048','m00049','m00052','m00053','m00055','m00056','m00058','m00059',... % 'm00056',
+        'm00060','m00061','m00068','m00071','m00073','m00075','m00079','m00083',...
+        'm00084','m00095','m00096','m00097','m00100','m00107','m00122','m00124'};
 
 label_header = '#!ascii label  , from subject ';
 label_header2 = '  vox2ras=TkReg';
@@ -28,7 +27,7 @@ Etable = {};
 for a = 1:length(subs)
     sid_const = subs{a};
     fprintf('Working on Participant %s\n',subs{a});
-    [avgCoords, elecNames, isLeft]=sub2AvgBrain(subs{a},cfg);
+    [avgCoords, elecNames, isLeft]=m00003AvgBrain(subs{a},cfg);
     groupAvgCoords = avgCoords; %[groupAvgCoords; avgCoords];
     groupLabels = [groupLabels; elecNames];
     groupIsLeft = [groupIsLeft; isLeft];

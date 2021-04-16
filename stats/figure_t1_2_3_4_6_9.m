@@ -7,28 +7,28 @@
 % mkdir: cannot create directory ‘figures/T6’: File exists
 % mkdir: cannot create directory ‘figures/T9’: File exists
 % mkdir: cannot create directory ‘figures/T9d1’: File exists
-% /media/klab/internal/data/stamps/sub3_00000000_stamps.txt
+% /media/klab/internal/data/stamps/m00005_00000000_stamps.txt
 % --- H5eeg.getTimeFromSample BEGIN ---
 % [!] Corrected stamp 74645095 -> 73347934, error: -1850
 % --- H5eeg.getTimeFromSample EXIT_SUCCESS ---
-% [E] video file not found for: sub3, 00000000
+% [E] video file not found for: m00005, 00000000
 % Sample number: 72056321, Time: 05/09/2007 01:14:53
 % , Video: 
 % Br364	172
 % BrN58	172
-% sub3__35_superiortemporal_PT7-PT8__84_parsopercularis_RP55-RP56__29mm_ct405_ctt0-1_mag221-49_coh1t172_Br364_Samp72056321_BrN58_SampN72102401
+% m00005__35_superiortemporal_PT7-PT8__84_parsopercularis_RP55-RP56__29mm_ct405_ctt0-1_mag221-49_coh1t172_Br364_Samp72056321_BrN58_SampN72102401
 % Time-shifted coherence: 0.053
 % Time-shifted gamma coherence: NaN
 % [*] figure t1 plot trigger detected in figure t9 plot
 % Starting parallel pool (parpool) using the 'local' profile ...
 % connected to 6 workers.
-% /media/klab/internal/data/stamps/sub3_00000000_stamps.txt
+% /media/klab/internal/data/stamps/m00005_00000000_stamps.txt
 % --- H5eeg.getTimeFromSample BEGIN ---
 % --- H5eeg.getTimeFromSample EXIT_SUCCESS ---
 % Total number of days: 5.524
 % Number of positive coherences: 19339
 % [*] figure t1 plot trigger detected in figure t9 plot
-% /media/klab/internal/data/stamps/sub3_00000000_stamps.txt
+% /media/klab/internal/data/stamps/m00005_00000000_stamps.txt
 % --- H5eeg.getTimeFromSample BEGIN ---
 % --- H5eeg.getTimeFromSample EXIT_SUCCESS ---
 % Done.
@@ -46,13 +46,15 @@ cp_thresh_override = 0.05;
 p_val = 0.01;
 
 % Path definitions
-dir_h5Lp = '../data/h5_notch20'; %'/media/klab/KLAB101/h5_notch20';
+%dir_h5Lp = '/media/klab/internal/data/h5_notch20';
+dir_h5Lp = '/media/klab/untitled/h5_notch20';
 dir_artLp = sprintf('%s/art_nosz',dir_h5Lp); %dir_artLp = '/media/klab/KLAB101/h5_notch20/art_nosz';
-dir_resLp = '../opencl/results_prepared'; %dir_resLp = '/media/klab/KLAB101/results/coh_w10'; 
-dir_corLp = '../data/coregistration';
+%dir_resLp = '/home/jerry/data/results/coh_w10';
+dir_resLp = '/media/klab/untitled/results/coh_w10'; 
+dir_corLp = '/media/klab/internal/data/coreg';
 dir_cacheLp = './cache';
-dir_stamp = '../data/stamps';
-dir_video = '../data/videos';
+dir_stamp = '/media/klab/internal/data/stamps';
+dir_video = '/media/klab/internal/data/videos';
 %subjects_dirLp = '/mnt/cuenap_ssd/coregistration';
 
 %dir_h5Lp = '/mnt/cuenap/data/h5_notch20';
@@ -64,87 +66,43 @@ metricsp = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'};
 %metricsp = {'pcBroadband','pcGamma'};
 %metricsp = {'pcBroadband'};
 
-% Subjects list
-Subjectsp = {...
-    'sub1',...
-    'sub2',...
-    'sub3',...
-    'sub4',...
-    'sub5',...
-    'sub6',...
-    'sub7',...
-    'sub8',...
-    'sub9',...
-    'sub10',...
-    'sub11',...
-    'sub12',...
-    'sub13',...
-    'sub14',...
-    'sub15',...
-    'sub16',...
-    'sub17',...
-    'sub18',...
-    'sub19',...
-    'sub20',...
-    'sub21',...
-    'sub22',...
-    'sub23',...
-    'sub24',...
-    'sub25',...
-    'sub26',...
-    'sub27',...
-    'sub28',...
-    'sub29',...
-    'sub30',...
-    'sub31',...
-    'sub32',...
-    'sub33',...
-    'sub34',...
-    'sub35',...
-    'sub36',...
-    'sub37',...
-    'sub38',...
-    'sub39',...
-    'sub40',...
-    'sub41',...
-    'sub42',...
-    'sub43',...
-    'sub44',...
-    'sub45',...
-    'sub46',...
-    'sub47',...
-    'sub48',...
-    'mSu'...
-};
+% Patients
+Subjectsp = {'m00001','m00003','m00005','m00006','m00019','m00021','m00022','m00023',...
+    'm00024','m00025','m00026','m00027','m00028','m00030','m00032','m00033',...
+    'm00035','m00037','m00038','m00039','m00043','m00044','m00045','m00047',...
+    'm00048','m00049','m00052','m00053','m00055','m00056','m00058','m00059',...
+    'm00060','m00061','m00068','m00071','m00073','m00075','m00079','m00083',...
+    'm00084','m00095','m00096','m00097','m00100','m00107','m00122','m00124',...
+    'mSu'};
 
 % Exclude monkey
 Subjectsp = Subjectsp(1:(end-1));
 
-% sub24
+% m00047
 % 64410001 - stamp - 128821664
 % 87692501 - stamp - 175386656
-%[*] cost: -26116.387557812	sub24	26	54	64875001 - stamp 129751664
-%[*] cost: -17351.387557812	sub24	26	54	84207501 - stamp 168416656
-%[*] cost: 0.232203059	sub24	26	54	86870001 - stamp 173741664 - line
+%[*] cost: -26116.387557812	m00047	26	54	64875001 - stamp 129751664
+%[*] cost: -17351.387557812	m00047	26	54	84207501 - stamp 168416656
+%[*] cost: 0.232203059	m00047	26	54	86870001 - stamp 173741664 - line
     %173740017 - 02/09/2010 17:03:39 - _2895.avi 28 seconds 
-%[*] cost: 0.241688453	sub24	26	54	86840001 - stamp 173681664
-%[*] cost: 0.265921794	sub24	26	54	86665001 - stamp 173331664
-%[*] cost: 0.261862211	sub24	26	54	86545001
+%[*] cost: 0.241688453	m00047	26	54	86840001 - stamp 173681664
+%[*] cost: 0.265921794	m00047	26	54	86665001 - stamp 173331664
+%[*] cost: 0.261862211	m00047	26	54	86545001
 
-% sub34
-%[*] cost: -0.423532230	sub34	27	54	79817501 - stamp 44116036
-%[*] cost: -0.488127392	sub34	27	54	79137501
-%[*] cost: -0.499706310	sub34	27	54	79770001
-%[*] cost: 0.158448989	sub34	20	54	8037501
-%[*] cost: 0.144253090	sub34	21	54	76060001
-%[*] cost: -0.128401051	sub34	13	54	78460001
+% m00061
+%[*] cost: -0.423532230	m00061	27	54	79817501 - stamp 44116036
+%[*] cost: -0.488127392	m00061	27	54	79137501
+%[*] cost: -0.499706310	m00061	27	54	79770001
+%[*] cost: 0.158448989	m00061	20	54	8037501
+%[*] cost: 0.144253090	m00061	21	54	76060001
+%[*] cost: -0.128401051	m00061	13	54	78460001
 
 % bypass
-%Subjectsp = {'sub45'}; '79ba6df8', rhanded, rh
-%Subjectsp = {'sub41'}; % rhanded, lh
-%Subjectsp = {'sub1'}; % rhanded, lh
-%Subjectsp = {'sub34'}; % rhanded, lh 'files':  'dcdce1b0' -novid, 'dd69e165' -vid, 'c5036be4' -vid, '70706eef' -vid
-%Subjectsp = {'sub24'}; % a289baf2 only, rhanded, rh
+%Subjectsp = {'m00100'}; '79ba6df8', rhanded, rh
+%Subjectsp = {'m00084'}; % rhanded, lh
+%Subjectsp = {'m00001'}; % rhanded, lh
+%Subjectsp = {'m00061'}; % rhanded, lh 'files':  'dcdce1b0' -novid, 'dd69e165' -vid, 'c5036be4' -vid, '70706eef' -vid
+%Subjectsp = {'m00047'}; % a289baf2 only, rhanded, rh
 
 %r_samp_const = 106865001; % set to nan to pick randomly
 %r_samp_const = 90545001; % strong t1, t9 good but next to art
@@ -153,22 +111,22 @@ Subjectsp = Subjectsp(1:(end-1));
 %r_samp_const = 91430001; % t9 missing right half
 
 % working examples
-%75120001 - 27 parsopercularis, 46 superiortemporal, sub41 - small number of artifacts just before
+%75120001 - 27 parsopercularis, 46 superiortemporal, m00084 - small number of artifacts just before
 % old example
-%22755001 - 13 parstriangularis, 58 inferiorparietal, sub1
+%22755001 - 13 parstriangularis, 58 inferiorparietal, m00001
 
 %----------------------------------- OLD ---------------------------------
 %r_samp_const = 22755001;
 
 % Candidates:
-% 75120001 - 27, 46, sub41
+% 75120001 - 27, 46, m00084
 % 75132501 - low frequency, not as strong but doable
 % 30102501 - high frequency, not ideal
 % Failed:
 %31512501 37867501 39132501 53297501 83542501 98377501
 %77837501; % 22755001; % good t9, magnitude of t1 is only 0.339 (DEFAULT)
-% bchan1_const = 13; % 13; % sub1 13
-% bchan2_const = 58; % 58; % sub1 58
+% bchan1_const = 13; % 13; % m00001 13
+% bchan2_const = 58; % 58; % m00001 58
 
 
 %roi_1 = 'parstriangularis'; %
@@ -179,13 +137,12 @@ Subjectsp = Subjectsp(1:(end-1));
 %roi_2 = 'superiortemporal';
 %roi_2 = 'inferiorparietal'; %
 
-%Subjectsp = {'sub1'};
-%Subjectsp = {'sub41'};
+%Subjectsp = {'m00001'};
+%Subjectsp = {'m00084'};
 %-----------------------------------
 
 % new new - Jan 10, 2019
-%Subjectsp = {'sub3'};
-Subjectsp = {'sub3'};
+Subjectsp = {'m00005'};
 roi_1 = 'superiortemporal';
 roi_2 = 'parsopercularis';
 bchan1_const = 35;
@@ -193,116 +150,116 @@ bchan2_const = 84;
 r_samp_const = 72056321;
 
 
-% sub41 - 27 - 46 
-% 78515001 - 01/29/2012 07:14:30 - sub41_8f2a6492_0686.avi,43 - SLEEPING
+% m00084 - 27 - 46 
+% 78515001 - 01/29/2012 07:14:30 - m00084_8f2a6492_0686.avi,43 - SLEEPING
 % 68527501 presses button 2 seconds before
 % 18762501 - sleep? higher frequency coherence
-% 38300001 -  01/26/2012 09:01:01 - sub41_501329d1_0027.avi,61 - CONVERSATION
+% 38300001 -  01/26/2012 09:01:01 - m00084_501329d1_0027.avi,61 - CONVERSATION
 % 37070001 - talks, but looks like discharges during speech
-% 4877501 - 01/24/2012 13:31:02 - sub41_ac5bb0aa_0162.avi,42 - speaks during the last second, raw looks spiky and low voltage
+% 4877501 - 01/24/2012 13:31:02 - m00084_ac5bb0aa_0162.avi,42 - speaks during the last second, raw looks spiky and low voltage
 
-% sub41 - 21 - 46
+% m00084 - 21 - 46
 % 59087501 - wake from sleep
 % 59720001 - presses button, makes a vocal noise
-% 77837501 - 01/29/2012 06:29:20 - sub41_8f2a6492_0663.avi,93 - reposition stuffed animal in front of nurse
+% 77837501 - 01/29/2012 06:29:20 - m00084_8f2a6492_0663.avi,93 - reposition stuffed animal in front of nurse
 
 % -- new calculations -----------------------------------------------------
 % parsopercularis, inferiorparietal
-%Subjectsp = {'sub34'}; % dominant hemi and video
-%Subjectsp = {'sub1','sub3','sub24','sub34'};
-%[*] cost: -0.676649978	sub34	27	54	79115001 - t9 end cluster
-%[*] cost: -0.649445107	sub34	27	54	80445001
-%[*] cost: 0.093009810	sub34	13	54	74092501 - 80mm middle of art
-%[*] cost: -0.354445984	sub34	27	54	74210001 
-%[*] cost: -0.182848577	sub34	21	54	76445001 - 65mm
-%[*] cost: -0.539553795	sub34	20	54	79240001 - 75mm
+%Subjectsp = {'m00061'}; % dominant hemi and video
+%Subjectsp = {'m00001','m00005','m00047','m00061'};
+%[*] cost: -0.676649978	m00061	27	54	79115001 - t9 end cluster
+%[*] cost: -0.649445107	m00061	27	54	80445001
+%[*] cost: 0.093009810	m00061	13	54	74092501 - 80mm middle of art
+%[*] cost: -0.354445984	m00061	27	54	74210001 
+%[*] cost: -0.182848577	m00061	21	54	76445001 - 65mm
+%[*] cost: -0.539553795	m00061	20	54	79240001 - 75mm
 
 % parsopercularis, superiortemporal
-%Subjectsp = {'sub1','sub2','sub3','sub5','sub7','sub8','sub10','sub11','sub14','sub15','sub23','sub34','sub37','sub38','sub39','sub41','sub42'};
+%Subjectsp = {'m00001','m00003','m00005','m00019','m00022','m00023','m00025','m00026','m00030','m00032','m00045','m00061','m00073','m00075','m00079','m00084','m00095'};
 % 3n,19,25n,30,32,61,73,75,84,95
-%Subjectsp = {'sub5','sub14','sub15','sub34','sub37','sub38','sub41','sub42'}; % dominant hemi and video
-%Subjectsp = {'sub42'};
-%[*] cost: 0.564330871	sub42	20	53	23932501 - weak interaction
-%[*] cost: 0.539396019	sub42	20	33	28727501 - too many arts
-%[*] cost: 0.572074498	sub42	20	47	47595001 - looks ok, could be stronger
-%[*] cost: 0.546873493	sub42	20	41	54105001 - looks ok, 26mm
-%[*] cost: 0.560554637	sub42	20	41	61880001 - 
-%[*] cost: 0.584691258	sub41	27	61	96155001 - arts, big change at 50%
-%[*] cost: 0.497183125	sub41	20	36	71732501 - big change at 50%
-%[*] cost: 0.288932666	sub41	20	54	64352501 - arts, big change
-%[*] cost: 0.597722641	sub41	20	41	72342501 - change more gradual, t9 looks good
-%[*] cost: 0.814054461	sub41	22	46	78242501
-%[*] cost: 0.204371957	sub38	14	98	29332501 - 18 mm
-%[*] cost: 0.224854736	sub38	14	98	32395001
-%[*] cost: 0.236381678	sub38	14	98	38712501
-%[*] cost: 0.261469712	sub37	7	21	3327501 - 21 mm
-%[*] cost: 0.318063100	sub37	7	21	5400001
-%[*] cost: 0.314823946	sub37	7	21	8427501
-%[*] cost: -0.155321119	sub34	13	39	74105001 - 60 mm - ct59 - 10/29/2010
+%Subjectsp = {'m00019','m00030','m00032','m00061','m00073','m00075','m00084','m00095'}; % dominant hemi and video
+%Subjectsp = {'m00095'};
+%[*] cost: 0.564330871	m00095	20	53	23932501 - weak interaction
+%[*] cost: 0.539396019	m00095	20	33	28727501 - too many arts
+%[*] cost: 0.572074498	m00095	20	47	47595001 - looks ok, could be stronger
+%[*] cost: 0.546873493	m00095	20	41	54105001 - looks ok, 26mm
+%[*] cost: 0.560554637	m00095	20	41	61880001 - 
+%[*] cost: 0.584691258	m00084	27	61	96155001 - arts, big change at 50%
+%[*] cost: 0.497183125	m00084	20	36	71732501 - big change at 50%
+%[*] cost: 0.288932666	m00084	20	54	64352501 - arts, big change
+%[*] cost: 0.597722641	m00084	20	41	72342501 - change more gradual, t9 looks good
+%[*] cost: 0.814054461	m00084	22	46	78242501
+%[*] cost: 0.204371957	m00075	14	98	29332501 - 18 mm
+%[*] cost: 0.224854736	m00075	14	98	32395001
+%[*] cost: 0.236381678	m00075	14	98	38712501
+%[*] cost: 0.261469712	m00073	7	21	3327501 - 21 mm
+%[*] cost: 0.318063100	m00073	7	21	5400001
+%[*] cost: 0.314823946	m00073	7	21	8427501
+%[*] cost: -0.155321119	m00061	13	39	74105001 - 60 mm - ct59 - 10/29/2010
     %00:31:44 - 70706eef - _0543.avi - 1:38 - putting on blindfold going to bed
-%[*] cost: -0.112810579	sub34	13	39	72645001
-%[*] cost: 0.134045247	sub34	27	36	76422501 - t9 not good
-%[*] cost: -0.320159630	sub34	21	36	80770001 - t9 not good
-%[*] cost: -0.426196223	sub34	21	48	80590001 - 40 mm not best placement
-%[*] cost: 0.079583935	sub34	27	39	22232501 - 52mm ct60 - 10/26/2010 14:52:13 - dd69e165 - _0196.avi - -1 sec - reading during stim
-%[*] cost: -0.358221876	sub34	21	39	80067501
-%[*] cost: 0.837716711	sub15	55	60	23692501 - 22mm
-%[*] cost: 0.761445999	sub15	28	60	51460001 - 30mm
-%[*] cost: 0.849530846	sub15	28	60	66437501
-%[*] cost: 0.835929138	sub15	55	60	124770001
-%[*] cost: 0.239254323	sub14	29	31	31370001 - 20mm
-%[*] cost: 0.206529823	sub14	29	31	66517501
-%[*] cost: 0.236791518	sub14	29	31	73600001
-% sub14	29	31  72342501 - 10/28/2008 22:04:19 0a9d761f - _0443.avi 23 sec - talking - elec too close together
-%[*] cost: -0.139612804	sub5	14	28	55607501 - 21mm
-%[*] cost: 0.215532971	sub5	5	14	57387501 - 23mm
-%[*] cost: 0.362740277	sub5	14	41	53862501 - 35mm
-%[*] cost: 0.155424700	sub5	14	27	28620001 - 25mm
+%[*] cost: -0.112810579	m00061	13	39	72645001
+%[*] cost: 0.134045247	m00061	27	36	76422501 - t9 not good
+%[*] cost: -0.320159630	m00061	21	36	80770001 - t9 not good
+%[*] cost: -0.426196223	m00061	21	48	80590001 - 40 mm not best placement
+%[*] cost: 0.079583935	m00061	27	39	22232501 - 52mm ct60 - 10/26/2010 14:52:13 - dd69e165 - _0196.avi - -1 sec - reading during stim
+%[*] cost: -0.358221876	m00061	21	39	80067501
+%[*] cost: 0.837716711	m00032	55	60	23692501 - 22mm
+%[*] cost: 0.761445999	m00032	28	60	51460001 - 30mm
+%[*] cost: 0.849530846	m00032	28	60	66437501
+%[*] cost: 0.835929138	m00032	55	60	124770001
+%[*] cost: 0.239254323	m00030	29	31	31370001 - 20mm
+%[*] cost: 0.206529823	m00030	29	31	66517501
+%[*] cost: 0.236791518	m00030	29	31	73600001
+% m00030	29	31  72342501 - 10/28/2008 22:04:19 0a9d761f - _0443.avi 23 sec - talking - elec too close together
+%[*] cost: -0.139612804	m00019	14	28	55607501 - 21mm
+%[*] cost: 0.215532971	m00019	5	14	57387501 - 23mm
+%[*] cost: 0.362740277	m00019	14	41	53862501 - 35mm
+%[*] cost: 0.155424700	m00019	14	27	28620001 - 25mm
 
 % parstriangularis, superiortemporal
-%Subjectsp = {'sub1','sub2','sub3','sub5','sub6','sub7','sub8','sub10','sub11','sub15','sub17','sub23','sub28','sub41'};
+%Subjectsp = {'m00001','m00003','m00005','m00019','m00021','m00022','m00023','m00025','m00026','m00032','m00035','m00045','m00053','m00084'};
 % 3n,19,21n,25n,32,35,53,84
-%Subjectsp = {'sub5','sub15','sub17','sub28','sub41'};% dominant hemi and video
-%Subjectsp = {'sub17'};
-%[*] cost: 0.463727641	sub41	3	61	66562501 - arts
-%[*] cost: 0.507391921	sub41	20	41	77422501
-%[*] cost: 0.275485745	sub41	4	42	92715001
-%[*] cost: 0.587059769	sub28	2	40	104900001 - arts
-%[*] cost: 0.586993876	sub28	2	40	112397501
-%[*] cost: 0.576190564	sub28	2	40	120232501
-%[*] cost: 0.523224774	sub17	77	88	522501
-%[*] cost: 0.528096888	sub17	77	88	15890001
-%[*] cost: 0.789399004	sub17	77	90	8185001
-%[*] cost: 0.793726301	sub17	77	90	19687501
-%[*] cost: 0.821242760	sub15	26	61	30217501
-%[*] cost: 0.531650747	sub15	26	61	96310001
-%[*] cost: 0.425622409	sub15	26	60	103780001
-%[*] cost: 0.786905825	sub15	28	60	120367501
-%[*] cost: -0.136224830	sub5	28	56	1700001
-%[*] cost: -0.325221711	sub5	28	56	5937501
-%[*] cost: 0.305643355	sub5	41	56	73312501
-%[*] cost: -0.064330439	sub5	28	54	12265001
-%[*] cost: 0.371564081	sub5	7	20	60667501
+%Subjectsp = {'m00019','m00032','m00035','m00053','m00084'};% dominant hemi and video
+%Subjectsp = {'m00035'};
+%[*] cost: 0.463727641	m00084	3	61	66562501 - arts
+%[*] cost: 0.507391921	m00084	20	41	77422501
+%[*] cost: 0.275485745	m00084	4	42	92715001
+%[*] cost: 0.587059769	m00053	2	40	104900001 - arts
+%[*] cost: 0.586993876	m00053	2	40	112397501
+%[*] cost: 0.576190564	m00053	2	40	120232501
+%[*] cost: 0.523224774	m00035	77	88	522501
+%[*] cost: 0.528096888	m00035	77	88	15890001
+%[*] cost: 0.789399004	m00035	77	90	8185001
+%[*] cost: 0.793726301	m00035	77	90	19687501
+%[*] cost: 0.821242760	m00032	26	61	30217501
+%[*] cost: 0.531650747	m00032	26	61	96310001
+%[*] cost: 0.425622409	m00032	26	60	103780001
+%[*] cost: 0.786905825	m00032	28	60	120367501
+%[*] cost: -0.136224830	m00019	28	56	1700001
+%[*] cost: -0.325221711	m00019	28	56	5937501
+%[*] cost: 0.305643355	m00019	41	56	73312501
+%[*] cost: -0.064330439	m00019	28	54	12265001
+%[*] cost: 0.371564081	m00019	7	20	60667501
 %--------------------------------------------------------------------------
 
 %bchan1_const = 30;
 %bchan2_const = 80;
 %r_samp_const = NaN;
-%[*] cost: 0.011246898	sub1	14	51	82335001
-%[*] cost: -0.065562469	sub1	4	57	83825001
-%[*] cost: -0.064870114	sub1	4	51	83425001
-%[*] cost: -0.025408129	sub1	21	50	116170001
-%[*] cost: -0.165981444	sub45	30	80	10840001
-%[*] cost: -0.213723722	sub45	30	80	7315001 % Sample 7315001, stamp 14630936 
+%[*] cost: 0.011246898	m00001	14	51	82335001
+%[*] cost: -0.065562469	m00001	4	57	83825001
+%[*] cost: -0.064870114	m00001	4	51	83425001
+%[*] cost: -0.025408129	m00001	21	50	116170001
+%[*] cost: -0.165981444	m00100	30	80	10840001
+%[*] cost: -0.213723722	m00100	30	80	7315001 % Sample 7315001, stamp 14630936 
 %   time: 05/10/2013 23:35:28 - estimated time: 10-May-2013 19:31:38 -
 %   00:01:27.957 into video 0243.avi
-%[*] cost: 0.660226596	sub41	20	66	89857501
-%[*] cost: 0.627504541	sub41	20	66	83155001
-%[*] cost: 0.613476766	sub41	20	66	60247501
-%[*] cost: 0.136753701	sub24	26	54	64410001
-%[*] cost: 0.269184195	sub24	26	54	86635001
-%[*] cost: 0.261862211	sub24	26	54	86545001
-%[*] cost: 0.091736786	sub24	26	54	87692501 % Sample 87692501, stamp 175386656 estimated time: 07-Feb-2010 17:15:24
+%[*] cost: 0.660226596	m00084	20	66	89857501
+%[*] cost: 0.627504541	m00084	20	66	83155001
+%[*] cost: 0.613476766	m00084	20	66	60247501
+%[*] cost: 0.136753701	m00047	26	54	64410001
+%[*] cost: 0.269184195	m00047	26	54	86635001
+%[*] cost: 0.261862211	m00047	26	54	86545001
+%[*] cost: 0.091736786	m00047	26	54	87692501 % Sample 87692501, stamp 175386656 estimated time: 07-Feb-2010 17:15:24
 
 
 % Pick areas to plot
@@ -327,7 +284,7 @@ r_samp_const = 72056321;
 system('mkdir figures');
 fig_fmt = '-depsc';
 trig_title = false; % show titles
-trig_both_elec = false; % plot both electrodes in bipolar pair
+trig_both_elec = true; % plot both electrodes in bipolar pair
 trig_eps = false;
 trig_t1 = true;
 trig_t2 = true; %
@@ -383,39 +340,44 @@ for iMp = 1%1:1 %length(metricsp)
     fn_artLp = sprintf('%s/%s_art.h5',dir_artLp,sidp);
     fn_distLp = sprintf('%s/%s_dists-%s-%i.mat',dir_resLp,sidp,metricp,n_perm);
     fn_graphLp = sprintf('%s/%s_graph-%s.h5',dir_resLp,sidp,metricp);
-    fn_permLp = sprintf('%s/%s_perm-%s-%i.h5',dir_resLp,sidp,metricp,n_perm);
+    fn_permLp = sprintf('/mnt/cuenap2/data/results/coh_w10/%s_perm-%s-%i.h5',sidp,metricp,n_perm);
     fn_h5Lp = sprintf('%s/%s.h5',dir_h5Lp,sidp);
     fn_coregLp = sprintf('%s/%s/label/all_parcellation.mat',dir_corLp,sidp);
-    fn_cacheLp = sprintf('%s/xsub_out_%s_%i_atl2.mat',dir_cacheLp,sidp,iMp);
+    fn_cacheLp = sprintf('%s/xsub_out_%s_%i.mat',dir_cacheLp,sidp,iMp);
     
     % Check if files exist
-    %ckf = {fn_artLp,fn_distLp,fn_graphLp,fn_permLp,fn_h5Lp,fn_coregLp,fn_cacheLp};
-    ckf = {fn_artLp,fn_distLp,fn_graphLp,fn_permLp,fn_coregLp,fn_cacheLp};
+    ckf = {fn_artLp,fn_distLp,fn_graphLp,fn_h5Lp,fn_coregLp,fn_cacheLp};
     for j = 1:length(ckf)
         if (~exist(ckf{j},'file'))
-            fprintf(2,'[!] ERROR File not found: %s\n',ckf{j});
-            fprintf(2,'\tExited with error.\n')
+            fprintf(2,'W> File not found: %s\n',ckf{j});
             return
-        else
-            fprintf('[*] Found file: %s\n',ckf{j});
         end
     end
     
+    %ecog = H5eeg(fn_h5);
     load(fn_cacheLp);
     
-
+%     % print time
+%     datetime_v = h5readatt(fn_h5Lp,'/h5eeg','datetime');
+%     files = h5readatt(fn_h5Lp,'/h5eeg','files');
+%     ds_factors = h5readatt(fn_h5Lp,'/h5eeg','ds_factors');
+%     n_samples = h5readatt(fn_h5Lp,'/h5eeg','n_samples');
+%     fileIdx = find(cumsum(n_samples) > r_samp_const);
+%     etime = h5read(fn_h5Lp,'/h5eeg/aux',[1 r_samp_const],[1 1]);
+%     start_etime = h5read(fn_h5Lp,'/h5eeg/aux',[1 1],[1 1]);
+%     try
+%         est_time = datestr(datenum(replace(datetime_v{fileIdx},'T',' ')) + seconds(r_samp_const*(1/(ecog.fs*ds_factors(fileIdx)))));
+%         fprintf('Sample %i, stamp %i estimated time: %s\n',r_samp_const,etime,est_time);
+%     catch
+%     end
+    
     
     
     % --- Apply threshold override --------------------------------------------
     cp_thresh = cp_thresh_override;
     %return
     
-    if (exist(fn_h5Lp,'file'))
-        ecog = H5eeg(fn_h5Lp);
-        chan_labels = h5readatt(fn_h5Lp,'/h5eeg/eeg','labels');
-    else
-        load('./cache/figure_t1_2_3_4_6_9_chan_labels');
-    end
+    chan_labels = h5readatt(fn_h5Lp,'/h5eeg/eeg','labels');
     bchan_labels = cell(ecog.n_bchan,1);
     for ii0 = 1:ecog.n_bchan
         bchan_labels{ii0} = sprintf('%s-%s',chan_labels{ecog.bip(ii0,1)},chan_labels{ecog.bip(ii0,2)});
@@ -550,7 +512,7 @@ for iMp = 1%1:1 %length(metricsp)
                     r_idx_n = (r_samp_n - 1)/(round(ecog.fs)*w) + 1;
                     
                     % Show sample time
-                    %ecog = H5eeg(fn_h5Lp);
+                    ecog = H5eeg(fn_h5Lp);
                     try
                         realTime = ecog.getTimeFromSample(dir_stamp,r_samp);
                         vidStr = ecog.getVideo(dir_video,r_samp,realTime);
@@ -563,21 +525,14 @@ for iMp = 1%1:1 %length(metricsp)
                     % Read timeseries
                     b1 = ecog.bip(ii1,1:2);
                     b2 = ecog.bip(ii2,1:2);
-                    fn_h5cache = sprintf('./cache/figure_t1_2_3_4_6_9_h5cache_%i_%i',ii1,ii2);
-                    if (exist([fn_h5cache,'.mat'],'file'))
-                        fprintf('[!] Using previously saved .mat file instead of reading .h5 file.\n');
-                        load(fn_h5cache);
-                    else
-                        v_b1c1 = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(1) r_samp],[1 round(ecog.fs)*w]);
-                        v_b1c2 = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(2) r_samp],[1 round(ecog.fs)*w]);
-                        v_b2c1 = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(1) r_samp],[1 round(ecog.fs)*w]);
-                        v_b2c2 = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(2) r_samp],[1 round(ecog.fs)*w]);
-                        v0_b1c1 = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(1) r_samp_n],[1 round(ecog.fs)*w]);
-                        v0_b1c2 = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(2) r_samp_n],[1 round(ecog.fs)*w]);
-                        v0_b2c1 = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(1) r_samp_n],[1 round(ecog.fs)*w]);
-                        v0_b2c2 = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(2) r_samp_n],[1 round(ecog.fs)*w]);
-                        save(fn_h5cache,'v_b1c1','v_b1c2','v_b2c1','v_b2c2','v0_b1c1','v0_b1c2','v0_b2c1','v0_b2c2');
-                    end
+                    v_b1c1 = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(1) r_samp],[1 round(ecog.fs)*w]);
+                    v_b1c2 = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(2) r_samp],[1 round(ecog.fs)*w]);
+                    v_b2c1 = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(1) r_samp],[1 round(ecog.fs)*w]);
+                    v_b2c2 = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(2) r_samp],[1 round(ecog.fs)*w]);
+                    v0_b1c1 = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(1) r_samp_n],[1 round(ecog.fs)*w]);
+                    v0_b1c2 = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(2) r_samp_n],[1 round(ecog.fs)*w]);
+                    v0_b2c1 = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(1) r_samp_n],[1 round(ecog.fs)*w]);
+                    v0_b2c2 = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(2) r_samp_n],[1 round(ecog.fs)*w]);
                     % Bipolar montage
                     v_b1 = v_b1c1 - v_b1c2;
                     v_b2 = v_b2c1 - v_b2c2;
@@ -616,8 +571,7 @@ for iMp = 1%1:1 %length(metricsp)
                         if (i3 == 1)
                             pname = sprintf('%s_%s%i',pname,mname,round(1000*coh_val));
                         end
-                        %CaT = load(sprintf('%s/xsub_out_%s_%i',dir_cacheLp,sid,i3),'coh_thresh');
-                        CaT = load(sprintf('%s/xsub_out_%s_%i_atl2',dir_cacheLp,sidp,i3),'coh_thresh');
+                        CaT = load(sprintf('%s/xsub_out_%s_%i',dir_cacheLp,sid,i3),'coh_thresh');
                         fprintf('%s%i\t%i\n',mname,round(1000*coh_val),round(1000*CaT.coh_thresh(countp)));
                     end                   
                     pname = sprintf('%s_Samp%i',pname,r_samp);
@@ -627,7 +581,7 @@ for iMp = 1%1:1 %length(metricsp)
                         if (i3 == 1)
                             pname = sprintf('%s_%s%i',pname,mname,round(1000*coh_val0(i3)));
                         end
-                        CaT = load(sprintf('%s/xsub_out_%s_%i_atl2',dir_cacheLp,sidp,i3),'coh_thresh');
+                        CaT = load(sprintf('%s/xsub_out_%s_%i',dir_cacheLp,sid,i3),'coh_thresh');
                         fprintf('%s%i\t%i\n',mname,round(1000*coh_val0(i3)),round(1000*CaT.coh_thresh(countp)));
                     end
                     pname = sprintf('%s_SampN%i',pname,r_samp_n);
@@ -738,22 +692,14 @@ for iMp = 1%1:1 %length(metricsp)
                         t_plot_offset_sec = 1; % space between time offset
                         soffset = round(sec_before*(ecog.fs));
                         loffset = round((sec_before + sec_after)*(ecog.fs));
-                        
-                        fn_h5cache = sprintf('./cache/figure_t1_2_3_4_6_9_h5cache2_%i_%i',ii1,ii2);
-                        if (exist([fn_h5cache,'.mat'],'file'))
-                            fprintf('[!] Using previously saved .mat file instead of reading .h5 file.\n');
-                            load(fn_h5cache);
-                        else
-                            v_b1c1p = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(1) r_samp-soffset],[1 round(ecog.fs)*w+loffset]);
-                            v_b1c2p = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(2) r_samp-soffset],[1 round(ecog.fs)*w+loffset]);
-                            v_b2c1p = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(1) r_samp-soffset],[1 round(ecog.fs)*w+loffset]);
-                            v_b2c2p = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(2) r_samp-soffset],[1 round(ecog.fs)*w+loffset]);
-                            v0_b1c1p = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(1) r_samp_n-soffset],[1 round(ecog.fs)*w+loffset]);
-                            v0_b1c2p = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(2) r_samp_n-soffset],[1 round(ecog.fs)*w+loffset]);
-                            v0_b2c1p = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(1) r_samp_n-soffset],[1 round(ecog.fs)*w+loffset]);
-                            v0_b2c2p = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(2) r_samp_n-soffset],[1 round(ecog.fs)*w+loffset]);
-                            save(fn_h5cache,'v_b1c1p','v_b1c2p','v_b2c1p','v_b2c2p','v0_b1c1p','v0_b1c2p','v0_b2c1p','v0_b2c2p');
-                        end
+                        v_b1c1p = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(1) r_samp-soffset],[1 round(ecog.fs)*w+loffset]);
+                        v_b1c2p = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(2) r_samp-soffset],[1 round(ecog.fs)*w+loffset]);
+                        v_b2c1p = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(1) r_samp-soffset],[1 round(ecog.fs)*w+loffset]);
+                        v_b2c2p = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(2) r_samp-soffset],[1 round(ecog.fs)*w+loffset]);
+                        v0_b1c1p = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(1) r_samp_n-soffset],[1 round(ecog.fs)*w+loffset]);
+                        v0_b1c2p = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(2) r_samp_n-soffset],[1 round(ecog.fs)*w+loffset]);
+                        v0_b2c1p = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(1) r_samp_n-soffset],[1 round(ecog.fs)*w+loffset]);
+                        v0_b2c2p = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(2) r_samp_n-soffset],[1 round(ecog.fs)*w+loffset]);
                         % Bipolar montage
                         v_b1p = v_b1c1p - v_b1c2p;
                         v_b2p = v_b2c1p - v_b2c2p;
@@ -1297,21 +1243,10 @@ for iMp = 1%1:1 %length(metricsp)
                     % Read timeseries
                     b1 = ecog.bip(ii1,1:2);
                     b2 = ecog.bip(ii2,1:2);
-                    
-                    
-                    fn_h5cache = sprintf('./cache/figure_t1_2_3_4_6_9_h5cache3_%i_%i',ii1,ii2);
-                    if (exist([fn_h5cache,'.mat'],'file'))
-                        fprintf('[!] Using previously saved .mat file instead of reading .h5 file.\n');
-                        load(fn_h5cache);
-                    else
-                        v_b1c1 = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(1) r_samp_a],[1 round(ecog.fs)*w]);
-                        v_b1c2 = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(2) r_samp_a],[1 round(ecog.fs)*w]);
-                        v_b2c1 = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(1) r_samp_a],[1 round(ecog.fs)*w]);
-                        v_b2c2 = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(2) r_samp_a],[1 round(ecog.fs)*w]);
-                        save(fn_h5cache,'v_b1c1','v_b1c2','v_b2c1','v_b2c2');
-                    end
-                    
-                    
+                    v_b1c1 = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(1) r_samp_a],[1 round(ecog.fs)*w]);
+                    v_b1c2 = h5read(fn_h5Lp,'/h5eeg/eeg',[b1(2) r_samp_a],[1 round(ecog.fs)*w]);
+                    v_b2c1 = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(1) r_samp_a],[1 round(ecog.fs)*w]);
+                    v_b2c2 = h5read(fn_h5Lp,'/h5eeg/eeg',[b2(2) r_samp_a],[1 round(ecog.fs)*w]);
                     % Bipolar montage
                     v_b1 = v_b1c1 - v_b1c2;
                     v_b2 = v_b2c1 - v_b2c2;
@@ -1458,7 +1393,7 @@ for iMp = 1%1:1 %length(metricsp)
                         end
 
                         % Reload coh_thresh
-                        fn_cacheLp = sprintf('%s/xsub_out_%s_%i_atl2.mat',dir_cacheLp,sidp,iMp);
+                        fn_cacheLp = sprintf('%s/xsub_out_%s_%i.mat',dir_cacheLp,sidp,iMp);
                         load(fn_cacheLp,'coh_thresh');
                         
                         % Load artifacts
@@ -1529,28 +1464,21 @@ for iMp = 1%1:1 %length(metricsp)
                         realTime_f = cell(length(starts_f),1);
                         starts_g = ceil(starts_f/(round(ecog.fs)*w));
                         mnight_g = [];
-                        fn_midnight = sprintf('%s/figure_t1_2_3_4_6_9_midnight',dir_cacheLp);
-                        if exist([fn_midnight,'.mat'],'file')
-                            load(fn_midnight);
-                        else
-                            parfor i_f = 1:(length(starts_f)-1)
-                                % DEBUG: remove dependency
-                                dstr = ecog.getTimeFromSample(dir_stamp,starts_f(i_f));
-                                sat = true;
-                                nday = 1;
-                                while(sat)
-                                    mnight_offset_g = seconds((datetime(dstr(1:10),'format','MM/dd/uuuu') + days(nday)) - datetime(dstr,'format','MM/dd/uuuu HH:mm:ss'))/w;
-                                    mng = (starts_g(i_f)+mnight_offset_g);
-                                    if (mng < starts_g(i_f+1))
-                                        mnight_g = [mnight_g; round(mng)];
-                                        nday = nday + 1;
-                                    else
-                                        break;
-                                    end
+                        parfor i_f = 1:(length(starts_f)-1)
+                            dstr = ecog.getTimeFromSample(dir_stamp,starts_f(i_f));
+                            sat = true;
+                            nday = 1;
+                            while(sat)
+                                mnight_offset_g = seconds((datetime(dstr(1:10),'format','MM/dd/uuuu') + days(nday)) - datetime(dstr,'format','MM/dd/uuuu HH:mm:ss'))/w;
+                                mng = (starts_g(i_f)+mnight_offset_g);
+                                if (mng < starts_g(i_f+1))
+                                    mnight_g = [mnight_g; round(mng)];
+                                    nday = nday + 1;
+                                else
+                                    break;
                                 end
-                                realTime_f{i_f} = datetime(dstr,'format','MM/dd/uuuu HH:mm:ss');
                             end
-                            save(fn_midnight,'realTime_f');
+                            realTime_f{i_f} = datetime(dstr,'format','MM/dd/uuuu HH:mm:ss');
                         end
                         
                         
@@ -1566,7 +1494,10 @@ for iMp = 1%1:1 %length(metricsp)
                             msize_main = 5;
                             msize_mark = 5;
                             %set(h,'Position',[0 0 0.5*1080 0.5*1080])
-                            set(h,'Position',[0 0 1*1080 0.5*1080])
+                            
+                            %set(h,'Position',[0 0 1*1080 0.5*1080]) % stable
+                            set(h,'Position',[0 0 1*1080 0.7*1080]) % tall
+                            %set(h,'Position',[0 0 (6/8)*1080 0.5*1080]) % broken axis
                         end
                         
                         color_div = 0.33*[1 1 1];
@@ -1618,7 +1549,20 @@ for iMp = 1%1:1 %length(metricsp)
                                 elseif (Tmin_fac == (1/60))
                                     xlabel('Time (hours)');
                                     if (mod(t_plot_hrs,12) == 0)
-                                        xticks(linspace(0,t_plot_hrs,9));
+                                        val_xticks = linspace(0,t_plot_hrs,9);
+                                        xticks(val_xticks);
+                                        
+                                        % xtick label string
+                                        str_xticks = cell(size(val_xticks));
+                                        for ixs = 1:length(str_xticks)
+                                            if (ixs == 1)
+                                                num_start_hr = (cond_plot(1))*w*(1/(3600));
+                                                str_xticks{ixs} = sprintf('%.1f',num_start_hr);
+                                            else
+                                                str_xticks{ixs} = sprintf('+%i',val_xticks(ixs));
+                                            end
+                                        end
+                                        xticklabels(str_xticks);
                                     end
                                 else
                                     xlabel('Time');
@@ -1729,6 +1673,73 @@ for iMp = 1%1:1 %length(metricsp)
                             print(h,fn_pname,'-depsc');
                         end
                         close(h);
+                        
+                        
+                        
+                        % for T9d1, plot beginning and end
+                        % Load graph
+                        if (i_9d1 == 2)
+                            % Load graph
+                            %fn_graphLp = sprintf('%s/%s_graph-%s.h5',dir_resLp,sidp,metricp);
+                            %Rc = h5read(fn_graphLp,'/R',[countp 1],[1 n_graph]);
+                            
+                            % Load artifacts
+                            %Risart = (art_idx(countp,:) ~= 0);
+                            
+                            hrs_buff = 3;
+                            nR_buff = hrs_buff * 3600 / w;
+                            
+                            % Index
+                            Rc_begin = Rc(1:(1 + nR_buff - 1));
+                            Risart_begin = Risart(1:(1 + nR_buff - 1));
+                            Rc_end = Rc((end - nR_buff + 1):end);
+                            Risart_end = Risart((end - nR_buff + 1):end);
+                            
+                            % Apply artifacts
+                            Rc_begin_x = 1:length(Rc_begin);
+                            Rc_begin(Risart_begin) = NaN;
+                            Rc_end_x = 1:length(Rc_end);
+                            Rc_end(Risart_end) = NaN;
+                            
+                            % Plot begin
+                            h = figure('visible','off');
+                            subplot(2,1,1)
+                            set(h,'Position',[0 0 ((3.4)/t_plot_hrs)*1080 0.7*1080])
+                            plot(Rc_begin_x,Rc_begin,'black.','MarkerSize',msize_main)
+                            box off;
+                            set(gca,'TickDir','Out');
+                            ylabel({sprintf('%s Coherence',metricp(3:end))});
+                            xlabel('Time (hours)');
+                            xlim([Rc_begin_x(1) Rc_begin_x(end)])
+                            xticks([Rc_begin_x(1) Rc_begin_x(end)])
+                            xticklabels({0 Rc_begin_x(end)*(w/3600)})
+                            ylim([0 1]);
+                            yticks(0:0.2:1);
+                            print(h,[fn_pname,'_B'],fig_fmt);
+                            close(h);
+                            
+                            % Plot end
+                            h = figure('visible','off');
+                            subplot(2,1,1)
+                            set(h,'Position',[0 0 ((3.4)/t_plot_hrs)*1080 0.7*1080])
+                            plot(Rc_end_x,Rc_end,'black.','MarkerSize',msize_main)
+                            box off;
+                            set(gca,'TickDir','Out');
+                            ylabel({sprintf('%s Coherence',metricp(3:end))});
+                            xlabel('Time (hours)');
+                            xlim([Rc_end_x(1) Rc_end_x(end)])
+                            xticks([Rc_end_x(1) Rc_end_x(end)])
+                            xticklabels([0 Rc_end_x(end)*(w/3600)])
+                            ylim([0 1]);
+                            yticks(0:0.2:1);
+                            print(h,[fn_pname,'_E'],fig_fmt);
+                            close(h);
+                            
+                            if (iMp == 5)
+                                %return
+                            end
+                        end
+                        
                     end
                 end
                 
@@ -1748,3 +1759,63 @@ clear j;
 
 % Print finish message
 fprintf('Done.\n')
+
+
+% 27 oct. 2020
+
+% Number of hours of example:
+% fprintf('%.4f\n',72056321 / ((ecog.fs)*60*60))
+% 78.1861
+
+% figure_t1_2_3_4_6_9
+% mkdir: cannot create directory ‘figures’: File exists
+% mkdir: cannot create directory ‘figures/T1’: File exists
+% mkdir: cannot create directory ‘figures/T1d1’: File exists
+% mkdir: cannot create directory ‘figures/T2’: File exists
+% mkdir: cannot create directory ‘figures/T3’: File exists
+% mkdir: cannot create directory ‘figures/T6’: File exists
+% mkdir: cannot create directory ‘figures/T9’: File exists
+% mkdir: cannot create directory ‘figures/T9d1’: File exists
+% [!] Corrected stamp 74645095 -> 73347934, error: -1850
+% [E] video file not found for: m00005, 00000000
+% Sample number: 72056321, Time: 05/09/2007 01:14:53, Video: 
+% Br364	172
+% Th662	1000
+% Al277	227
+% Be149	215
+% Ga394	152
+% BrN58	172
+% ThN53	1000
+% AlN64	227
+% BeN51	215
+% GaN60	152
+% m00005__35_superiortemporal_PT7-PT8__84_parsopercularis_RP55-RP56__29mm_ct405_ctt0-1_mag221-49_coh1t172_Br364_Samp72056321_BrN58_SampN72102401
+% In-time coherence: 0.405
+% Time-shifted coherence: 0.053
+% Movmean (5 s) In-time coherence: 0.643
+% Movmean (5 s) Time-shifted coherence: 0.554
+% Gaussian (5 s) In-time coherence: 0.736
+% Gaussian (5 s) Time-shifted coherence: 0.613
+% [*] figure t1 plot trigger detected in figure t9 plot
+% Starting parallel pool (parpool) using the 'local' profile ...
+% Connected to the parallel pool (number of workers: 6).
+% Total number of days: 5.524
+% Number of positive coherences: 19339
+% [*] figure t1 plot trigger detected in figure t9 plot
+% Total number of days: 5.524
+% Number of positive coherences: 0
+% [*] figure t1 plot trigger detected in figure t9 plot
+% Total number of days: 5.524
+% Number of positive coherences: 9053
+% [*] figure t1 plot trigger detected in figure t9 plot
+% Total number of days: 5.524
+% Number of positive coherences: 7542
+% [*] figure t1 plot trigger detected in figure t9 plot
+% Total number of days: 5.524
+% Number of positive coherences: 22465
+% [*] figure t1 plot trigger detected in figure t9 plot
+% [*] figure t1 plot trigger detected in figure t9 plot
+% [*] figure t1 plot trigger detected in figure t9 plot
+% [*] figure t1 plot trigger detected in figure t9 plot
+% [*] figure t1 plot trigger detected in figure t9 plot
+% Done.

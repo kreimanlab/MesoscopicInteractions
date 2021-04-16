@@ -30,34 +30,30 @@ system('mkdir figures/T14_150');
 
 [~,host] = system('hostname');
 
-%if contains(host,'ubuntu_1604')
-%    dir_artL = '/nas_share/RawData/data/h5_notch20/art';
-%    dir_resL = '/nas_share/RawData/data/results/coh_w10';
-%    dir_corL = '/nas_share/RawData/data/coreg';
-%    dir_cacheL = './cache';
-%    subjects_dirL = '/mnt/cuenap_ssd/coregistration';
-%    dir_h5L = '/nas_share/RawData/data/h5_notch20';
-%else
-%    dir_artL = '/media/klab/KLAB101/h5_notch20/art_nosz';
-%    dir_resL = '/media/klab/KLAB101/results/coh_w10';
-%    dir_corL = '/media/klab/internal/data/coreg';
-%    dir_cacheL = './cache';
-%    subjects_dirL = '/mnt/cuenap_ssd/coregistration';
-%    dir_h5L = '/media/klab/KLAB101/h5_notch20';
-%end
-
-dir_artL = '../data/h5_notch20/art_nosz';
-dir_resL = '../opencl/results';
-dir_corL = '../data/coregistration';
-dir_cacheL = './cache';
-subjects_dirL = dir_corL;
-dir_h5L = '../data/h5_notch20';
+if contains(host,'ubuntu_1604')
+    dir_artL = '/nas_share/RawData/data/h5_notch20/art';
+    dir_resL = '/nas_share/RawData/data/results/coh_w10';
+    dir_corL = '/nas_share/RawData/data/coreg';
+    dir_cacheL = './cache';
+    subjects_dirL = '/mnt/cuenap_ssd/coregistration';
+    dir_h5L = '/nas_share/RawData/data/h5_notch20';
+else
+%     dir_artL = '/media/klab/internal/data/h5_notch20/art';
+%     dir_resL = '/media/klab/internal/data/results/coh_w10';
+%     dir_corL = '/media/klab/internal/data/coreg';
+    dir_artL = '/media/klab/KLAB101/h5_notch20/art_nosz';
+    dir_resL = '/media/klab/KLAB101/results/coh_w10';
+    dir_corL = '/media/klab/internal/data/coreg';
+    dir_cacheL = './cache';
+    subjects_dirL = '/mnt/cuenap_ssd/coregistration';
+    dir_h5L = '/media/klab/KLAB101/h5_notch20';
+end
 
 metrics = {'pcBroadband','pcTheta','pcAlpha','pcBeta','pcGamma'};
 metrics_suffix = {'0.5-125 Hz','3-8 Hz','8-12 Hz','12-30 Hz','30-100 Hz'};
 %metrics = {'pcBroadband'};
 
-for iM = 1 %1:length(metrics) % [1 5] %
+for iM = 1:length(metrics) % [1 5] %
     metric = metrics{iM};
     
     % Load human cache
@@ -988,15 +984,14 @@ for iM = 1 %1:length(metrics) % [1 5] %
 %            19.0000   23.0000   21.4229  -22.6023  -27.3582    7.0000
 
         % Regions mapping onto original bip electrodes
-        Subjectsp = {'sub3'};
+        Subjectsp = {'m00005'};
         roi_1 = 'superiortemporal';
         roi_2 = 'parsopercularis';
         bchan1_const = 35;
         bchan2_const = 84;
         r_samp_const = 72056321;
         Cm5 = load(sprintf('%s/%s/label/all_parcellation_150.mat',dir_corL,Subjectsp{1}));
-        %Ca5 = load(sprintf('./cache/xsub_out_%s_%i.mat',Subjectsp{1},iM));
-        Ca5 = load(sprintf('./cache/xsub_out_%s_%i_atl2.mat',Subjectsp{1},iM));
+        Ca5 = load(sprintf('./cache/xsub_out_%s_%i.mat',Subjectsp{1},iM));
         
         % Load 150 area labels from coreg directory
         roi150s = Cm5.AtlLabels{1};
@@ -1385,7 +1380,7 @@ end
 % [*] not significant: 0.242711 (5461 of 22500)
 % [*] significant: 0.170133 (3828 of 22500)
 % [*] significance fraction: 41.210033 (3828 of 9289)
-% Original sub3:
+% Original m00005:
 % [*] Bipolar electrode 1:
 % 	DK: superiortemporal	
 % 	150: 111
@@ -1453,7 +1448,7 @@ end
 % [*] not significant: 0.266800 (6003 of 22500)
 % [*] significant: 0.146044 (3286 of 22500)
 % [*] significance fraction: 35.375175 (3286 of 9289)
-% Original sub3:
+% Original m00005:
 % [*] Bipolar electrode 1:
 % 	DK: superiortemporal	
 % 	150: 111
