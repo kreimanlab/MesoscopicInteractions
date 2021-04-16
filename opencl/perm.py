@@ -198,6 +198,10 @@ if __name__ == "__main__":
     print('\tNote: if nothing happens there may be too many artifacts to find continuous chunks')
     secure_random = random.SystemRandom()
     Starts = numpy.zeros((2,N_PERM))
+
+    # without replacement bank
+    bank_rIdx = []
+    bank_rIdx2 = []
     for parIdx in range(N_PERM):
         t_par0 = time.time()
 
@@ -208,8 +212,12 @@ if __name__ == "__main__":
             ch = arts[chIdx:int(chIdx+(fs/width)*(w+1))] # +1 to trim off end case
             chTest = ch[:,0]
             endI = int(ch[0][1])+r_rows
-            if ((numpy.count_nonzero(chTest) == 0) and (endI < n_samples)):
+            if ((numpy.count_nonzero(chTest) == 0) and (endI < n_samples) and (int(ch[0][1]) not in bank_rIdx)):
                 r_idx = int(ch[0][1])
+
+                # without replacement
+                bank_rIdx.append(r_idx)
+
                 choose = False
 
         choose  = True
@@ -221,8 +229,12 @@ if __name__ == "__main__":
             midpoint1 = endI + (endI - r_idx)/2
             midpoint2 = endI2 + (endI2 - int(ch2[0][1]) )/2
             alphaSAT = abs(midpoint1 - midpoint2) > (alpha * fs)
-            if (((numpy.count_nonzero(chTest2) == 0) and (endI2 < n_samples)) and (alphaSAT)):
+            if (((numpy.count_nonzero(chTest2) == 0) and (endI2 < n_samples)) and (alphaSAT) and (int(ch2[0][1]) not in bank_rIdx2)):
                 r_idx2 = int(ch2[0][1])
+
+                # without replacement
+                bank_rIdx2.append(r_idx2)
+
                 choose = False
         print('[{0}] Random: {1}-{2}, {3}-{4}'.format(n_samples,r_idx,endI,r_idx2,endI2))
 
