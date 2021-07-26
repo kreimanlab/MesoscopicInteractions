@@ -14,7 +14,7 @@ echo ""
 
 PS3=": "
 
-select opt in "fig 1" "fig 2" "fig 3" "fig 4" "fig 5" "fig 6" "fig s1" "fig s2" "fig s3" "fig s4" "fig s5" "fig s6" "fig s7" "fig s8" "fig s9" "fig s10" "fig s11" "fig s12" "fig s13" "fig s14" quit; do
+select opt in "fig 1" "fig 2" "fig 3" "fig 4" "fig 5" "fig 6" "fig7" "fig s1" "fig s2" "fig s3" "fig s4" "fig s5" "fig s6" "fig s7" "fig s8" "fig s9" "fig s10" "fig s11" "fig s12" "fig s13" "fig s14" quit; do
 
   case $opt in
     "fig 1")
@@ -32,7 +32,7 @@ select opt in "fig 1" "fig 2" "fig 3" "fig 4" "fig 5" "fig 6" "fig s1" "fig s2" 
     "fig 3")
       matlab -nodesktop -nosplash -r "figure_t8d1;figure_t7d1;exit()"
       echo "Output (A-B): stats/figures/T8d1"
-      echo "Output (C-E): stats/figures/caret"
+      #echo "Output (C-E): stats/figures/caret"
       echo "Output (F-I): stats/figures/T7d1"
       break
       ;;
@@ -54,43 +54,32 @@ select opt in "fig 1" "fig 2" "fig 3" "fig 4" "fig 5" "fig 6" "fig s1" "fig s2" 
       ;;
     "fig 7")
       matlab -nodesktop -nosplash -r "figure_T21;exit()"
+      echo "Output: stats/figures/T21"
       break
       ;;
     "fig s1")
       mkdir figures/T4
       matlab -nodesktop -nosplash -r "figure_t4;exit()"
-      echo "Output: stats/figures/T4"
+      echo "Output (A-C): stats/figures/T4"
       matlab -nodesktop -nosplash -r "dist_thresh;exit()"
-      echo "Output: stats/figures/dist_thresh"
+      echo "Output (E): stats/figures/dist_thresh"
       break
       ;;
     "fig s2") #7
-      break
-      ;;
-    "fig s3")
-      matlab -nodesktop -nosplash -r "figure_t1_2_3_4_6_9;exit()"
-      echo "Output (A): stats/figures/T9d1"
-      echo "Output (B): stats/figures/T9"
-      break
-      ;;
-    "fig s4")
       matlab -nodesktop -nosplash -r "figure_t1_2_3_4_6_9;exit()"
       echo "Output (A-D): stats/figures/T1d1"
       echo "Output (E): stats/figures/T9d1"
       echo "Output (F): stats/figures/T9"
       break
       ;;
-    "fig s5")
-      matlab -nodesktop -nosplash -r "figure_t1_2_3_4_6_9;exit()"
-      echo "Output (A): stats/figures/T1d3"
-      break
-      ;;
-    "fig s7")
+    "fig s3")
       matlab -nodesktop -nosplash -r "figure_t1_2_3_4_6_9;exit()"
       echo "Output (A-D): stats/figures/T1d2/sub3_35_84_t1d2_one"
+      matlab -nodesktop -nosplash -r "figure_t1_2_3_4_6_9;exit()"
+      echo "Output (E-F): stats/figures/T1d3"
       break
       ;;
-    "fig s8") #13
+    "fig s4")
       matlab -nodesktop -nosplash -r "figure_t11_new;exit()"
       echo "Output (A-C): stats/figures/T11_new"
       #matlab -nodesktop -nosplash -r "s2fsaverage;exit()" # ielvis
@@ -103,30 +92,7 @@ select opt in "fig 1" "fig 2" "fig 3" "fig 4" "fig 5" "fig 6" "fig s1" "fig s2" 
       echo "Output (E): stats/figures/T14d1/Figure_W2-3B"
       break
       ;;
-    "fig s9") #14 - running - done
-      matlab -nodesktop -nosplash -r "figure_t11_new;exit()"
-      echo "Output (A-C): stats/figures/T11_new"
-      matlab -nodesktop -nosplash -r "s2fsaverage;exit()"
-      echo "Output (D): data/coregistration/fsaverage_sym/label/s2fsaverage_sym_figures/Figure_W1"
-      matlab -nodesktop -nosplash -r "figure_t14d1_raw;exit()"
-      echo "Output (D): stats/figures/T14d1/Figure_W2-3A"
-      matlab -nodesktop -nosplash -r "figure_t14d1;exit()"
-      echo "Output (E): stats/figures/T14d1/Figure_W2-3B"
-      break
-      ;;
-    "fig s10") #15
-      matlab -nodesktop -nosplash -r "figure_t16_dk;exit()" #wait on brainexport script to finish
-      echo "Output (A): stats/figures/T16"
-      matlab -nodesktop -nosplash -r "figure_t19;exit()"
-      echo "Output (B): stats/figures/T19"
-      break
-      ;;
-    "fig s11") #16
-      matlab -nodesktop -nosplash -r "figure_t14_allatl;exit()"
-      echo "Output: stats/figures/T14_allatl"
-      break
-      ;;
-    "fig s12") #17
+    "fig s5")
       matlab -nodesktop -nosplash -r "fig_S16;exit()"
       echo "Output (A): stats/figures/figure_S16_pial_nbip-150_nedge-0_1stdev"
       matlab -nodesktop -nosplash -r "fig_cluster3_v2;exit()"
@@ -135,20 +101,67 @@ select opt in "fig 1" "fig 2" "fig 3" "fig 4" "fig 5" "fig 6" "fig s1" "fig s2" 
       echo "Output (C): stats/figures/T14_150"
       break
       ;;
-    "fig s13")
-      matlab -nodesktop -nosplash -r "figure_t14_150;exit()"
-      echo "Output (A): stats/figures/T14_150"
-      matlab -nodesktop -nosplash -r "figure_t18;exit()"
-      echo "Output (A): stats/figures/T18"
+    "fig s6")
+      matlab -nodesktop -nosplash -r "figure_t20_lognormal;exit()"
+      echo "Output: stats/figures/T20_lognormal"
       break
       ;;
-    "fig s14")
-      matlab -nodesktop -nosplash -r "figure_t14_allatl;exit()"
-      echo "Output (A-G): stats/figures/T14_allatl/atl2_Desikan-Killiany"
-      matlab -nodesktop -nosplash -r "figure_t14_150;exit()"
-      echo "Output (B-H): stats/figures/T14_allatl/atl2_Desikan-Killiany"
+    "fig s7")
+      matlab -nodesktop -nosplash -r "fig_cluster2_sworld_circle;exit()"
+      echo "Output: stats/figures/fig_cluster2_sworld_circle_monkey_metric-1"
       break
       ;;
+    "fig s8") #13
+      matlab -nodesktop -nosplash -r "figure_t14_allatl_resampSage;exit()"
+      echo "Output: stats/figures/T14_allatl_resampSage"
+      break
+      ;;
+    #"fig s9") #14 - running - done
+    #  matlab -nodesktop -nosplash -r "figure_t11_new;exit()"
+    #  echo "Output (A-C): stats/figures/T11_new"
+    #  matlab -nodesktop -nosplash -r "s2fsaverage;exit()"
+    #  echo "Output (D): data/coregistration/fsaverage_sym/label/s2fsaverage_sym_figures/Figure_W1"
+    #  matlab -nodesktop -nosplash -r "figure_t14d1_raw;exit()"
+    #  echo "Output (D): stats/figures/T14d1/Figure_W2-3A"
+    #  matlab -nodesktop -nosplash -r "figure_t14d1;exit()"
+    #  echo "Output (E): stats/figures/T14d1/Figure_W2-3B"
+    #  break
+    #  ;;
+    #"fig s10") #15
+    #  matlab -nodesktop -nosplash -r "figure_t16_dk;exit()" #wait on brainexport script to finish
+    #  echo "Output (A): stats/figures/T16"
+    #  matlab -nodesktop -nosplash -r "figure_t19;exit()"
+    #  echo "Output (B): stats/figures/T19"
+    #  break
+    #  ;;
+    #"fig s11") #16
+    #  matlab -nodesktop -nosplash -r "figure_t14_allatl;exit()"
+    #  echo "Output: stats/figures/T14_allatl"
+    #  break
+    #  ;;
+    #"fig s12") #17
+    #  break
+    #  ;;
+    #"fig s13")
+    #  matlab -nodesktop -nosplash -r "figure_t14_150;exit()"
+    #  echo "Output (A): stats/figures/T14_150"
+    #  matlab -nodesktop -nosplash -r "figure_t18;exit()"
+    #  echo "Output (A): stats/figures/T18"
+    #  break
+    #  ;;
+    #"fig s14")
+    #  matlab -nodesktop -nosplash -r "figure_t14_allatl;exit()"
+    #  echo "Output (A-G): stats/figures/T14_allatl/atl2_Desikan-Killiany"
+    #  matlab -nodesktop -nosplash -r "figure_t14_150;exit()"
+    #  echo "Output (B-H): stats/figures/T14_allatl/atl2_Desikan-Killiany"
+    #  break
+    #  ;;
+    #"fig w1")
+    #  matlab -nodesktop -nosplash -r "figure_t1_2_3_4_6_9;exit()"
+    #  echo "Output (A): stats/figures/T9d1"
+    #  echo "Output (B): stats/figures/T9"
+    #  break
+    #  ;;
     quit)
       break
       ;;

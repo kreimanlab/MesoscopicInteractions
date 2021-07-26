@@ -64,7 +64,7 @@ for iAgeG = 1:2
 
         system(sprintf('mkdir figures/T14_allatl_resampSage/atl%i_%s',atl,AtlNames{atl}));
 
-        for iM = [1 5] %1:length(metrics) % [1 5] %
+        for iM = 1 %[1 5] %1:length(metrics) % [1 5] %
             metric = metrics{iM};
 
             % Load human cache
@@ -670,6 +670,41 @@ for iAgeG = 1:2
                         minv = min(v(:));
                         maxv = max(v(:));
                     end
+                    
+                    % -----------------------------------------------------
+                    % Colorscale max mins for mean coherence
+                    % 	[*] minv: 0.137898698449
+                    % 	[*] maxv: 0.510548055172
+                    % for std coherence
+                    % 	[*] minv: 0.001970777856
+                    % 	[*] maxv: 0.165467841509
+
+                    % Second age group mean coh
+                    % 	[*] minv: 0.143031621973
+                    % 	[*] maxv: 0.617667578161
+                    % Second age group std coh
+                    % 	[*] minv: 0.000529849106
+                    % 	[*] maxv: 0.206156606033
+
+                    % Remap min/max colorscale
+                    if (abs(minv - 0.143031621973) <= 1e-11)
+                        minv = 0.137898698449;
+                        %caxis([0.137898698449 maxv]);
+                    elseif (abs(minv - 0.137898698449) <= 1e-11)
+                        maxv = 0.617667578161;
+                        %caxis([minv 0.617667578161]);
+                    elseif (abs(minv - 0.001970777856) <= 1e-11)
+                        minv = 0.000529849106;
+                        maxv = 0.206156606033;
+                        %caxis([0.000529849106 0.206156606033]);
+                    elseif (abs(minv - 0.000529849106) <= 1e-11)
+                        minv = minv;
+                        maxv = maxv;
+                        %caxis([minv maxv]);
+                    end
+                    % -----------------------------------------------------
+                    
+                    
                     ncol = size(map,1);
                     s = round(1+(ncol-1)*(v-minv)/(maxv-minv));
                     Im = ind2rgb(s,map);
@@ -843,7 +878,10 @@ for iAgeG = 1:2
                     rois_plt_sav = rois_plt;
 
 
-                    imagesc(Im);
+                    imagesc(Im); hold all;
+                    %colordef_draw_cross_nocov;
+                    
+                    
                     %imagesc(Im, 'Parent', ax);
 
                     % 
@@ -1031,7 +1069,15 @@ for iAgeG = 1:2
                             % Integer values
                             cb = colorbar('FontSize',fontsz);
                         end
-                        caxis([minv maxv]);
+                        
+                        caxis([minv maxv])
+                        
+                        
+                        fprintf('\t[*] minv: %.12f\n',minv);
+                        fprintf('\t[*] maxv: %.12f\n',maxv);
+                        
+                        
+                        
                     else
                         cb = colorbar('ytick',minv);
                     end
@@ -1558,6 +1604,121 @@ for iAgeG = 1:2
     end
 
 end
+
+
+% 3 jun 2021
+
+% 
+% mkdir: cannot create directory ‘figures’: File exists
+% mkdir: cannot create directory ‘figures/T14_allatl_resampSage’: File exists
+% mkdir: cannot create directory ‘figures/T14_allatl_resampSage/atl2_Desikan-Killiany’: File exists
+% [*] Total subjects: 48
+% 	Cutoff median age: 17.00
+% 	Group 1 - 24, mean age: 11.208, std: 3.9450
+% 	Group 2 - 24, mean age: 26.917, std: 10.2317
+% 	Age ranksum p: 3.68728174e-09
+% [n_perm: 1] atl: 2	metric: 1	#drop: 0	of 0
+% [*] Correlation age vs. coherence
+% 	r=0.105252, p=000000, n=168282
+% per atl-metric ETA: 0.0 mins
+% [*] Loading existing hier-clustering: ./cache/figure_t14_1_atl2_Desikan-Killiany
+% cluster clash: 3.118823393796 mm
+% [*] Pars Opercularis - Superior Temporal, coh mean: 0.24
+% 	[*] minv: 0.137898698449
+% 	[*] maxv: 0.510548055172
+% [!!] 9 of 31 in diagonal are nans.
+% [!!] 16 of 22 covered are significant
+% [!!] minimum at: 4, 4, coherence = 0.1379 +- 0.17348
+% 	Inferior Parietal\bf{   4}, Inferior Parietal\bf{   4}
+% [!!] maximum at: 26, 30, coherence = 0.5105 +- 0.28933
+% 	Pericalcarine\bf{  26}, Precuneus\bf{  30}
+% [!!] Min region: Paracentral\bf{  18}, total pairs sig: 1.00
+% 	1 of 22 sig
+% [!!] Max region: Fusiform\bf{   5}, total pairs sig: 23.00
+% 	23 of 29 sig
+% [*] saved file: figures/T14_allatl_resampSage/atl2_Desikan-Killiany/Adj_pcBroadband_Mag-bin_Desikan-Killiany
+% [!] Significant in : 168 of 353 (47.59%), total possible (31 choose 2): 465
+% [*] Pars Opercularis - Superior Temporal, coh std: 0.13
+% 	[*] minv: 0.001970777856
+% 	[*] maxv: 0.165467841509
+% [*] Pars Opercularis - Superior Temporal, coh nsigpair: 16.00
+% 	[*] minv: 1.000000000000
+% 	[*] maxv: 344.000000000000
+% [*] Pars Opercularis - Superior Temporal, coh npair: 441.00
+% 	[*] minv: 10.000000000000
+% 	[*] maxv: 3258.000000000000
+% [*] Pars Opercularis - Superior Temporal, coh nsigusub: 10.00
+% 	[*] minv: 1.000000000000
+% 	[*] maxv: 28.000000000000
+% [*] Pars Opercularis - Superior Temporal, coh nusub: 29.00
+% 	[*] minv: 2.000000000000
+% 	[*] maxv: 44.000000000000
+% [*] Number of permutations: 100000
+% [*] metric: 1, atl: 2
+% 	Bip-pair full n=0
+% 	Full	n_sig=193
+% 	Split1	n_sig=168
+% 	Split2	n_sig=165
+% 	Ranksum	p=1.5682e-17
+% 	T-test	p=5.9283e-16
+% 	diff mean: -0.0945 (-54.91%)
+% 	diff std: 0.1220 (61.63%)
+% 	diff n: 140
+% [*] Number of edges compared: 193
+% mkdir: cannot create directory ‘figures/T14_allatl_resampSage/atl2_Desikan-Killiany’: File exists
+% [*] Total subjects: 48
+% 	Cutoff median age: 17.00
+% 	Group 1 - 24, mean age: 11.208, std: 3.9450
+% 	Group 2 - 24, mean age: 26.917, std: 10.2317
+% 	Age ranksum p: 3.68728174e-09
+% [n_perm: 1] atl: 2	metric: 1	#drop: 0	of 0
+% [*] Correlation age vs. coherence
+% 	r=0.105252, p=000000, n=168282
+% per atl-metric ETA: 0.0 mins
+% [*] Loading existing hier-clustering: ./cache/figure_t14_1_atl2_Desikan-Killiany
+% cluster clash: 3.623762491379 mm
+% [*] Pars Opercularis - Superior Temporal, coh mean: 0.33
+% 	[*] minv: 0.143031621973
+% 	[*] maxv: 0.617667578161
+% [!!] 8 of 31 in diagonal are nans.
+% [!!] 17 of 23 covered are significant
+% [!!] minimum at: 7, 24, coherence = 0.1430 +- 0.05451
+% 	Inferior Temporal\bf{   7}, Superior Parietal\bf{  24}
+% [!!] maximum at: 1, 10, coherence = 0.6177 +- 0.50298
+% 	Parahippocampal\bf{   1}, Pars Opercularis\bf{  10}
+% [!!] Min region: Paracentral\bf{  18}, total pairs sig: 0.00
+% 	0 of 21 sig
+% [!!] Max region: Fusiform\bf{   5}, total pairs sig: 22.00
+% 	22 of 28 sig
+% [*] saved file: figures/T14_allatl_resampSage/atl2_Desikan-Killiany/Adj_pcBroadband_Mag-bin_Desikan-Killiany
+% [!] Significant in : 165 of 350 (47.14%), total possible (31 choose 2): 465
+% [*] Pars Opercularis - Superior Temporal, coh std: 0.13
+% 	[*] minv: 0.000529849106
+% 	[*] maxv: 0.206156606033
+% [*] Pars Opercularis - Superior Temporal, coh nsigpair: 16.00
+% 	[*] minv: 1.000000000000
+% 	[*] maxv: 344.000000000000
+% [*] Pars Opercularis - Superior Temporal, coh npair: 441.00
+% 	[*] minv: 10.000000000000
+% 	[*] maxv: 3258.000000000000
+% [*] Pars Opercularis - Superior Temporal, coh nsigusub: 10.00
+% 	[*] minv: 1.000000000000
+% 	[*] maxv: 28.000000000000
+% [*] Pars Opercularis - Superior Temporal, coh nusub: 29.00
+% 	[*] minv: 2.000000000000
+% 	[*] maxv: 44.000000000000
+% [*] Number of permutations: 100000
+% [*] metric: 1, atl: 2
+% 	Bip-pair full n=0
+% 	Full	n_sig=193
+% 	Split1	n_sig=168
+% 	Split2	n_sig=165
+% 	Ranksum	p=1.5682e-17
+% 	T-test	p=5.9283e-16
+% 	diff mean: -0.0945 (-54.91%)
+% 	diff std: 0.1220 (61.63%)
+% 	diff n: 140
+% [*] Number of edges compared: 193
 
 
 % 2 mars 2021
