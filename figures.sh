@@ -47,21 +47,24 @@ select opt in "fig 1" "fig 2" "fig 3" "fig 4" "fig 5" "fig 6" "fig s1" "fig s2" 
       break
       ;;
     "fig 6")
-      # running - done
       matlab -nodesktop -nosplash -r "fig_cluster2_sworld_circle;figure_t22;exit()"
       echo "Output: stats/figures/fig_cluster2_sworld_circle_metric-1"
       echo "Output: stats/figures/T22"
+      break
+      ;;
+    "fig 7")
+      matlab -nodesktop -nosplash -r "figure_T21;exit()"
       break
       ;;
     "fig s1")
       mkdir figures/T4
       matlab -nodesktop -nosplash -r "figure_t4;exit()"
       echo "Output: stats/figures/T4"
+      matlab -nodesktop -nosplash -r "dist_thresh;exit()"
+      echo "Output: stats/figures/dist_thresh"
       break
       ;;
     "fig s2") #7
-      matlab -nodesktop -nosplash -r "dist_thresh;exit()"
-      echo "Output: stats/figures/dist_thresh"
       break
       ;;
     "fig s3")

@@ -48,7 +48,7 @@ for iM = 1 %[1 5]
     %--------------------------------------------------------------------------
     %
     % original subject
-    sid = 'm00005';
+    sid = 'sub3';
     sid_i = str2double(sid(2:end));
     b1 = 35;
     b2 = 84;
@@ -560,7 +560,7 @@ end
 % 23 janvier
 % [*] First loop complete.
 % [*] Second loop complete.
-% ERROR: could not open /fsaverage_sym/label/ielvis_m00005.label
+% ERROR: could not open /fsaverage_sym/label/ielvis_sub3.label
 % [*] Reading from fallback location..
 % Warning: Directory already exists. 
 % > In figure_t18 (line 322) 
@@ -569,7 +569,7 @@ end
 % 	Coherence mean: 0.30, std: 0.10, min: 0.19, max: 0.49
 % [*] First loop complete.
 % [*] Second loop complete.
-% ERROR: could not open /fsaverage_sym/label/ielvis_m00005.label
+% ERROR: could not open /fsaverage_sym/label/ielvis_sub3.label
 % [*] Reading from fallback location..
 % Warning: Directory already exists. 
 % > In figure_t18 (line 322) 
