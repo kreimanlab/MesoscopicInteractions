@@ -14,7 +14,7 @@ echo ""
 
 PS3=": "
 
-select opt in "fig 1" "fig 2" "fig 3" "fig 4" "fig 5" "fig s1" "fig s2" "fig s3" "fig s4" "fig s5" "fig s6" "fig s7" "fig s8" "fig s9" "fig s10" "fig s11" "fig s12" "fig s13" "fig s14" quit; do
+select opt in "fig 1" "fig 2" "fig 3" "fig 4" "fig 5" "fig 6" "fig s1" "fig s2" "fig s3" "fig s4" "fig s5" "fig s6" "fig s7" "fig s8" "fig s9" "fig s10" "fig s11" "fig s12" "fig s13" "fig s14" quit; do
 
   case $opt in
     "fig 1")
@@ -30,21 +30,27 @@ select opt in "fig 1" "fig 2" "fig 3" "fig 4" "fig 5" "fig s1" "fig s2" "fig s3"
       break
       ;;
     "fig 3")
-      #matlab -nodesktop -nosplash -r "figure_brainexport_6all;exit()"
-      matlab -nodesktop -nosplash -r "figure_t19;figure_t16_dk;exit()"
-      echo "Output (A): stats/figures/T16"
-      echo "Output (B): see figure S10B"
+      matlab -nodesktop -nosplash -r "figure_t8d1;figure_t7d1;exit()"
+      echo "Output (A-B): stats/figures/T8d1"
+      echo "Output (C-E): stats/figures/caret"
+      echo "Output (F-I): stats/figures/T7d1"
       break
       ;;
     "fig 4")
+      matlab -nodesktop -nosplash -r "figure_t19;figure_t16_dk;exit()"
+      echo "Output: stats/figures/T16"
+      break
+      ;;
+    "fig 5")
       matlab -nodesktop -nosplash -r "figure_t14_allatl;exit()"
       echo "Output: stats/figures/T14"
       break
       ;;
-    "fig 5")
+    "fig 6")
       # running - done
-      matlab -nodesktop -nosplash -r "fig_cluster2_sworld_circle;exit()"
+      matlab -nodesktop -nosplash -r "fig_cluster2_sworld_circle;figure_t22;exit()"
       echo "Output: stats/figures/fig_cluster2_sworld_circle_metric-1"
+      echo "Output: stats/figures/T22"
       break
       ;;
     "fig s1")
@@ -74,13 +80,6 @@ select opt in "fig 1" "fig 2" "fig 3" "fig 4" "fig 5" "fig s1" "fig s2" "fig s3"
     "fig s5")
       matlab -nodesktop -nosplash -r "figure_t1_2_3_4_6_9;exit()"
       echo "Output (A): stats/figures/T1d3"
-      break
-      ;;
-    "fig s6")
-      matlab -nodesktop -nosplash -r "figure_t1_2_3_4_6_9;exit()"
-      echo "Output (A-B): stats/figures/T8d1"
-      echo "Output (C-E): stats/figures/caret"
-      echo "Output (F-I): stats/figures/T7d1"
       break
       ;;
     "fig s7")
